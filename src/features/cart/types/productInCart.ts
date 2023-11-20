@@ -2,7 +2,8 @@ import { ProductCardInterface } from "../../products/interfaces/ProductCardInter
 
 export type productInCart = {
   product: ProductCardInterface;
-  quantity: number;
+  amount: number;
+  sum: number;
 };
 export type PropProductInCart = {
   productCart: productInCart;

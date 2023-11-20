@@ -6,27 +6,15 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { ProductCardInterface } from "../interfaces/ProductCardInterface";
 import { FC } from "react";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { productInCart } from "../../cart/types/productInCart";
-import { addProductToCart, setQuantityPlus } from "../../cart/cartSlice";
+import { useAppDispatch } from "../../../store/hooks";
+import { addToCart } from "../../cart/cartSlice";
 import { useNavigate } from "react-router-dom";
 
 export const ProductCard: FC<ProductCardInterface> = (product) => {
   const navigate = useNavigate();
   const { title, description, price, thumbnail } = product;
   const dispatch = useAppDispatch();
-  const cart = useAppSelector((state) => state.cart.cart);
 
-  const handleAddProductToCart = (newProduct: productInCart) => {
-    const alreadyInCart = cart.findIndex(
-      (p) => p.product.title === newProduct.product.title
-    );
-    if (alreadyInCart !== -1) {
-      dispatch(setQuantityPlus(newProduct.product.title));
-    } else {
-      dispatch(addProductToCart(newProduct));
-    }
-  };
   return (
     <Card
       sx={{
@@ -77,9 +65,7 @@ export const ProductCard: FC<ProductCardInterface> = (product) => {
         <Button
           size="small"
           sx={{ backgroundColor: "#4CAF50", color: "#fff" }}
-          onClick={() =>
-            handleAddProductToCart({ product: product, quantity: 1 })
-          }
+          onClick={() => dispatch(addToCart(product))}
         >
           Add To Cart
         </Button>

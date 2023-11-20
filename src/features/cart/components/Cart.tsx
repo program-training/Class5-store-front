@@ -14,17 +14,19 @@ import { useAppSelector } from "../../../store/hooks";
 import { productInCart } from "../types/productInCart";
 import Checkout from "./Checkout";
 const Cart = () => {
-  const [open, setOpen] = useState(false);
-  const [localStorageCart, setLocalStorageCart] = useState([]);
   const cart = useAppSelector((state) => state.cart.cart);
-  let quantity = 0;
-  cart.forEach((product) => {
-    quantity += product.quantity;
-  });
+  const [open, setOpen] = useState(false);
+  const [localCart, setLocalCart] = useState<productInCart[]>([]);
+  const [sumAndAmount, setSumAndAmount] = useState({ sum: 0, amount: 0 });
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-    setLocalStorageCart(JSON.parse(localStorage.getItem("cart") as string));
-  }, [cart]);
+    setLocalCart(cart);
+    const sumAndAmount2 = { sum: 0, amount: 0 };
+    localCart.forEach((element) => {
+      sumAndAmount2.sum += element.sum;
+      sumAndAmount2.amount += element.amount;
+    });
+    setSumAndAmount(sumAndAmount2);
+  }, [cart, localCart]);
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -35,7 +37,7 @@ const Cart = () => {
   return (
     <Box>
       <Box component={Button} onClick={toggleDrawer(true)} variant="outlined">
-        <Badge badgeContent={quantity} color="primary">
+        <Badge badgeContent={sumAndAmount.amount} color="primary">
           <ShoppingCartOutlinedIcon sx={{ color: "white" }} />
         </Badge>
       </Box>
@@ -50,7 +52,7 @@ const Cart = () => {
           alignItems: "center",
         }}
       >
-        {!localStorageCart.length ? (
+        {!cart.length ? (
           <Box role="presentation">
             <Typography
               variant="h6"
@@ -77,7 +79,10 @@ const Cart = () => {
         ) : (
           <>
             <Box sx={{ width: 260 }} role="presentation">
-              {localStorageCart.map((productOnCart: productInCart) => (
+              <Typography variant="h5">
+                Total cost: {sumAndAmount.sum}$
+              </Typography>
+              {localCart.map((productOnCart: productInCart) => (
                 <React.Fragment key={productOnCart.product.title}>
                   <List>
                     <ProductInCart productCart={productOnCart} />
