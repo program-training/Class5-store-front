@@ -13,7 +13,7 @@ const ProductCartButton = ({ productCart }: PropProductInCart) => {
       <Fab
         size="small"
         color="success"
-        onClick={() => dispatch(addOne(productCart.product._id))}
+        onClick={() => dispatch(addOne(productCart.product.id))}
       >
         <AddIcon />
       </Fab>
@@ -21,14 +21,14 @@ const ProductCartButton = ({ productCart }: PropProductInCart) => {
         size="small"
         color="success"
         disabled={productCart.amount === 1 ? true : false}
-        onClick={() => dispatch(subOne(productCart.product._id))}
+        onClick={() => dispatch(subOne(productCart.product.id))}
       >
         <RemoveIcon />
       </Fab>
       <Fab
         size="small"
         color="success"
-        onClick={() => dispatch(removeItem(productCart.product._id))}
+        onClick={() => dispatch(removeItem(productCart.product.id))}
       >
         <DeleteIcon />
       </Fab>

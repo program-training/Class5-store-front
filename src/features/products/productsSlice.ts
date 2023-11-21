@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { ProductCardInterface } from "./interfaces/ProductCardInterface";
+import { ProductsCardInterface } from "./interfaces/ProductCardInterface";
 
 interface InitialState {
-  products: ProductCardInterface[];
+  products: ProductsCardInterface[];
 }
 
 const initialState: InitialState = {

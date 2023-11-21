@@ -5,7 +5,6 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Typography, Box, IconButton } from "@mui/material";
 import { HeaderNav } from "./HeaderNav";
 import { useNavigate } from "react-router-dom";
-import HeaderButtons from "./HeaderButtons";
 import Cart from "../../cart/components/Cart";
 import HeaderSignInButton from "./HeaderSignInButton";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
@@ -50,7 +49,7 @@ const Header = () => {
                 textDecoration: "none",
               }}
             >
-              Team 3 Store
+              David & Teddy's team
             </Typography>
           </Box>
           <Box
@@ -61,8 +60,6 @@ const Header = () => {
           >
             <HeaderNav pages={pages} />
           </Box>
-
-          <HeaderButtons pages={pages} />
           <Box sx={{ marginLeft: "auto", display: "flex" }}>
             <HeaderSignInButton />
             <IconButton

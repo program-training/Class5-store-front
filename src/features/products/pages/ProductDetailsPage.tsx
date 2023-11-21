@@ -1,24 +1,24 @@
 import ProductDetailsCard from "../components/ProductDetails/ProductDetailsCard";
 import { useParams } from "react-router-dom";
-import { useAppSelector } from "../../../store/hooks";
-import { ProductCardInterface } from "../interfaces/ProductCardInterface";
+import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
 import { CssBaseline } from "@mui/material";
+import { useEffect, useState } from "react";
+import axios from "axios";
 const ProductDetailsPage = () => {
-  const { product } = useParams();
-  const products = useAppSelector((store) => store.products).products;
-  const myProduct = products.find(
-    (p) => String(p.title) === product
-  ) as ProductCardInterface;
+  const { productId } = useParams();
+
+  const [product, setProduct] = useState<ProductsCardInterface>();
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3333/api/products/${productId}`)
+      .then((res) => setProduct(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+  if (!product) return <>null</>;
   return (
     <>
       <CssBaseline />
-      <ProductDetailsCard
-        title={myProduct.title}
-        description={myProduct.description}
-        price={myProduct.price}
-        thumbnail={myProduct.thumbnail}
-      />
-      ;
+      <ProductDetailsCard product={product} />;
     </>
   );
 };

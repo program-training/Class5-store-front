@@ -18,7 +18,7 @@ const RouterDom = () => {
       <Route path="/home/categories" element={<CategoriesPage />} />
       <Route path="/home/categories/:category" element={<CategoryPage />} />
       <Route
-        path="/home/categories/:category/:product"
+        path="/home/categories/category/:productId"
         element={<ProductDetailsPage />}
       />
       <Route path="/home/products" element={<ProductsPage />} />

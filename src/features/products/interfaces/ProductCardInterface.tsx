@@ -1,14 +1,11 @@
-export interface ProductCardInterface {
-  _id: string;
-  id?: number;
-  title: string;
+export interface ProductsCardInterface {
+  id: string;
+  name: string;
+  salePrice: number;
+  quantity: number;
   description: string;
-  price: number;
-  discountPercentage?: number;
-  rating: number;
-  stock: number;
-  brand: string;
   category: string;
-  thumbnail: string;
-  images?: string[];
+  discountPercentage: number;
+  imageUrl: string;
+  imageAlt: string;
 }

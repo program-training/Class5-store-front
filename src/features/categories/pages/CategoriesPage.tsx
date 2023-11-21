@@ -1,13 +1,8 @@
 import { Box, CssBaseline, Typography } from "@mui/material";
-import { GetCategories } from "../../categories/utils/GetCategories";
 import { useAppSelector } from "../../../store/hooks";
-import { GetProducts } from "../../products/utils/GetProducts";
 import { ProductCard } from "../../products/components/ProductCard";
 
 const CategoriesPage = () => {
-  GetCategories();
-  GetProducts();
-
   const categories = useAppSelector((store) => store.categories).categories;
   const products = useAppSelector((store) => store.products).products;
 
@@ -48,18 +43,7 @@ const CategoriesPage = () => {
                 }}
               >
                 {sortedProducts.map((product, j) => (
-                  <ProductCard
-                    key={j}
-                    title={product.title}
-                    description={product.description}
-                    thumbnail={product.thumbnail}
-                    price={product.price}
-                    category={product.category}
-                    _id={product._id}
-                    rating={product.rating}
-                    stock={product.stock}
-                    brand={product.brand}
-                  />
+                  <ProductCard key={j} product={product} />
                 ))}
               </Box>
             </Box>

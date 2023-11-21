@@ -83,7 +83,7 @@ const Cart = () => {
                 Total cost: {sumAndAmount.sum}$
               </Typography>
               {localCart.map((productOnCart: productInCart) => (
-                <React.Fragment key={productOnCart.product.title}>
+                <React.Fragment key={productOnCart.product.name}>
                   <List>
                     <ProductInCart productCart={productOnCart} />
                   </List>

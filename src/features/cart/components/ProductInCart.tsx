@@ -12,19 +12,19 @@ const ProductInCart = ({ productCart }: PropProductInCart) => {
   const cart = useAppSelector((state) => state.cart.cart);
 
   const productIndexInCart = cart.findIndex(
-    (p) => p.product.title === productCart.product.title
+    (p) => p.product.name === productCart.product.name
   );
 
   return (
     <Card sx={{ width: 250, margin: 1 }}>
       <CardMedia
         sx={{ height: 140, maxWidth: 250 }}
-        image={productCart.product.thumbnail}
-        title={productCart.product.title}
+        image={productCart.product.imageUrl}
+        title={productCart.product.name}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {productCart.product.title}
+          {productCart.product.name}
         </Typography>
         <Grid>
           {productCart.product.discountPercentage &&
@@ -34,7 +34,7 @@ const ProductInCart = ({ productCart }: PropProductInCart) => {
                 {parseFloat(
                   (
                     ((100 - productCart.product.discountPercentage) / 100) *
-                    productCart.product.price
+                    productCart.product.salePrice
                   ).toFixed(1)
                 )}
                 $
@@ -45,12 +45,12 @@ const ProductInCart = ({ productCart }: PropProductInCart) => {
                 color="text.secondary"
                 sx={{ textDecoration: "line-through", display: "inline" }}
               >
-                {productCart.product.price}$
+                {productCart.product.salePrice}$
               </Typography>
             </>
           ) : (
             <Typography variant="body1" sx={{ display: "inline" }}>
-              {productCart.product.price}$
+              {productCart.product.salePrice}$
             </Typography>
           )}
         </Grid>
