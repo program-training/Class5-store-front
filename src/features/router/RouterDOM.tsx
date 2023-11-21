@@ -8,6 +8,7 @@ import CategoryPage from "../categories/pages/CategoryPage";
 import ProductDetailsPage from "../products/pages/ProductDetailsPage";
 import StorePage from "../maps/pages/StorePage";
 import NotFoundPage from "../layout/NotFoundPage/NotFoundPage";
+import Payment from "../../order/pages/Payment";
 const RouterDom = () => {
   return (
     <Routes>
@@ -24,6 +25,8 @@ const RouterDom = () => {
       <Route path="/home/products" element={<ProductsPage />} />
       <Route path="/home/store/map" element={<StorePage />} />
       <Route path="*" element={<NotFoundPage />} />
+
+      <Route path="/payment" element={<Payment />} />
     </Routes>
   );
 };
