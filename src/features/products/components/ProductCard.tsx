@@ -45,7 +45,7 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
         <Typography
           variant="body2"
           color="text.secondary"
-          sx={{ fontSize: "1.25rem", color: "red" }}
+          sx={{ fontSize: "1.25rem" }}
         >
           ${product.salePrice}
         </Typography>
@@ -53,6 +53,11 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
           {product.description}
         </Typography>
       </CardContent>
+      <Typography variant="body2" color="text.secondary">
+        {product.quantity > 5
+          ? "in stock"
+          : "Only a few left in stock of this item!! Order quickly"}
+      </Typography>
       <CardActions sx={{ justifyContent: "space-evenly" }}>
         <Button
           onClick={() => {
@@ -67,6 +72,7 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
           size="small"
           sx={{ backgroundColor: "#4CAF50", color: "#fff" }}
           onClick={() => dispatch(addToCart(product))}
+          disabled={product.quantity < 1}
         >
           Add To Cart
         </Button>

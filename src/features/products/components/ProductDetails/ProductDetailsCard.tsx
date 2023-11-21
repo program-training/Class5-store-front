@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { addToCart } from "../../../cart/cartSlice";
 import { ProductsCardInterface } from "../../interfaces/ProductCardInterface";
 import Missing from "../../../cart/MissingProduc";
+import { Box } from "@mui/material";
 interface ProductCardProps {
   product: ProductsCardInterface;
 }
@@ -17,12 +18,6 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
   const products = useAppSelector((store) => store.products).products;
   const currentProduct = products.find((p) => p.name === product.name);
   const dispatch = useAppDispatch();
-  const [quantity, setQuantity] = React.useState(1);
-  const handleQuantityChange = (
-    event: React.ChangeEvent<{ value: unknown }>
-  ) => {
-    setQuantity(event.target.value as number);
-  };
 
   const handlePriceComparisonClick = () => {
     console.log(`Clicked on price comparison`);
@@ -53,13 +48,17 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
         <Typography variant="body2" color="text.secondary">
           Price: ${product.salePrice}
         </Typography>
-        <OrderOptions />
-        <QuantitySelector value={quantity} onChange={handleQuantityChange} />
+        <Typography variant="body2" color="text.secondary">
+          {product.quantity > 5
+            ? "in stock"
+            : "Only a few left in stock of this item!! Order quickly"}
+        </Typography>
         <Button
           variant="contained"
           onClick={() => {
-            if (currentProduct) dispatch(addToCart(product));
+            dispatch(addToCart(product));
           }}
+          disabled={product.quantity < 1}
           sx={{
             width: "100%",
             marginTop: 2,
@@ -82,7 +81,6 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
           Price Comparison
         </Button>
       </CardContent>
-      <Missing product={product} />
     </Card>
   );
 };
