@@ -8,13 +8,14 @@ import OrderOptions from "./OrderOptions";
 import QuantitySelector from "./QuantitySelector";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { addToCart } from "../../../cart/cartSlice";
-import { ProductCardInterface } from "../../interfaces/ProductCardInterface";
+import { ProductsCardInterface } from "../../interfaces/ProductCardInterface";
+import Missing from "../../../cart/MissingProduc";
 interface ProductCardProps {
-  product: ProductCardInterface;
+  product: ProductsCardInterface;
 }
 const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
   const products = useAppSelector((store) => store.products).products;
-  const currentProduct = products.find((p) => p.title === product.title);
+  const currentProduct = products.find((p) => p.name === product.name);
   const dispatch = useAppDispatch();
   const [quantity, setQuantity] = React.useState(1);
   const handleQuantityChange = (
@@ -37,20 +38,20 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
     >
       <CardMedia
         component="img"
-        alt={product.title}
+        alt={product.name}
         height="300px"
-        image={product.thumbnail}
+        image={product.imageUrl}
         sx={{ objectFit: "cover" }}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {product.title}
+          {product.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {product.description}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Price: ${product.price}
+          Price: ${product.salePrice}
         </Typography>
         <OrderOptions />
         <QuantitySelector value={quantity} onChange={handleQuantityChange} />
@@ -81,6 +82,7 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
           Price Comparison
         </Button>
       </CardContent>
+      <Missing product={product} />
     </Card>
   );
 };

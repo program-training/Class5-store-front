@@ -4,15 +4,16 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { ProductCardInterface } from "../interfaces/ProductCardInterface";
+import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
 import { FC } from "react";
 import { useAppDispatch } from "../../../store/hooks";
 import { addToCart } from "../../cart/cartSlice";
 import { useNavigate } from "react-router-dom";
-
-export const ProductCard: FC<ProductCardInterface> = (product) => {
+type ProductsProps = {
+  product: ProductsCardInterface;
+};
+export const ProductCard: FC<ProductsProps> = ({ product }) => {
   const navigate = useNavigate();
-  const { title, description, price, thumbnail } = product;
   const dispatch = useAppDispatch();
 
   return (
@@ -32,30 +33,30 @@ export const ProductCard: FC<ProductCardInterface> = (product) => {
     >
       <CardMedia
         component="img"
-        alt="Apple iPhone 11"
+        alt={product.imageAlt}
         height="300px"
-        image={thumbnail}
+        image={product.imageUrl}
         sx={{ objectFit: "cover" }}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {title}
+          {product.name}
         </Typography>
         <Typography
           variant="body2"
           color="text.secondary"
           sx={{ fontSize: "1.25rem", color: "red" }}
         >
-          ${price}
+          ${product.salePrice}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {description}
+          {product.description}
         </Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: "space-evenly" }}>
         <Button
           onClick={() => {
-            navigate(`/home/categories/${product.category}/${title}`);
+            navigate(`/home/categories/category/${product.id}`);
           }}
           size="small"
           sx={{ backgroundColor: "#2196F3", color: "#fff" }}
