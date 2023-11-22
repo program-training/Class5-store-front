@@ -4,19 +4,13 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import OrderOptions from "./OrderOptions";
-import QuantitySelector from "./QuantitySelector";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { useAppDispatch } from "../../../../store/hooks";
 import { addToCart } from "../../../cart/cartSlice";
 import { ProductsCardInterface } from "../../interfaces/ProductCardInterface";
-import Missing from "../../../cart/MissingProduc";
-import { Box } from "@mui/material";
 interface ProductCardProps {
   product: ProductsCardInterface;
 }
 const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
-  const products = useAppSelector((store) => store.products).products;
-  const currentProduct = products.find((p) => p.name === product.name);
   const dispatch = useAppDispatch();
 
   const handlePriceComparisonClick = () => {
@@ -49,14 +43,12 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
           Price: ${product.salePrice}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {product.quantity > 5
-            ? "in stock"
-            : "Only a few left in stock of this item!! Order quickly"}
+          {product.quantity > 0 ? "in stock" : "not in stock"}
         </Typography>
         <Button
           variant="contained"
           onClick={() => {
-            dispatch(addToCart(product));
+            dispatch(addToCart(product.id));
           }}
           disabled={product.quantity < 1}
           sx={{

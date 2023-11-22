@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { productInCart } from "./types/productInCart";
-import { ProductsCardInterface } from "../products/interfaces/ProductCardInterface";
+
 import {
   handelAddOne,
   handelCart,
@@ -25,25 +25,25 @@ export const cartSlice = createSlice({
       const cartList = JSON.parse(localStorage.getItem("cartItem") || "[]");
       state.cart = cartList;
     },
-    addToCart(state, action: PayloadAction<ProductsCardInterface>) {
+    addToCart(state, action: PayloadAction<number>) {
       const cartItems = [...state.cart];
       state.cart = handelCart(action.payload, cartItems);
       localStorage.setItem("cartItem", JSON.stringify(state.cart));
       return state;
     },
-    addOne(state, action: PayloadAction<string>) {
+    addOne(state, action: PayloadAction<number>) {
       const cartItems = [...state.cart];
       state.cart = handelAddOne(action.payload, cartItems);
       localStorage.setItem("cartItem", JSON.stringify(state.cart));
       return state;
     },
-    subOne(state, action: PayloadAction<string>) {
+    subOne(state, action: PayloadAction<number>) {
       const cartItems = [...state.cart];
       state.cart = handelSubOne(action.payload, cartItems);
       localStorage.setItem("cartItem", JSON.stringify(state.cart));
       return state;
     },
-    removeItem(state, action: PayloadAction<string>) {
+    removeItem(state, action: PayloadAction<number>) {
       const cartItems = [...state.cart];
       state.cart = removeItemFromCart(action.payload, cartItems);
       localStorage.setItem("cartItem", JSON.stringify(state.cart));

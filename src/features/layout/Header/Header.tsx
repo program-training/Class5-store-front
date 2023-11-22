@@ -49,7 +49,7 @@ const Header = () => {
                 textDecoration: "none",
               }}
             >
-              David & Teddy's team
+              David & Teddy's class
             </Typography>
           </Box>
           <Box
