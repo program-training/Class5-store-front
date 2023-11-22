@@ -34,7 +34,6 @@ const Cart = () => {
   useEffect(() => {
     sumCartItem(localCart, cart).then((res) => {
       setLocalCart(res.newLocalCart);
-      console.log(res.newLocalCart);
       setAmount(res.sumAndAmount.amount);
       setSum(res.sumAndAmount.sum);
     });
