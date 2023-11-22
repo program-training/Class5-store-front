@@ -1,10 +1,15 @@
-import  ProductInterface from "../../products/interfaces/ProductInterface";
+import { ProductsCardInterface } from "../../products/interfaces/ProductCardInterface";
 
 export type productInCart = {
-  product: ProductInterface;
+  productId: number;
+  amount: number;
+};
+
+export type LocalCartType = {
+  product: ProductsCardInterface;
   amount: number;
   sum: number;
 };
 export type PropProductInCart = {
-  productCart: productInCart;
+  productCart: LocalCartType;
 };

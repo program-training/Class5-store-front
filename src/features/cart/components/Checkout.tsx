@@ -2,11 +2,8 @@ import { Button } from "@mui/material";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { useState } from "react";
 import DeliveryFrom from "../../Deliveryform/components/DeliveryFrom";
-import { FC } from "react";
-type CheckoutProps = {
-  sum: number
-}
-const Checkout:FC<CheckoutProps> = ({sum}) => {
+
+const Checkout = () => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -27,7 +24,7 @@ const Checkout:FC<CheckoutProps> = ({sum}) => {
       >
         <ShoppingCartCheckoutIcon sx={{ mr: 1 }} /> Checkout
       </Button>
-      <DeliveryFrom open={open} onClose={handleClose} sum={sum}/>
+      <DeliveryFrom open={open} onClose={handleClose} />
     </>
   );
 };

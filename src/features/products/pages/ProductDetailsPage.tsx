@@ -1,15 +1,13 @@
 import ProductDetailsCard from "../components/ProductDetails/ProductDetailsCard";
 import { useParams } from "react-router-dom";
-<<<<<<< HEAD
-import { useAppSelector } from "../../../store/hooks";
-import  ProductInterface from "../interfaces/ProductInterface";
 import { CssBaseline } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
 const ProductDetailsPage = () => {
   const { productId } = useParams();
 
-  const [product, setProduct] = useState< ProductInterface | null>(null);
+  const [product, setProduct] = useState< ProductsCardInterface | null>(null);
   useEffect(() => {
     axios
       .get(`http://localhost:3333/api/products/${productId}`)
