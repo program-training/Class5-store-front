@@ -1,4 +1,4 @@
-import  ProductInterface  from "../../products/interfaces/ProductInterface";
+import  ProductInterface from "../../products/interfaces/ProductInterface";
 
 export type productInCart = {
   product: ProductInterface;

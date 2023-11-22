@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { productInCart } from "./types/productInCart";
-import  ProductCardInterface  from "../products/interfaces/ProductInterface";
+import  ProductInterface  from "../products/interfaces/ProductInterface";
 import {
   handelAddOne,
   handelCart,
@@ -25,7 +25,7 @@ export const cartSlice = createSlice({
       const cartList = JSON.parse(localStorage.getItem("cartItem") || "[]");
       state.cart = cartList;
     },
-    addToCart(state, action: PayloadAction<ProductCardInterface>) {
+    addToCart(state, action: PayloadAction<ProductInterface>) {
       const cartItems = [...state.cart];
       state.cart = handelCart(action.payload, cartItems);
       localStorage.setItem("cartItem", JSON.stringify(state.cart));

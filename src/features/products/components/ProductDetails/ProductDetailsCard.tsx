@@ -8,20 +8,16 @@ import OrderOptions from "./OrderOptions";
 import QuantitySelector from "./QuantitySelector";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { addToCart } from "../../../cart/cartSlice";
-import { ProductCardInterface } from "../../interfaces/ProductCardInterface";
+import { ProductsCardInterface } from "../../interfaces/ProductCardInterface";
+import Missing from "../../../cart/MissingProduc";
+import { Box } from "@mui/material";
 interface ProductCardProps {
-  product: ProductCardInterface;
+  product: ProductsCardInterface;
 }
 const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
   const products = useAppSelector((store) => store.products).products;
-  const currentProduct = products.find((p) => p.title === product.title);
+  const currentProduct = products.find((p) => p.name === product.name);
   const dispatch = useAppDispatch();
-  const [quantity, setQuantity] = React.useState(1);
-  const handleQuantityChange = (
-    event: React.ChangeEvent<{ value: unknown }>
-  ) => {
-    setQuantity(event.target.value as number);
-  };
 
   const handlePriceComparisonClick = () => {
     console.log(`Clicked on price comparison`);
@@ -37,28 +33,32 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
     >
       <CardMedia
         component="img"
-        alt={product.title}
+        alt={product.name}
         height="300px"
-        image={product.thumbnail}
+        image={product.imageUrl}
         sx={{ objectFit: "cover" }}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {product.title}
+          {product.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {product.description}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Price: ${product.price}
+          Price: ${product.salePrice}
         </Typography>
-        <OrderOptions />
-        <QuantitySelector value={quantity} onChange={handleQuantityChange} />
+        <Typography variant="body2" color="text.secondary">
+          {product.quantity > 5
+            ? "in stock"
+            : "Only a few left in stock of this item!! Order quickly"}
+        </Typography>
         <Button
           variant="contained"
           onClick={() => {
-            if (currentProduct) dispatch(addToCart(product));
+            dispatch(addToCart(product));
           }}
+          disabled={product.quantity < 1}
           sx={{
             width: "100%",
             marginTop: 2,

@@ -80,7 +80,7 @@ const Cart = () => {
           <>
             <Box sx={{ width: 260 }} role="presentation">
               <Typography variant="h5">
-                Total cost: {sumAndAmount.sum}$
+                Total cost: {sumAndAmount.sum.toFixed(2)}$
               </Typography>
               {localCart.map((productOnCart: productInCart) => (
                 <React.Fragment key={productOnCart.product.id}>
