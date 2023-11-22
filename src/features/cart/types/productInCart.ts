@@ -1,7 +1,7 @@
-import { ProductCardInterface } from "../../products/interfaces/ProductCardInterface";
+import  ProductInterface  from "../../products/interfaces/ProductInterface";
 
 export type productInCart = {
-  product: ProductCardInterface;
+  product: ProductInterface;
   amount: number;
   sum: number;
 };

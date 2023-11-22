@@ -1,7 +1,7 @@
 import ProductDetailsCard from "../components/ProductDetails/ProductDetailsCard";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../../store/hooks";
-import { ProductCardInterface } from "../interfaces/ProductCardInterface";
+import  ProductCardInterface from "../interfaces/ProductCardInterface";
 import { CssBaseline } from "@mui/material";
 const ProductDetailsPage = () => {
   const { product } = useParams();

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { productInCart } from "./types/productInCart";
-import { ProductCardInterface } from "../products/interfaces/ProductCardInterface";
+import  ProductCardInterface  from "../products/interfaces/ProductInterface";
 import {
   handelAddOne,
   handelCart,

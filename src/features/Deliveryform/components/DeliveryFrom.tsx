@@ -7,9 +7,10 @@ import { FC } from "react";
 export interface SimpleDialogProps {
   open: boolean;
   onClose: () => void;
+  sum: number
 }
 
-const DeliveryFrom: FC<SimpleDialogProps> = ({ onClose, open }) => {
+const DeliveryFrom: FC<SimpleDialogProps> = ({ onClose, open, sum }) => {
   const handleClose = () => {
     onClose();
   };
@@ -18,7 +19,7 @@ const DeliveryFrom: FC<SimpleDialogProps> = ({ onClose, open }) => {
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Your Details</DialogTitle>
       <DialogContent>
-        <InputDelivery onBuyClick={onClose} />
+        <InputDelivery onBuyClick={onClose} sum={sum}/>
       </DialogContent>
       <DialogActions></DialogActions>
     </Dialog>

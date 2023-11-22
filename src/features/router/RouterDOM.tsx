@@ -8,6 +8,7 @@ import CategoryPage from "../categories/pages/CategoryPage";
 import ProductDetailsPage from "../products/pages/ProductDetailsPage";
 import StorePage from "../maps/pages/StorePage";
 import NotFoundPage from "../layout/NotFoundPage/NotFoundPage";
+import OrderDetails from "../orderDetails/pages/OrderDetails";
 const RouterDom = () => {
   return (
     <Routes>
@@ -23,6 +24,7 @@ const RouterDom = () => {
       />
       <Route path="/home/products" element={<ProductsPage />} />
       <Route path="/home/store/map" element={<StorePage />} />
+      <Route path="/order-details/:userId" element={<OrderDetails/>}/>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

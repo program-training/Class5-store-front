@@ -83,7 +83,7 @@ const Cart = () => {
                 Total cost: {sumAndAmount.sum}$
               </Typography>
               {localCart.map((productOnCart: productInCart) => (
-                <React.Fragment key={productOnCart.product.title}>
+                <React.Fragment key={productOnCart.product.id}>
                   <List>
                     <ProductInCart productCart={productOnCart} />
                   </List>
@@ -91,7 +91,7 @@ const Cart = () => {
                 </React.Fragment>
               ))}
             </Box>
-            <Checkout />
+            <Checkout sum={sumAndAmount.sum}/>
           </>
         )}
       </SwipeableDrawer>

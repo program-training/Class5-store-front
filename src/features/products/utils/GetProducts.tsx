@@ -10,7 +10,7 @@ export const GetProducts = () => {
 
   useEffect(() => {
     axios.axiosVar
-      .get("https://project-team3-server.onrender.com/api/products")
+      .get("http://localhost:3333/api/products")
       .then((res) => dispatch(setProducts(res.data)))
       .catch((error) => console.log(error));
   }, []);
