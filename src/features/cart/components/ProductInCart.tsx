@@ -12,7 +12,7 @@ const ProductInCart = ({ productCart }: PropProductInCart) => {
   const cart = useAppSelector((state) => state.cart.cart);
 
   const productIndexInCart = cart.findIndex(
-    (p) => p.product.name === productCart.product.name
+    (p) => p.productId === productCart.product.id
   );
 
   return (
