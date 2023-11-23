@@ -8,65 +8,65 @@ import {
   Box,
 } from "@mui/material";
 import {
-  emailValidet,
-  houseValidet,
-  idValidet,
-  middelName,
-  nameValidet,
-  phoneValidet,
+  emailValidate,
+  houseValidate,
+  nameValidate,
+  phoneValidate,
 } from "../../products/helpers/validation";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import phonePrefixes from "../helpers/prefixs";
 import PersonalDetails from "./PersonalDetails";
 import Address from "./Address";
 import { FC } from "react";
 import { useAppDispatch } from "../../../store/hooks";
 import { clearCart } from "../../cart/cartSlice";
-
+import axios from "axios";
 type PropType = {
   onBuyClick: () => void;
 };
 
 const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
   const dispatch = useAppDispatch();
-
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
-  const onSubmit = () => {
-    onBuyClick();
-    dispatch(clearCart());
+  const onSubmit = async (data: FieldValues) => {
+    try {
+      const { email } = data;
+      const userID = await axios.post("http://localhost:3000/api/users", {
+        email: email,
+      });
+      console.log(userID);
+      onBuyClick();
+      dispatch(clearCart());
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <PersonalDetails
-          id={{ idValidet: idValidet, iderrors: errors, idregister: register }}
           name={{
             nameregister: register,
             nameerrors: errors,
-            nameValidet: nameValidet,
-          }}
-          middel={{
-            middelregister: register,
-            middelerrors: errors,
-            middelName: middelName,
+            nameValidet: nameValidate,
           }}
         />
         <Address
           name={{
-            nameValidet: nameValidet,
+            nameValidet: nameValidate,
             nameregister: register,
             nameerrors: errors,
           }}
           house={{
             houseregister: register,
             houseerrors: errors,
-            houseValidet: houseValidet,
+            houseValidet: houseValidate,
           }}
         />
         <TextField
@@ -77,7 +77,7 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
           label="Email Address"
           autoComplete="email"
           autoFocus
-          {...register("email", emailValidet)}
+          {...register("email", emailValidate)}
           helperText={errors.email?.message?.toString()}
           error={errors.email ? true : false}
         />
@@ -106,7 +106,7 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
               label="Phone Number"
               autoComplete="phone"
               autoFocus
-              {...register("phone", phoneValidet)}
+              {...register("phone", phoneValidate)}
               helperText={errors.phone?.message?.toString()}
               error={errors.phone ? true : false}
             />

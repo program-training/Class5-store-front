@@ -10,7 +10,7 @@
 
 //   useEffect(() => {
 //     axios.axiosVar
-//       .get("http://localhost:3333/api/categories")
+//       .get("http://localhost:3000/api/categories")
 //       .then((res) => dispatch(setCategories(res.data)))
 //       .catch((error) => console.log(error));
 //   }, []);

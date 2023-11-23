@@ -18,7 +18,7 @@ const DeliveryFrom: FC<SimpleDialogProps> = ({ onClose, open }) => {
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Your Details</DialogTitle>
       <DialogContent>
-        <InputDelivery onBuyClick={onClose} />
+        <InputDelivery onBuyClick={onClose}/>
       </DialogContent>
       <DialogActions></DialogActions>
     </Dialog>

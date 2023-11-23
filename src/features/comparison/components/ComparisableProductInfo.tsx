@@ -10,10 +10,10 @@ import {
   Button,
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { ProductCardInterface } from "../../products/interfaces/ProductCardInterface";
+import { ProductsCardInterface } from "../../products/interfaces/ProductCardInterface";
 
 export type PropProducts = {
-  product: ProductCardInterface;
+  product: ProductsCardInterface;
 };
 
 const ComparisableProductInfo = ({ product }: PropProducts) => {
@@ -22,12 +22,12 @@ const ComparisableProductInfo = ({ product }: PropProducts) => {
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           sx={{ height: 140 }}
-          image={product.thumbnail}
-          title={product.title}
+          image={product.imageUrl}
+          title={product.name}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {product.title}
+            {product.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {product.description}
@@ -40,7 +40,7 @@ const ComparisableProductInfo = ({ product }: PropProducts) => {
                 {parseFloat(
                   (
                     ((100 - product.discountPercentage) / 100) *
-                    product.price
+                    product.salePrice
                   ).toFixed(1)
                 )}
                 $
@@ -51,12 +51,12 @@ const ComparisableProductInfo = ({ product }: PropProducts) => {
                 color="text.secondary"
                 sx={{ textDecoration: "line-through", display: "inline" }}
               >
-                {product.price}$
+                {product.salePrice}$
               </Typography>
             </>
           ) : (
             <Typography variant="body1" sx={{ display: "inline" }}>
-              {product.price}$
+              {product.salePrice}$
             </Typography>
           )}
         </Grid>

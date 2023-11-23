@@ -47,7 +47,7 @@ export const sumCartItem = async (
   cart.forEach((product) => {
     return promises.push(
       axios
-        .get(`http://localhost:3333/api/products/${product.productId}`)
+        .get(`https://app-store-server1.onrender.com/api/products/${product.productId}`)
         .then((newProduct) => {
           const updatedProduct = newProduct.data;
           const index = newLocalCart.findIndex(
