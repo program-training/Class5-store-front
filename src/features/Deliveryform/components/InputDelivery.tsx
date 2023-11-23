@@ -15,35 +15,41 @@ import {
   nameValidet,
   phoneValidet,
 } from "../../products/helpers/validation";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import phonePrefixes from "../helpers/prefixs";
 import PersonalDetails from "./PersonalDetails";
 import Address from "./Address";
 import { FC } from "react";
 import { useAppDispatch } from "../../../store/hooks";
 import { clearCart } from "../../cart/cartSlice";
-
 type PropType = {
   onBuyClick: () => void;
 };
 
 const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
   const dispatch = useAppDispatch();
-
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
-  const onSubmit = () => {
-    onBuyClick();
-    dispatch(clearCart());
+  const onSubmit = async (data: FieldValues) => {
+    try {
+      console.log(JSON.stringify(data));
+      onBuyClick();
+      dispatch(clearCart());
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
-      <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+      <Box
+        component="form"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <PersonalDetails
           id={{ idValidet: idValidet, iderrors: errors, idregister: register }}
           name={{

@@ -9,9 +9,9 @@
 //   const dispatch = useAppDispatch();
 
 //   useEffect(() => {
-//     axios
-//       .get("http://localhost:3333/api/products")
-//       .then((res) => dispatch(setProducts(res.data.products)))
+//     axios.axiosVar
+//       .get("https://project-team3-server.onrender.com/api/products")
+//       .then((res) => dispatch(setProducts(res.data)))
 //       .catch((error) => console.log(error));
 //   }, []);
 //   return <></>;
