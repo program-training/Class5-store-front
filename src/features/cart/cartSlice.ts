@@ -2,6 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { productInCart } from "./types/productInCart";
 
+import {
+  handelAddOne,
+  handelCart,
+  removeItemFromCart,
+  handelSubOne,
+} from "./utils/functions";
+
 interface InitialState {
   cart: productInCart[];
 }
@@ -14,26 +21,33 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    setQuantityPlus: (state, action: PayloadAction<string>) => {
-      const productIndex = state.cart.findIndex(
-        (p) => p.product.title === action.payload
-      );
-      state.cart[productIndex].quantity++;
+    pullFromLocalStorage(state) {
+      const cartList = JSON.parse(localStorage.getItem("cartItem") || "[]");
+      state.cart = cartList;
     },
-    setQuantityMinus: (state, action: PayloadAction<string>) => {
-      const productIndex = state.cart.findIndex(
-        (p) => p.product.title === action.payload
-      );
-      state.cart[productIndex].quantity--;
+    addToCart(state, action: PayloadAction<number>) {
+      const cartItems = [...state.cart];
+      state.cart = handelCart(action.payload, cartItems);
+      localStorage.setItem("cartItem", JSON.stringify(state.cart));
+      return state;
     },
-    addProductToCart: (state, action: PayloadAction<productInCart>) => {
-      state.cart.push(action.payload);
+    addOne(state, action: PayloadAction<number>) {
+      const cartItems = [...state.cart];
+      state.cart = handelAddOne(action.payload, cartItems);
+      localStorage.setItem("cartItem", JSON.stringify(state.cart));
+      return state;
     },
-    deleteProductFromCart: (state, action: PayloadAction<string>) => {
-      const productIndex = state.cart.findIndex(
-        (p) => p.product.title === action.payload
-      );
-      state.cart.splice(productIndex, 1);
+    subOne(state, action: PayloadAction<number>) {
+      const cartItems = [...state.cart];
+      state.cart = handelSubOne(action.payload, cartItems);
+      localStorage.setItem("cartItem", JSON.stringify(state.cart));
+      return state;
+    },
+    removeItem(state, action: PayloadAction<number>) {
+      const cartItems = [...state.cart];
+      state.cart = removeItemFromCart(action.payload, cartItems);
+      localStorage.setItem("cartItem", JSON.stringify(state.cart));
+      return state;
     },
     clearCart: (state) => {
       state.cart = [];
@@ -42,10 +56,11 @@ export const cartSlice = createSlice({
 });
 
 export const {
-  setQuantityPlus,
-  setQuantityMinus,
-  addProductToCart,
-  deleteProductFromCart,
+  pullFromLocalStorage,
+  addToCart,
+  addOne,
+  subOne,
+  removeItem,
   clearCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;

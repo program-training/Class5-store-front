@@ -4,39 +4,15 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import OrderOptions from "./OrderOptions";
-import QuantitySelector from "./QuantitySelector";
-import { productInCart } from "../../../cart/types/productInCart";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { addProductToCart, setQuantityPlus } from "../../../cart/cartSlice";
+import { useAppDispatch } from "../../../../store/hooks";
+import { addToCart } from "../../../cart/cartSlice";
+import { ProductsCardInterface } from "../../interfaces/ProductCardInterface";
 interface ProductCardProps {
-  title: string;
-  description: string;
-  price: number;
-  thumbnail: string;
+  product: ProductsCardInterface;
 }
-const ProductDetailsCard: React.FC<ProductCardProps> = (product) => {
-  const { title, description, price, thumbnail } = product;
-  const products = useAppSelector((store) => store.products).products;
-  const currentProduct = products.find((p) => p.title === title);
+const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useAppDispatch();
-  const cart = useAppSelector((state) => state.cart.cart);
-  const [quantity, setQuantity] = React.useState(1);
-  const handleQuantityChange = (
-    event: React.ChangeEvent<{ value: unknown }>
-  ) => {
-    setQuantity(event.target.value as number);
-  };
-  const handleAddToCartClick = (newProduct: productInCart) => {
-    const alreadyInCart = cart.findIndex(
-      (p) => p.product.title === newProduct.product.title
-    );
-    if (alreadyInCart !== -1) {
-      dispatch(setQuantityPlus(newProduct.product.title));
-    } else {
-      dispatch(addProductToCart(newProduct));
-    }
-  };
+
   const handlePriceComparisonClick = () => {
     console.log(`Clicked on price comparison`);
   };
@@ -51,32 +27,30 @@ const ProductDetailsCard: React.FC<ProductCardProps> = (product) => {
     >
       <CardMedia
         component="img"
-        alt={title}
+        alt={product.name}
         height="300px"
-        image={thumbnail}
+        image={product.imageUrl}
         sx={{ objectFit: "cover" }}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {title}
+          {product.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {description}
+          {product.description}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Price: ${price}
+          Price: ${product.salePrice}
         </Typography>
-        <OrderOptions />
-        <QuantitySelector value={quantity} onChange={handleQuantityChange} />
+        <Typography variant="body2" color="text.secondary">
+          {product.quantity > 0 ? "in stock" : "not in stock"}
+        </Typography>
         <Button
           variant="contained"
           onClick={() => {
-            if (currentProduct)
-              handleAddToCartClick({
-                product: currentProduct,
-                quantity: quantity,
-              });
+            dispatch(addToCart(product.id));
           }}
+          disabled={product.quantity < 1}
           sx={{
             width: "100%",
             marginTop: 2,

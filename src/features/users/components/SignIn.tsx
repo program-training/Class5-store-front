@@ -12,7 +12,7 @@ import {
   emailValidet,
   passwordValidet,
 } from "../../products/helpers/validation";
-import { Copyright } from "../../layout/Copyright";
+
 import SignInUpButton from "./SignInUpButton";
 export const SignIn = () => {
   const {
@@ -83,7 +83,6 @@ export const SignIn = () => {
           {/* <SignInUpLink text="signup" /> */}
         </Box>
       </Box>
-      <Copyright />
     </Container>
   );
 };

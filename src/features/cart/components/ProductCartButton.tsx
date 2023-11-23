@@ -1,9 +1,5 @@
 import { Box, Fab } from "@mui/material";
-import {
-  setQuantityPlus,
-  setQuantityMinus,
-  deleteProductFromCart,
-} from "../cartSlice";
+import { addOne, subOne, removeItem } from "../cartSlice";
 import { useAppDispatch } from "../../../store/hooks";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -16,25 +12,23 @@ const ProductCartButton = ({ productCart }: PropProductInCart) => {
     <Box sx={{ "& > :not(style)": { m: 1 } }}>
       <Fab
         size="small"
-        color="inherit"
-        onClick={() => dispatch(setQuantityPlus(productCart.product.title))}
+        color="success"
+        onClick={() => dispatch(addOne(productCart.product.id))}
       >
         <AddIcon />
       </Fab>
       <Fab
         size="small"
-        color="inherit"
-        disabled={productCart.quantity === 1 ? true : false}
-        onClick={() => dispatch(setQuantityMinus(productCart.product.title))}
+        color="success"
+        disabled={productCart.amount === 1 ? true : false}
+        onClick={() => dispatch(subOne(productCart.product.id))}
       >
         <RemoveIcon />
       </Fab>
       <Fab
         size="small"
-        color="inherit"
-        onClick={() =>
-          dispatch(deleteProductFromCart(productCart.product.title))
-        }
+        color="success"
+        onClick={() => dispatch(removeItem(productCart.product.id))}
       >
         <DeleteIcon />
       </Fab>

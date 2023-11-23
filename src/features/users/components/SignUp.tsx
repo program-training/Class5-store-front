@@ -12,7 +12,6 @@ import {
   passwordValidet,
 } from "../../products/helpers/validation";
 import { FieldValues, useForm } from "react-hook-form";
-import { Copyright } from "../../layout/Copyright";
 import SignInUpLink from "./SignInUpLink";
 import SignInUpButton from "./SignInUpButton";
 import PasswordInput from "./PasswordInput";
@@ -92,7 +91,7 @@ export const SignUp = () => {
           <SignInUpLink text="signin" />
         </Box>
       </Box>
-      <Copyright />
+
     </Container>
   );
 };
