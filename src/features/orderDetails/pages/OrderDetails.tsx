@@ -11,22 +11,26 @@ const OrderDetails = () => {
     const getOrder = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:3333/api/orders/${userId}`
+          `http://localhost:3000/api/orders/${userId}`
         );
         setOrder(data);
       } catch (error) {
         console.log(error);
       }
     };
-    getOrder()
+    getOrder();
   }, []);
 
-  return <>
-  <Typography>order time {order?.orderTime.toDateString()}</Typography>
-  <Typography>status order {order?.status}</Typography>
-  {order?.products.map((product) => <ProductDetails product={product}/>)}
-  <Typography>total price{order?.price}</Typography>
-  </>;
+  return (
+    <>
+      <Typography>order time {order?.orderTime.toDateString()}</Typography>
+      <Typography>status order {order?.status}</Typography>
+      {order?.products.map((product) => (
+        <ProductDetails product={product} />
+      ))}
+      <Typography>total price{order?.price}</Typography>
+    </>
+  );
 };
 
 export default OrderDetails;

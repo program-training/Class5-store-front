@@ -6,7 +6,7 @@ import axios from "axios";
 
 export const fetchCategories = createAsyncThunk("user/fetchUsers", () =>
   axios
-    .get("http://localhost:3333/api/categories")
+    .get("http://localhost:3000/api/categories")
     .then(({ data }: any) => data)
 );
 
