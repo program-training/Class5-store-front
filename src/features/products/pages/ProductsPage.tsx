@@ -9,8 +9,8 @@ const ProductsPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/products")
-      .then((res) => setProducts(res.data.products))
+      .get("https://app-store-server1.onrender.com/api/products")
+      .then((res) => setProducts(res.data))
       .catch((error) => console.log(error));
   }, []);
 
@@ -22,8 +22,8 @@ const ProductsPage = () => {
           sx={{ textAlign: "center", marginBottom: "30px" }}
         ></Typography>
         <Box className="product-grid">
-          {products.map((product) => (
-            <Box key={product.name}>
+          {products?.map((product, i) => (
+            <Box key={`${product.name}-${i}`}>
               <ProductCard product={product} />
             </Box>
           ))}
