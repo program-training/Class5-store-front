@@ -7,10 +7,10 @@ import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
 const ProductDetailsPage = () => {
   const { productId } = useParams();
 
-  const [product, setProduct] = useState< ProductsCardInterface | null>(null);
+  const [product, setProduct] = useState<ProductsCardInterface | null>(null);
   useEffect(() => {
     axios
-      .get(`http://localhost:3333/api/products/${productId}`)
+      .get(`http://localhost:3000/api/products/${productId}`)
       .then((res) => setProduct(res.data))
       .catch((err) => console.log(err));
   }, []);

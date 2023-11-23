@@ -9,7 +9,7 @@ const ProductsPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3333/api/products")
+      .get("http://localhost:3000/api/products")
       .then((res) => setProducts(res.data.products))
       .catch((error) => console.log(error));
   }, []);
