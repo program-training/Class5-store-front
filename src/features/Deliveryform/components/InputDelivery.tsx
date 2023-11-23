@@ -8,12 +8,10 @@ import {
   Box,
 } from "@mui/material";
 import {
-  emailValidet,
-  houseValidet,
-  idValidet,
-  middelName,
-  nameValidet,
-  phoneValidet,
+  emailValidate,
+  houseValidate,
+  nameValidate,
+  phoneValidate,
 } from "../../products/helpers/validation";
 import { FieldValues, useForm } from "react-hook-form";
 import phonePrefixes from "../helpers/prefixs";
@@ -52,29 +50,23 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
   return (
     <>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-        {/* <PersonalDetails
-          id={{ idValidet: idValidet, iderrors: errors, idregister: register }}
+        <PersonalDetails
           name={{
             nameregister: register,
             nameerrors: errors,
-            nameValidet: nameValidet,
+            nameValidet: nameValidate,
           }}
-          middel={{
-            middelregister: register,
-            middelerrors: errors,
-            middelName: middelName,
-          }}
-        /> */}
+        />
         <Address
           name={{
-            nameValidet: nameValidet,
+            nameValidet: nameValidate,
             nameregister: register,
             nameerrors: errors,
           }}
           house={{
             houseregister: register,
             houseerrors: errors,
-            houseValidet: houseValidet,
+            houseValidet: houseValidate,
           }}
         />
         <TextField
@@ -85,7 +77,7 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
           label="Email Address"
           autoComplete="email"
           autoFocus
-          {...register("email", emailValidet)}
+          {...register("email", emailValidate)}
           helperText={errors.email?.message?.toString()}
           error={errors.email ? true : false}
         />
@@ -114,7 +106,7 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
               label="Phone Number"
               autoComplete="phone"
               autoFocus
-              {...register("phone", phoneValidet)}
+              {...register("phone", phoneValidate)}
               helperText={errors.phone?.message?.toString()}
               error={errors.phone ? true : false}
             />

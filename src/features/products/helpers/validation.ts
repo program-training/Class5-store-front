@@ -1,4 +1,4 @@
-export const passwordValidet = {
+export const passwordValidate = {
   required: "⚠ Required field",
   pattern: {
     value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,20}$/,
@@ -6,14 +6,14 @@ export const passwordValidet = {
       "⚠ Password must contain an uppercase letter, a lowercase letter, a digit, a special character, and be 8-20 characters long.",
   },
 };
-export const emailValidet = {
+export const emailValidate = {
   required: "⚠ Required field",
   pattern: {
     value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
     message: "⚠ Invalid email address",
   },
 };
-export const nameValidet = {
+export const nameValidate = {
   required: "⚠ Required field",
   minLength: {
     value: 2,
@@ -25,7 +25,7 @@ export const nameValidet = {
   },
 };
 
-export const middelName = {
+export const middleName = {
   minLength: {
     value: 2,
     message: "⚠ Must be at least two characters",
@@ -36,17 +36,17 @@ export const middelName = {
   },
 };
 
-export const phoneValidet = {
+export const phoneValidate = {
   required: "⚠ Required field",
   pattern: {
     value: /^\d{7}$/,
     message: "⚠ Invalid Phone Number",
   },
 };
-export const requiredValidet = {
+export const requiredValidate = {
   required: "⚠ Required field",
 };
-export const houseValidet = {
+export const houseValidate = {
   required: "⚠ Required field",
   pattern: {
     value: /^[0-9]+$/,
@@ -54,7 +54,7 @@ export const houseValidet = {
   },
 };
 
-export const idValidet = {
+export const idValidate = {
   required: "⚠ Required field",
   pattern: {
     value: /^\w{5,10}$/,
