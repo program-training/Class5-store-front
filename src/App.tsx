@@ -7,18 +7,19 @@ import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
 import { CssBaseline } from "@mui/material";
 import { pullFromLocalStorage } from "./features/cart/cartSlice";
+import Hostages from "./features/layout/war/Hostages";
 
 const App = () => {
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
   const dispatch = useAppDispatch();
   dispatch(pullFromLocalStorage());
 
-
   return (
     <>
       <ThemeProvider theme={themeMode ? themeLight : themeDark}>
         <CssBaseline />
         <Header />
+        <Hostages />
         <RouterDOM />
         <Footer />
       </ThemeProvider>

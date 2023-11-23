@@ -23,7 +23,7 @@ const ProductsPage = () => {
         ></Typography>
         <Box className="product-grid">
           {products.map((product) => (
-            <Box key={product.id}>
+            <Box key={product.name}>
               <ProductCard product={product} />
             </Box>
           ))}

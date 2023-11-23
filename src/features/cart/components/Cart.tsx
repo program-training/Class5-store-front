@@ -2,42 +2,52 @@ import {
   SwipeableDrawer,
   Button,
   Box,
-  Divider,
-  List,
+  // Divider,
+  // List,
   Typography,
   Badge,
+  List,
+  Divider,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import ProductInCart from "./ProductInCart";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCart";
 import { useAppSelector } from "../../../store/hooks";
-import { productInCart } from "../types/productInCart";
 import Checkout from "./Checkout";
+import { sumCartItem } from "../utils/functions";
+import { LocalCartType } from "../types/productInCart";
+import ProductInCart from "./ProductInCart";
 const Cart = () => {
   const cart = useAppSelector((state) => state.cart.cart);
   const [open, setOpen] = useState(false);
-  const [localCart, setLocalCart] = useState<productInCart[]>([]);
-  const [sumAndAmount, setSumAndAmount] = useState({ sum: 0, amount: 0 });
+  const [localCart, setLocalCart] = useState<LocalCartType[]>([]);
+  const [amount, setAmount] = useState(0);
+  const [sum, setSum] = useState(0);
+
+  // useEffect(() => {
+  //   sumCartItem(localCart, cart).then((res) => {
+  //     setLocalCart(res.localCart);
+  //     sumAndAmount.sum = res.sumAndAmount.sum;
+  //     sumAndAmount.amount = res.sumAndAmount.amount;
+  //   });
+  // }, []);
+
   useEffect(() => {
-    setLocalCart(cart);
-    const sumAndAmount2 = { sum: 0, amount: 0 };
-    localCart.forEach((element) => {
-      sumAndAmount2.sum += element.sum;
-      sumAndAmount2.amount += element.amount;
+    sumCartItem(localCart, cart).then((res) => {
+      setLocalCart(res.newLocalCart);
+      setAmount(res.sumAndAmount.amount);
+      setSum(res.sumAndAmount.sum);
     });
-    setSumAndAmount(sumAndAmount2);
-  }, [cart, localCart]);
+  }, [cart]);
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (event.type === "keydown") return;
       setOpen(open);
     };
-
   return (
     <Box>
       <Box component={Button} onClick={toggleDrawer(true)} variant="outlined">
-        <Badge badgeContent={sumAndAmount.amount} color="primary">
+        <Badge badgeContent={amount} color="primary">
           <ShoppingCartOutlinedIcon sx={{ color: "white" }} />
         </Badge>
       </Box>
@@ -80,9 +90,9 @@ const Cart = () => {
           <>
             <Box sx={{ width: 260 }} role="presentation">
               <Typography variant="h5">
-                Total cost: {sumAndAmount.sum.toFixed(2)}$
+                Total cost: {sum.toFixed(2)}$
               </Typography>
-              {localCart.map((productOnCart: productInCart) => (
+              {localCart.map((productOnCart) => (
                 <React.Fragment key={productOnCart.product.name}>
                   <List>
                     <ProductInCart productCart={productOnCart} />
