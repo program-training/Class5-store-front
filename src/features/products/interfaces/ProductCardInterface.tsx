@@ -1,4 +1,7 @@
 export interface ProductsCardInterface {
+  title: string | undefined;
+  price: number;
+  thumbnail: string | undefined;
   id: number;
   name: string;
   salePrice: number;

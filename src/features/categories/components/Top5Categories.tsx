@@ -59,7 +59,7 @@ const Top5Categories = () => {
                 };
                 axios
                   .put(
-                    `http://localhost:3333/api/categories/${category.category_name}`,
+                    `http://localhost:3000/api/categories/${category.category_name}`,
                     updatedData
                   )
                   .then((res) => console.log(res.data))

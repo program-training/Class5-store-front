@@ -1,5 +1,4 @@
 interface ProductInterface {
-  image: string;
   id: string;
   name: string;
   salePrice: number;

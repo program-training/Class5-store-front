@@ -11,7 +11,7 @@ const OrderDetails = () => {
     const getOrder = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:3333/api/orders/${userId}`
+          `http://localhost:3000/api/orders/${userId}`
         );
         setOrder(data);
       } catch (error) {
