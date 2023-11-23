@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { ProductsCardInterface } from "./interfaces/ProductCardInterface";
+import  ProductInterface  from "./interfaces/ProductInterface";
 
 interface InitialState {
-  products: ProductsCardInterface[];
+  products: ProductInterface[];
 }
 
 const initialState: InitialState = {
@@ -14,7 +14,7 @@ export const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    setProducts: (state, action: PayloadAction<[]>) => {
+    setProducts: (state, action: PayloadAction<ProductInterface[]>) => {
       state.products = action.payload;
     },
   },

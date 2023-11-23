@@ -101,7 +101,7 @@ const Cart = () => {
                 </React.Fragment>
               ))}
             </Box>
-            <Checkout />
+            <Checkout  />
           </>
         )}
       </SwipeableDrawer>

@@ -4,10 +4,17 @@ import { useState } from "react";
 import DeliveryFrom from "../../Deliveryform/components/DeliveryFrom";
 
 const Checkout = () => {
+<<<<<<< HEAD
   const [openDeliveryFrom, setOpenDeliveryFrom] = useState(false);
 
   const handleClickOpenDeliveryFrom = () => {
     setOpenDeliveryFrom(true);
+=======
+
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+>>>>>>> 22b6e38637ebb2e53198dd19227497ec751a2c37
   };
 
   const handleCloseDeliveryFrom = () => {
