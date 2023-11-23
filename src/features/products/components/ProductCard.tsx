@@ -19,11 +19,11 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
   return (
     <Card
       sx={{
-        maxWidth: "600px",
-        minWidth: "600px",
+        maxWidth: "240px",
+        minWidth: "240px",
+        height: "400px",
         margin: "20px",
         borderRadius: "8px",
-        // backgroundColor: "#0f0d14",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         transition: "transform 0.3s ease-in-out", // Add a smooth transition for the transform property
         ":hover": {
@@ -31,41 +31,39 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
         },
       }}
     >
-      <CardMedia
-        component="img"
-        alt={product.imageAlt}
-        height="300px"
-        image={product.imageUrl}
-        sx={{ objectFit: "cover" }}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {product.name}
-        </Typography>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{ fontSize: "1.25rem" }}
-        >
-          ${product.salePrice}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {product.description}
-        </Typography>
-      </CardContent>
-      <Typography variant="body2" color="text.secondary">
-        {product.quantity > 0 ? "in stock" : "not in stock"}
-      </Typography>
+      <Card
+        onClick={() => {
+          navigate(`/home/products/${product.id}`);
+        }}
+      >
+        <CardMedia
+          component="img"
+          alt={product.imageAlt}
+          height="180px"
+          width="240px"
+          image={product.imageUrl}
+          sx={{ objectFit: "cover" }}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {product.name}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ fontSize: "1.25rem" }}
+          >
+            ${product.salePrice}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {product.description}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {product.quantity > 0 ? "in stock" : "not in stock"}
+          </Typography>
+        </CardContent>
+      </Card>
       <CardActions sx={{ justifyContent: "space-evenly" }}>
-        <Button
-          onClick={() => {
-            navigate(`/home/categories/category/${product.id}`);
-          }}
-          size="small"
-          sx={{ backgroundColor: "#2196F3", color: "#fff" }}
-        >
-          Learn More
-        </Button>
         <Button
           size="small"
           sx={{ backgroundColor: "#4CAF50", color: "#fff" }}
