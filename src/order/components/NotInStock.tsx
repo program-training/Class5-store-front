@@ -7,15 +7,20 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useNavigate } from "react-router-dom";
 
-const NotInStock = () => {
-  const [open, setOpen] = React.useState(false);
-  // const [renderComponent, setRenderComponent] = useState(false);
+export interface SimpleDialogProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+const NotInStock: React.FC<SimpleDialogProps> = ({ open, onClose }) => {
+  const [open1, setOpen] = React.useState(open);
   const navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
+    onClose();
     setOpen(false);
   };
   const handleToPayment = () => {
@@ -33,7 +38,7 @@ const NotInStock = () => {
         Open alert dialog
       </Button>
       <Dialog
-        open={open}
+        open={open1}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
