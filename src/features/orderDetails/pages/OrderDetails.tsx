@@ -19,7 +19,7 @@ const OrderDetails = () => {
       }
     };
     getOrder();
-  }, []);
+  }, [userId]);
 
   return (
     <>

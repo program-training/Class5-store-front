@@ -36,8 +36,8 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
 
   const onSubmit = async (data: FieldValues) => {
     try {
-      console.log(JSON.stringify(data));
-      onBuyClick();
+      console.log(JSON.stringify(data))
+       onBuyClick();
       dispatch(clearCart());
     } catch (error) {
       console.log(error);
