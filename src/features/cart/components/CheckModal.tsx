@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { ProductsCardInterface } from "../../products/interfaces/ProductCardInterface";
 import { Box, Typography } from "@mui/material";
-import Missing from "../MissingProduct";
+import Missing from "../missingProduct/MissingProduct";
 
 type CheckExistProps = { products: ProductsCardInterface[] };
 

@@ -11,6 +11,7 @@ import NotFoundPage from "../layout/NotFoundPage/NotFoundPage";
 import OrderDetails from "../orderDetails/pages/OrderDetails";
 import Payment from "../../order/pages/Payment";
 import GetUsers from "../users/pages/GetUsers";
+import ButtonDelete from "../cart/missingProduct/ButtonDeleteProduct";
 const RouterDom = () => {
   return (
     <Routes>
@@ -26,10 +27,11 @@ const RouterDom = () => {
       />
       <Route path="/home/products" element={<ProductsPage />} />
       <Route path="/home/store/map" element={<StorePage />} />
-      <Route path="/order-details/:userId" element={<OrderDetails/>}/>
+      <Route path="/order-details/:userId" element={<OrderDetails />} />
       <Route path="*" element={<NotFoundPage />} />
-      <Route path="/getUsers" element={<GetUsers/>}/>
+      <Route path="/getUsers" element={<GetUsers />} />
       <Route path="/payment" element={<Payment />} />
+      <Route path="/missingProduct" element={<ButtonDelete />} />
     </Routes>
   );
 };

@@ -42,28 +42,29 @@ const Header = () => {
             <IconButton color="inherit" onClick={handleNavigateHome}>
               <HomeIcon />
             </IconButton>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex" } }}>
+              <HeaderNav pages={pages} />
+            </Box>
             <Typography
               variant="h6"
               noWrap
-              component="a"
-              onClick={handleNavigateHome}
               sx={{
                 ml: 1,
                 fontFamily: "monospace",
-                fontWeight: 700,
+                fontWeight: 7,
                 letterSpacing: ".3rem",
-                color: "inherit",
                 textDecoration: "none",
               }}
             >
               David & Teddy's class
             </Typography>
           </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <HeaderNav pages={pages} />
-          </Box>
           <Box
-            sx={{ marginLeft: "auto", display: "flex", alignItems: "center" }}
+            sx={{
+              marginLeft: "auto",
+              display: "flex",
+              alignItems: "center",
+            }}
           >
             <HeaderSignInButton />
             <IconButton

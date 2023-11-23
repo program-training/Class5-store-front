@@ -1,9 +1,17 @@
 import { Box, Typography } from "@mui/material";
-import { ProductsCardInterface } from "../products/interfaces/ProductCardInterface";
+import { ProductsCardInterface } from "../../products/interfaces/ProductCardInterface";
 import { FC } from "react";
-type MissingProps = { product: ProductsCardInterface };
 
-const Missing: FC<MissingProps> = ({ product }) => {
+type MissingProps = {
+  product: ProductsCardInterface;
+  requiredQuantity: number;
+};
+
+const Missing: FC<MissingProps> = ({ product, requiredQuantity }) => {
+  const availableQuantity = product.quantity;
+  const quantitySold = requiredQuantity;
+  const remainingQuantity = availableQuantity - quantitySold;
+
   return (
     <Box
       display="flex"
@@ -31,6 +39,16 @@ const Missing: FC<MissingProps> = ({ product }) => {
           reduced from the price:
           <br />
           {product.salePrice} $
+        </Typography>
+        <Typography component="h3" fontWeight={800} margin={2}>
+          available quantity:
+          {availableQuantity}
+          <br />
+        </Typography>
+        <Typography component="h3" fontWeight={800} margin={2}>
+          Remaining quantity:
+          <br />
+          {remainingQuantity > 0 ? remainingQuantity : "Out of stock"}
         </Typography>
       </Box>
     </Box>

@@ -2,8 +2,6 @@ import {
   SwipeableDrawer,
   Button,
   Box,
-  // Divider,
-  // List,
   Typography,
   Badge,
   List,
@@ -12,10 +10,11 @@ import {
 import React, { useEffect, useState } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCart";
 import { useAppSelector } from "../../../store/hooks";
-import Checkout from "./Checkout";
 import { sumCartItem } from "../utils/functions";
 import { LocalCartType } from "../types/productInCart";
 import ProductInCart from "./ProductInCart";
+import Checkout from "./Checkout";
+
 const Cart = () => {
   const cart = useAppSelector((state) => state.cart.cart);
   const [open, setOpen] = useState(false);
@@ -23,21 +22,13 @@ const Cart = () => {
   const [amount, setAmount] = useState(0);
   const [sum, setSum] = useState(0);
 
-  // useEffect(() => {
-  //   sumCartItem(localCart, cart).then((res) => {
-  //     setLocalCart(res.localCart);
-  //     sumAndAmount.sum = res.sumAndAmount.sum;
-  //     sumAndAmount.amount = res.sumAndAmount.amount;
-  //   });
-  // }, []);
-
   useEffect(() => {
     sumCartItem(localCart, cart).then((res) => {
       setLocalCart(res.newLocalCart);
       setAmount(res.sumAndAmount.amount);
       setSum(res.sumAndAmount.sum);
     });
-  }, [cart]);
+  }, [cart, localCart]);
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -87,7 +78,7 @@ const Cart = () => {
             </Typography>
           </Box>
         ) : (
-          <>
+          <Box>
             <Box sx={{ width: 260 }} role="presentation">
               <Typography variant="h5">
                 Total cost: {sum.toFixed(2)}$
@@ -101,8 +92,8 @@ const Cart = () => {
                 </React.Fragment>
               ))}
             </Box>
-            <Checkout  />
-          </>
+            <Checkout />
+          </Box>
         )}
       </SwipeableDrawer>
     </Box>

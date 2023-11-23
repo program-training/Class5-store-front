@@ -20,14 +20,14 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
     <Card
       sx={{
         maxWidth: "600px",
-        minWidth: "600px",
+        // minWidth: "600px",
         margin: "20px",
         borderRadius: "8px",
-        // backgroundColor: "#0f0d14",
+        backgroundColor: "#0f0d14",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        transition: "transform 0.3s ease-in-out", // Add a smooth transition for the transform property
+        transition: "transform 0.3s ease-in-out",
         ":hover": {
-          transform: "scale(1.03)", // Increase the scale on hover
+          transform: "scale(1.03)",
         },
       }}
     >

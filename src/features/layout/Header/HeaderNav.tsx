@@ -46,7 +46,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({ pages }) => {
         open={Boolean(anchorElNav)}
         onClose={handleCloseNavMenu}
         sx={{
-          display: { xs: "block", md: "none" },
+          display: { xs: "block" },
         }}
       >
         {pages.map((page) => (
