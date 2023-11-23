@@ -7,9 +7,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import {
-  emailValidet,
-  nameValidet,
-  passwordValidet,
+  emailValidate,
+  nameValidate,
+  passwordValidate,
 } from "../../products/helpers/validation";
 import { FieldValues, useForm } from "react-hook-form";
 import SignInUpLink from "./SignInUpLink";
@@ -58,7 +58,7 @@ export const SignUp = () => {
                 id="firstName"
                 label="First Name"
                 autoFocus
-                {...register("firstName", nameValidet)}
+                {...register("firstName", nameValidate)}
                 helperText={errors.firstName?.message?.toString()}
                 error={errors.firstName ? true : false}
               />
@@ -71,7 +71,7 @@ export const SignUp = () => {
                 id="lastName"
                 label="Last Name"
                 autoComplete="family-name"
-                {...register("lastName", nameValidet)}
+                {...register("lastName", nameValidate)}
                 helperText={errors.lastName?.message?.toString()}
                 error={errors.lastName ? true : false}
               />
@@ -79,19 +79,18 @@ export const SignUp = () => {
             <EmailInput
               register={register}
               errors={errors}
-              emailValidet={emailValidet}
+              emailValidet={emailValidate}
             />
             <PasswordInput
               register={register}
               errors={errors}
-              passwordValidet={passwordValidet}
+              passwordValidet={passwordValidate}
             />
           </Grid>
           <SignInUpButton text="Sign Up" isValid={isValid} />
           <SignInUpLink text="signin" />
         </Box>
       </Box>
-
     </Container>
   );
 };
