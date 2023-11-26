@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { CardActionsButtonStyle, cardStyle } from "../helpers/cardStyles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DiscountComponent from "../../cart/utils/DiscountComponent";
+import { Box } from "@mui/material";
 type ProductsProps = {
   product: ProductsCardInterface;
 };
@@ -25,8 +26,19 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
         onClick={() => {
           navigate(`/home/products/${product.id}`);
         }}
-        sx={{ height: "350px" }}
+        sx={{ height: "350px", position: "relative" }}
       >
+        {product.discountPercentage > 0 && (
+          <Box
+            component="img"
+            src="https://d3m9l0v76dty0.cloudfront.net/system/photos/855622/original/df87f0a987ff5442427409e9e5affbe5.gif?1700728239"
+            position="absolute"
+            top={0}
+            left={0}
+            width="85px"
+            height="85px"
+          />
+        )}
         <CardMedia
           component="img"
           alt={product.imageAlt}
