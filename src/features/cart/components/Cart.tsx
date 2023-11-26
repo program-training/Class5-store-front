@@ -32,11 +32,13 @@ const Cart = () => {
   // }, []);
 
   useEffect(() => {
-    sumCartItem(localCart, cart).then((res) => {
-      setLocalCart(res.newLocalCart);
-      setAmount(res.sumAndAmount.amount);
-      setSum(res.sumAndAmount.sum);
-    });
+    setTimeout(() => {
+      sumCartItem(localCart, cart).then((res) => {
+        setLocalCart(res.newLocalCart);
+        setAmount(res.sumAndAmount.amount);
+        setSum(res.sumAndAmount.sum);
+      });
+    }, 1000);
   }, [cart]);
 
   const toggleDrawer =
@@ -101,7 +103,7 @@ const Cart = () => {
                 </React.Fragment>
               ))}
             </Box>
-            <Checkout  />
+            <Checkout />
           </>
         )}
       </SwipeableDrawer>

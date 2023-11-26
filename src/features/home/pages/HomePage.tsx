@@ -19,7 +19,7 @@ const HomePage = () => {
         </Box>
       </Modal>
       <Container>
-        <CssBaseline />
+        {/* <CssBaseline /> */}
         <Typography
           variant="h3"
           sx={{
