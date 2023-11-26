@@ -1,4 +1,4 @@
-import { TextField, Grid } from "@mui/material";
+import { TextField, Grid, Box } from "@mui/material";
 import { houseInput, nameInput } from "../types/propInput";
 import { FC } from "react";
 
@@ -10,13 +10,10 @@ type PropAddress = {
 const Address: FC<PropAddress> = ({ name, house }) => {
   const { nameValidet, nameerrors, nameregister } = name;
   const { houseValidet, houseerrors, houseregister } = house;
-  // const {
-  //   register,
-  //   formState: { errors },
-  // } = useForm({ mode: "onChange" });
+
   return (
-    <>
-      <Grid container spacing={2}>
+    <Box>
+      <Grid container spacing={10}>
         <Grid item xs={12} sm={3}>
           <TextField
             margin="normal"
@@ -63,7 +60,7 @@ const Address: FC<PropAddress> = ({ name, house }) => {
           error={nameerrors.city ? true : false}
         />
       </Grid>
-    </>
+    </Box>
   );
 };
 export default Address;

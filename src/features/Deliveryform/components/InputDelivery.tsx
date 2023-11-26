@@ -8,12 +8,10 @@ import {
   Box,
 } from "@mui/material";
 import {
-  emailValidet,
-  houseValidet,
-  idValidet,
-  middelName,
-  nameValidet,
-  phoneValidet,
+  emailValidate,
+  houseValidate,
+  nameValidate,
+  phoneValidate,
 } from "../../products/helpers/validation";
 import { FieldValues, useForm } from "react-hook-form";
 import phonePrefixes from "../helpers/prefixs";
@@ -22,6 +20,7 @@ import Address from "./Address";
 import { FC } from "react";
 import { useAppDispatch } from "../../../store/hooks";
 import { clearCart } from "../../cart/cartSlice";
+import axios from "axios";
 type PropType = {
   onBuyClick: () => void;
 };
@@ -36,7 +35,11 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
 
   const onSubmit = async (data: FieldValues) => {
     try {
-      console.log(JSON.stringify(data));
+      const { email } = data;
+      const userID = await axios.post("http://localhost:3000/api/users", {
+        email: email,
+      });
+      console.log(userID);
       onBuyClick();
       dispatch(clearCart());
     } catch (error) {
@@ -46,33 +49,24 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
 
   return (
     <>
-      <Box
-        component="form"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <PersonalDetails
-          id={{ idValidet: idValidet, iderrors: errors, idregister: register }}
           name={{
             nameregister: register,
             nameerrors: errors,
-            nameValidet: nameValidet,
-          }}
-          middel={{
-            middelregister: register,
-            middelerrors: errors,
-            middelName: middelName,
+            nameValidet: nameValidate,
           }}
         />
         <Address
           name={{
-            nameValidet: nameValidet,
+            nameValidet: nameValidate,
             nameregister: register,
             nameerrors: errors,
           }}
           house={{
             houseregister: register,
             houseerrors: errors,
-            houseValidet: houseValidet,
+            houseValidet: houseValidate,
           }}
         />
         <TextField
@@ -83,7 +77,7 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
           label="Email Address"
           autoComplete="email"
           autoFocus
-          {...register("email", emailValidet)}
+          {...register("email", emailValidate)}
           helperText={errors.email?.message?.toString()}
           error={errors.email ? true : false}
         />
@@ -103,7 +97,7 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={9}>
+          <Grid item xs={1} sm={9}>
             <TextField
               margin="normal"
               fullWidth
@@ -112,7 +106,7 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
               label="Phone Number"
               autoComplete="phone"
               autoFocus
-              {...register("phone", phoneValidet)}
+              {...register("phone", phoneValidate)}
               helperText={errors.phone?.message?.toString()}
               error={errors.phone ? true : false}
             />

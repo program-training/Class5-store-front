@@ -9,8 +9,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { FieldValues, useForm } from "react-hook-form";
 import {
-  emailValidet,
-  passwordValidet,
+  emailValidate,
+  passwordValidate,
 } from "../../products/helpers/validation";
 
 import SignInUpButton from "./SignInUpButton";
@@ -59,7 +59,7 @@ export const SignIn = () => {
             label="Email Address"
             autoComplete="email"
             autoFocus
-            {...register("email", emailValidet)}
+            {...register("email", emailValidate)}
             helperText={errors.email?.message?.toString()}
             error={errors.email ? true : false}
           />
@@ -71,7 +71,7 @@ export const SignIn = () => {
             type="password"
             id="password"
             autoComplete="current-password"
-            {...register("password", passwordValidet)}
+            {...register("password", passwordValidate)}
             helperText={errors.password?.message?.toString()}
             error={errors.password ? true : false}
           />

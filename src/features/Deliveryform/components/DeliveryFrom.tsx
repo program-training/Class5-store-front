@@ -1,7 +1,8 @@
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
-import { DialogActions, DialogContent } from "@mui/material";
+import { AppBar, DialogContent, IconButton, Toolbar } from "@mui/material";
 import InputDelivery from "./InputDelivery";
+import CloseIcon from "@mui/icons-material/Close";
 import { FC } from "react";
 
 export interface SimpleDialogProps {
@@ -15,12 +16,27 @@ const DeliveryFrom: FC<SimpleDialogProps> = ({ onClose, open }) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Your Details</DialogTitle>
+    <Dialog fullScreen open={open} onClose={handleClose}>
+      <AppBar sx={{ position: "relative", color: "Gray" }}>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="default"
+            onClick={handleClose}
+            aria-label="close"
+          >
+            <CloseIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <DialogTitle
+        sx={{ display: "flex", justifyContent: "center", weight: "900" }}
+      >
+        Your Details
+      </DialogTitle>
       <DialogContent>
-        <InputDelivery onBuyClick={onClose}/>
+        <InputDelivery onBuyClick={onClose} />
       </DialogContent>
-      <DialogActions></DialogActions>
     </Dialog>
   );
 };

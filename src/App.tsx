@@ -5,7 +5,7 @@ import Footer from "./features/layout/Footer";
 import { ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
-import { CssBaseline } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 import { pullFromLocalStorage } from "./features/cart/cartSlice";
 import Hostages from "./features/layout/war/Hostages";
 
@@ -17,11 +17,15 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={themeMode ? themeLight : themeDark}>
-        <CssBaseline />
-        <Header />
-        <Hostages />
-        <RouterDOM />
-        <Footer />
+        <Container>
+          <CssBaseline />
+          <Header />
+          <Box flexGrow={1}>
+            <Hostages />
+            <RouterDOM />
+          </Box>
+          <Footer />
+        </Container>
       </ThemeProvider>
     </>
   );
