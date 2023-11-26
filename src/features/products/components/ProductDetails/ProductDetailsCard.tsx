@@ -7,19 +7,18 @@ import Button from "@mui/material/Button";
 import { useAppDispatch } from "../../../../store/hooks";
 import { addToCart } from "../../../cart/cartSlice";
 import { ProductsCardInterface } from "../../interfaces/ProductCardInterface";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+
+import DiscountComponent from "../../../cart/utils/DiscountComponent";
 interface ProductCardProps {
   product: ProductsCardInterface;
 }
 const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useAppDispatch();
 
-  const handlePriceComparisonClick = () => {
-    console.log(`Clicked on price comparison`);
-  };
   return (
     <Card
       sx={{
-        minWidth: "600px",
         maxWidth: "600px",
         margin: "100px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -39,9 +38,10 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
         <Typography variant="body2" color="text.secondary">
           {product.description}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Price: ${product.salePrice}
-        </Typography>
+        <DiscountComponent
+          salePrice={product.salePrice}
+          discountPercentage={product.discountPercentage}
+        />
         <Typography variant="body2" color="text.secondary">
           {product.quantity > 0 ? "in stock" : "not in stock"}
         </Typography>
@@ -59,18 +59,7 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
           }}
         >
           Add to Cart
-        </Button>
-        <Button
-          variant="contained"
-          onClick={handlePriceComparisonClick}
-          sx={{
-            width: "100%",
-            marginTop: 2,
-            backgroundColor: "#CAE942",
-            color: "#fff",
-          }}
-        >
-          Price Comparison
+          <AddShoppingCartIcon />
         </Button>
       </CardContent>
     </Card>

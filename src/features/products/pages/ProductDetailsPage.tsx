@@ -10,7 +10,7 @@ const ProductDetailsPage = () => {
   const [product, setProduct] = useState<ProductsCardInterface | null>(null);
   useEffect(() => {
     axios
-      .get(`https://app-store-server1.onrender.com/api/products/${productId}`)
+      .get(`http://localhost:3000/api/products/${productId}`)
       .then((res) => setProduct(res.data))
       .catch((err) => console.log(err));
   }, []);

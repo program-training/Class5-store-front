@@ -2,8 +2,6 @@ import {
   SwipeableDrawer,
   Button,
   Box,
-  // Divider,
-  // List,
   Typography,
   Badge,
   List,
@@ -23,20 +21,14 @@ const Cart = () => {
   const [amount, setAmount] = useState(0);
   const [sum, setSum] = useState(0);
 
-  // useEffect(() => {
-  //   sumCartItem(localCart, cart).then((res) => {
-  //     setLocalCart(res.localCart);
-  //     sumAndAmount.sum = res.sumAndAmount.sum;
-  //     sumAndAmount.amount = res.sumAndAmount.amount;
-  //   });
-  // }, []);
-
   useEffect(() => {
-    sumCartItem(localCart, cart).then((res) => {
-      setLocalCart(res.newLocalCart);
-      setAmount(res.sumAndAmount.amount);
-      setSum(res.sumAndAmount.sum);
-    });
+    setTimeout(() => {
+      sumCartItem(localCart, cart).then((res) => {
+        setLocalCart(res.newLocalCart);
+        setAmount(res.sumAndAmount.amount);
+        setSum(res.sumAndAmount.sum);
+      });
+    }, 1000);
   }, [cart]);
 
   const toggleDrawer =
@@ -101,7 +93,7 @@ const Cart = () => {
                 </React.Fragment>
               ))}
             </Box>
-            <Checkout  />
+            <Checkout />
           </>
         )}
       </SwipeableDrawer>

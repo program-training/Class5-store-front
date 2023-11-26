@@ -4,7 +4,6 @@ import { useState } from "react";
 import DeliveryFrom from "../../Deliveryform/components/DeliveryFrom";
 // import { useAppSelector } from "../../../store/hooks";
 // import { checkCart } from "../utils/checkCart";
-
 const Checkout = () => {
   // const cart = useAppSelector((store) => store.cart.cart);
   // const [openMissing, setOpenMissing] = useState(false);

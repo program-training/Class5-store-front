@@ -5,9 +5,8 @@ import Footer from "./features/layout/Footer";
 import { ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
-import { Box, Container, CssBaseline } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { pullFromLocalStorage } from "./features/cart/cartSlice";
-import Hostages from "./features/layout/war/Hostages";
 
 const App = () => {
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
@@ -17,11 +16,17 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={themeMode ? themeLight : themeDark}>
-        <Container>
-          <CssBaseline />
+        <Container sx={{ display: "flex", justifyContent: "center" }}>
           <Header />
-          <Box flexGrow={1}>
-            <Hostages />
+          <Box
+            className="product-grid"
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              maxWidth: "90%",
+              justifyContent: "center",
+            }}
+          >
             <RouterDOM />
           </Box>
           <Footer />
