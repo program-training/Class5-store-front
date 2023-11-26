@@ -1,6 +1,6 @@
 import { Box, Container, Typography } from "@mui/material";
 import ProductsPage from "../../products/pages/ProductsPage";
-import Banner from "../../baners/Banner";
+import Banner from "../../banners/Banner";
 const HomePage = () => {
   return (
     <>
@@ -23,7 +23,6 @@ const HomePage = () => {
         >
           <Banner />
         </Box>
-
         <Box
           sx={{
             display: "flex",
