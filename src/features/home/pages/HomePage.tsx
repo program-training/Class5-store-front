@@ -1,10 +1,28 @@
 import { Box, Container, Typography } from "@mui/material";
 import ProductsPage from "../../products/pages/ProductsPage";
-import Banner from "../../baners/Banner";
+import Banner from "../../banners/Banner";
 const HomePage = () => {
   return (
     <>
       <Container>
+        <Box
+          sx={{
+            position: "fixed",
+            top: "100px",
+            right: "20px",
+          }}
+        >
+          <Banner />
+        </Box>
+        <Box
+          sx={{
+            position: "fixed",
+            top: "100px",
+            left: "20px",
+          }}
+        >
+          <Banner />
+        </Box>
         <Box
           sx={{
             position: "fixed",
