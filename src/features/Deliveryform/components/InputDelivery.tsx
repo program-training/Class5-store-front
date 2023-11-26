@@ -48,7 +48,7 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
   };
 
   return (
-    <>
+    <Grid>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <PersonalDetails
           name={{
@@ -127,7 +127,7 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
           Buy
         </Button>
       </Box>
-    </>
+    </Grid>
   );
 };
 export default InputDelivery;

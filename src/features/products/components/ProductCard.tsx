@@ -19,6 +19,8 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
   return (
     <Card
       sx={{
+        display: "flex",
+        flexDirection: "column",
         maxWidth: "600px",
         margin: "20px",
         borderRadius: "8px",

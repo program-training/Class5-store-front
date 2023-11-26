@@ -1,4 +1,4 @@
-import { Box, Container, CssBaseline, Modal, Typography } from "@mui/material";
+import { Box, Container, Modal, Typography } from "@mui/material";
 import ProductsPage from "../../products/pages/ProductsPage";
 import { useEffect, useState } from "react";
 import { styleModal } from "../../layout/war/styleModal";
@@ -19,7 +19,6 @@ const HomePage = () => {
         </Box>
       </Modal>
       <Container>
-        <CssBaseline />
         <Typography
           variant="h3"
           sx={{
