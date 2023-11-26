@@ -20,6 +20,7 @@ import Address from "./Address";
 import { FC } from "react";
 import { useAppDispatch } from "../../../store/hooks";
 import { clearCart } from "../../cart/cartSlice";
+import PersonalDetails from "./PersonalDetails";
 type PropType = {
   onBuyClick: () => void;
 };
