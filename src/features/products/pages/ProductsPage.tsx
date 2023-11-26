@@ -9,7 +9,7 @@ const ProductsPage = () => {
 
   useEffect(() => {
     axios
-      .get("https://app-store-server1.onrender.com/api/products")
+      .get("http://localhost:3000/api/products")
       .then((res) => setProducts(res.data))
       .catch((error) => console.log(error));
   }, []);

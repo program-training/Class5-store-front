@@ -9,6 +9,9 @@ import { FC } from "react";
 import { useAppDispatch } from "../../../store/hooks";
 import { addToCart } from "../../cart/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { CardActionsButtonStyle, cardStyle } from "../helpers/cardStyles";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import DiscountComponent from "../../cart/utils/DiscountComponent";
 type ProductsProps = {
   product: ProductsCardInterface;
 };
@@ -17,20 +20,7 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
   const dispatch = useAppDispatch();
 
   return (
-    <Card
-      sx={{
-        maxWidth: "240px",
-        minWidth: "240px",
-        height: "400px",
-        margin: "20px",
-        borderRadius: "8px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        transition: "transform 0.3s ease-in-out", // Add a smooth transition for the transform property
-        ":hover": {
-          transform: "scale(1.03)", // Increase the scale on hover
-        },
-      }}
-    >
+    <Card sx={cardStyle}>
       <Card
         onClick={() => {
           navigate(`/home/products/${product.id}`);
@@ -49,13 +39,10 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
           <Typography gutterBottom variant="h5" component="div">
             {product.name}
           </Typography>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{ fontSize: "1.25rem" }}
-          >
-            ${product.salePrice}
-          </Typography>
+          <DiscountComponent
+            salePrice={product.salePrice}
+            discountPercentage={product.discountPercentage}
+          />
           <Typography variant="body2" color="text.secondary">
             {product.description}
           </Typography>
@@ -67,16 +54,13 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
       <CardActions sx={{ justifyContent: "space-evenly", padding: 0 }}>
         <Button
           size="small"
-          sx={{
-            backgroundColor: "#4CAF50",
-            color: "#fff",
-            height: "50px",
-            width: "100%",
-          }}
+          sx={CardActionsButtonStyle}
           onClick={() => dispatch(addToCart(product.id))}
+          variant="contained"
           disabled={product.quantity < 1}
         >
           Add To Cart
+          <AddShoppingCartIcon />
         </Button>
       </CardActions>
     </Card>

@@ -25,35 +25,9 @@ const HomePage = () => {
         </Box>
         <Box
           sx={{
-            position: "fixed",
-            top: "100px",
-            right: "20px",
-          }}
-        >
-          <Banner />
-        </Box>
-        <Box
-          sx={{
-            position: "fixed",
-            top: "100px",
-            left: "20px",
-          }}
-        >
-          <Banner />
-        </Box>
-        <Typography
-          variant="h3"
-          sx={{
-            marginTop: "60px",
-            marginBottom: "10px",
-          }}
-        ></Typography>
-
-        <Box
-          sx={{
             display: "flex",
-            marginBottom: "60px",
-            marginTop: "10px",
+            marginBottom: "70px",
+            marginTop: "60px",
             flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",
