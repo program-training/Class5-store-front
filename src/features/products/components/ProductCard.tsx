@@ -35,6 +35,7 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
         onClick={() => {
           navigate(`/home/products/${product.id}`);
         }}
+        sx={{ height: "350px" }}
       >
         <CardMedia
           component="img"
@@ -63,10 +64,15 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
           </Typography>
         </CardContent>
       </Card>
-      <CardActions sx={{ justifyContent: "space-evenly" }}>
+      <CardActions sx={{ justifyContent: "space-evenly", padding: 0 }}>
         <Button
           size="small"
-          sx={{ backgroundColor: "#4CAF50", color: "#fff" }}
+          sx={{
+            backgroundColor: "#4CAF50",
+            color: "#fff",
+            height: "50px",
+            width: "100%",
+          }}
           onClick={() => dispatch(addToCart(product.id))}
           disabled={product.quantity < 1}
         >
