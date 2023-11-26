@@ -10,14 +10,14 @@ import {
 import {
   emailValidet,
   houseValidet,
-  idValidet,
-  middelName,
+  // idValidet,
+  // middelName,
   nameValidet,
   phoneValidet,
 } from "../../products/helpers/validation";
 import { FieldValues, useForm } from "react-hook-form";
 import phonePrefixes from "../helpers/prefixs";
-import PersonalDetails from "./PersonalDetails";
+// import PersonalDetails from "./PersonalDetails";
 import Address from "./Address";
 import { FC } from "react";
 import { useAppDispatch } from "../../../store/hooks";
@@ -36,8 +36,8 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
 
   const onSubmit = async (data: FieldValues) => {
     try {
-      console.log(JSON.stringify(data))
-       onBuyClick();
+      console.log(JSON.stringify(data));
+      onBuyClick();
       dispatch(clearCart());
     } catch (error) {
       console.log(error);
@@ -46,11 +46,8 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
 
   return (
     <>
-      <Box
-        component="form"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <PersonalDetails
+      <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+        {/* <PersonalDetails
           id={{ idValidet: idValidet, iderrors: errors, idregister: register }}
           name={{
             nameregister: register,
@@ -62,7 +59,7 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
             middelerrors: errors,
             middelName: middelName,
           }}
-        />
+        /> */}
         <Address
           name={{
             nameValidet: nameValidet,
