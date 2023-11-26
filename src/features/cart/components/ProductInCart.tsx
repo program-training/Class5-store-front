@@ -7,7 +7,6 @@ import { Grid } from "@mui/material";
 import { useAppSelector } from "../../../store/hooks";
 import ProductCartButton from "./ProductCartButton";
 import { PropProductInCart } from "../types/productInCart";
-
 const ProductInCart = ({ productCart }: PropProductInCart) => {
   const cart = useAppSelector((state) => state.cart.cart);
 

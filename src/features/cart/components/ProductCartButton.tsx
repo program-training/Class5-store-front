@@ -5,7 +5,6 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { PropProductInCart } from "../types/productInCart";
-
 const ProductCartButton = ({ productCart }: PropProductInCart) => {
   const dispatch = useAppDispatch();
   return (

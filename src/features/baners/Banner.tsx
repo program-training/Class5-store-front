@@ -1,13 +1,9 @@
 import { Box } from "@mui/material";
-import { FC } from "react";
-
-type BannerProps = {
-  id: string;
-};
-const Banner: FC<BannerProps> = () => {
+const Banner = () => {
   return (
     <>
       <Box
+        sx={{ width: "185px", height: "370px" }}
         component="iframe"
         src={`https://sparkly-souffle-e37dff.netlify.app/banners/products/sd`}
       />

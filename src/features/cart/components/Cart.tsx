@@ -2,8 +2,6 @@ import {
   SwipeableDrawer,
   Button,
   Box,
-  // Divider,
-  // List,
   Typography,
   Badge,
   List,
@@ -22,14 +20,6 @@ const Cart = () => {
   const [localCart, setLocalCart] = useState<LocalCartType[]>([]);
   const [amount, setAmount] = useState(0);
   const [sum, setSum] = useState(0);
-
-  // useEffect(() => {
-  //   sumCartItem(localCart, cart).then((res) => {
-  //     setLocalCart(res.localCart);
-  //     sumAndAmount.sum = res.sumAndAmount.sum;
-  //     sumAndAmount.amount = res.sumAndAmount.amount;
-  //   });
-  // }, []);
 
   useEffect(() => {
     setTimeout(() => {
