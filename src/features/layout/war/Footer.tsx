@@ -31,9 +31,8 @@ const Footer = () => {
         backgroundColor: "#3f51b5",
         color: "white",
         padding: "10px 0",
-        position: "fixed",
+        // position: "fixed",
         bottom: 0,
-        left: 0,
         width: "100%",
         borderRadius: "3px",
       }}

@@ -23,6 +23,24 @@ const HomePage = () => {
         >
           <Banner />
         </Box>
+        <Box
+          sx={{
+            position: "fixed",
+            top: "100px",
+            right: "20px",
+          }}
+        >
+          <Banner />
+        </Box>
+        <Box
+          sx={{
+            position: "fixed",
+            top: "100px",
+            left: "20px",
+          }}
+        >
+          <Banner />
+        </Box>
         <Typography
           variant="h3"
           sx={{
