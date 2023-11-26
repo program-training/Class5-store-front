@@ -13,13 +13,9 @@ interface ProductCardProps {
 const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useAppDispatch();
 
-  const handlePriceComparisonClick = () => {
-    console.log(`Clicked on price comparison`);
-  };
   return (
     <Card
       sx={{
-        minWidth: "600px",
         maxWidth: "600px",
         margin: "100px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -59,18 +55,6 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
           }}
         >
           Add to Cart
-        </Button>
-        <Button
-          variant="contained"
-          onClick={handlePriceComparisonClick}
-          sx={{
-            width: "100%",
-            marginTop: 2,
-            backgroundColor: "#CAE942",
-            color: "#fff",
-          }}
-        >
-          Price Comparison
         </Button>
       </CardContent>
     </Card>
