@@ -15,7 +15,7 @@ const CheckExist: FC<CheckExistProps> = ({ products }) => {
       </Typography>
       <Box>
         {products.map((product) => (
-          <Missing product={product} />
+          <Missing product={product} requiredQuantity={0} />
         ))}
       </Box>
     </Box>
