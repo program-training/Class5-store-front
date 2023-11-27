@@ -78,3 +78,11 @@ export const sumCartItem = async (
   });
   return { newLocalCart: [...newLocalCart], sumAndAmount };
 };
+
+export const countAmount = (cart: productInCart[]) => {
+  let amount = 0;
+  cart.forEach((product) => {
+    amount += product.amount;
+  });
+  return amount;
+};
