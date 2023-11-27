@@ -28,8 +28,8 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        backgroundColor: "#3f51b5",
-        color: "white",
+        color: "black",
+        backgroundColor: "#22242d",
         padding: "10px 0",
         position: "fixed",
         bottom: 0,
@@ -40,7 +40,7 @@ const Footer = () => {
     >
       <Container maxWidth="md">
         <Typography variant="body2">
-          © {new Date().getFullYear()} Team 3 | Local Time: {currentTime}
+          © {new Date().getFullYear()} Team 2 | Local Time: {currentTime}
         </Typography>
       </Container>
       <Button

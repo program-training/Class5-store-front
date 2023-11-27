@@ -1,9 +1,10 @@
 import ProductDetailsCard from "../components/ProductDetails/ProductDetailsCard";
 import { useParams } from "react-router-dom";
-import { CssBaseline } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
+import Banner from "../../banners/Banner";
 const ProductDetailsPage = () => {
   const { productId } = useParams();
 
@@ -18,6 +19,15 @@ const ProductDetailsPage = () => {
   return (
     <>
       <CssBaseline />
+      <Box
+        sx={{
+          position: "fixed",
+          top: "100px",
+          right: "20px",
+        }}
+      >
+        <Banner />
+      </Box>
       <ProductDetailsCard product={product} />;
     </>
   );
