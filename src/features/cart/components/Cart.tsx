@@ -14,6 +14,7 @@ import Checkout from "./Checkout";
 import { sumCartItem } from "../utils/functions";
 import { LocalCartType } from "../types/productInCart";
 import ProductInCart from "./ProductInCart";
+import EmptyCart from "./EmptyCart";
 const Cart = () => {
   const cart = useAppSelector((state) => state.cart.cart);
   const [open, setOpen] = useState(false);
@@ -31,6 +32,7 @@ const Cart = () => {
     }, 1000);
   }, [cart]);
 
+  
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (event.type === "keydown") return;
@@ -55,29 +57,7 @@ const Cart = () => {
         }}
       >
         {!cart.length ? (
-          <Box role="presentation">
-            <Typography
-              variant="h6"
-              align="center"
-              sx={{
-                fontWeight: "bold",
-                color: "",
-                mb: 4,
-              }}
-            >
-              Your Cart is Empty
-              <Box
-                sx={{
-                  width: 260,
-                  height: 260,
-                  backgroundImage: `url("https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-7359557-6024626.png")`,
-                  backgroundSize: "cover", // Set the background size
-                  backgroundPosition: "center",
-                  mb: 4,
-                }}
-              />
-            </Typography>
-          </Box>
+          <EmptyCart />
         ) : (
           <>
             <Box sx={{ width: 260 }} role="presentation">

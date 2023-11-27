@@ -30,7 +30,10 @@ const DiscountComponent: FC<DiscountComponentProps> = ({
           </Typography>
         </>
       ) : (
-        <Typography variant="body1" sx={{ display: "inline" }}>
+        <Typography
+          variant="body1"
+          sx={{ display: "inline", fontSize: "1.25rem" }}
+        >
           {salePrice}$
         </Typography>
       )}

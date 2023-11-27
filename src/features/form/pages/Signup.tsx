@@ -1,19 +1,23 @@
-import { Box, Button, Typography } from "@mui/material";
-import useFormSignup from "../hooks/useFormSignup";
+import { Box, Button } from "@mui/material";
+import useForm from "../hooks/useForm";
 import DisplayFormContext from "../components/DisplayForm";
 import { FieldValues } from "react-hook-form";
 import SignInUpLink from "../components/SignUpLink";
+import signupValidation from "../models/signupValidation";
+import Icon from "../components/Icon";
 
 const SignUp = () => {
+  const onSubmit = (data: FieldValues) => {
+    console.log(JSON.stringify(data));
+  };
+
   const {
     handleSubmit,
     control,
     formState: { errors, isDirty, isValid },
-  } = useFormSignup();
+  } = useForm(signupValidation , onSubmit);
   const formValues = ["email", "password", "confirmPassword"];
-  const onSubmit = (data: FieldValues) => {
-    console.log(JSON.stringify(data));
-  };
+  
   return (
     <Box
       sx={{
@@ -23,11 +27,11 @@ const SignUp = () => {
         alignItems: "center",
       }}
     >
-      <Typography component={"h1"}>Sign up</Typography>
+      <Icon text="Signup"/>
       <Box
         noValidate
         component="form"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit}
         sx={{ width: "100%", mt: "2rem" }}
       >
         <DisplayFormContext
