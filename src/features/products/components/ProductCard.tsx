@@ -4,13 +4,18 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
 import { FC } from "react";
 import { useAppDispatch } from "../../../store/hooks";
 import { addToCart } from "../../cart/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { CardActionsButtonStyle, cardStyle } from "../helpers/cardStyles";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import DiscountComponent from "../../cart/utils/DiscountComponent";
+import { Box } from "@mui/material";
+import ProductInterface from "../interfaces/ProductInterface";
+
 type ProductsProps = {
-  product: ProductsCardInterface;
+  product: ProductInterface;
 };
 export const ProductCard: FC<ProductsProps> = ({ product }) => {
   const navigate = useNavigate();
@@ -19,18 +24,15 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
   return (
     <Card
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        maxWidth: "600px",
-        margin: "20px",
-        borderRadius: "8px",
-        backgroundColor: "#0f0d14",
+        maxWidth: "240px",
         minWidth: "240px",
         height: "400px",
+        margin: "20px",
+        borderRadius: "8px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-        transition: "transform 0.3s ease-in-out",
+        transition: "transform 0.3s ease-in-out", // Add a smooth transition for the transform property
         ":hover": {
-          transform: "scale(1.03)",
+          transform: "scale(1.03)", // Increase the scale on hover
         },
       }}
     >
@@ -38,7 +40,19 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
         onClick={() => {
           navigate(`/home/products/${product.id}`);
         }}
+        sx={{ height: "350px", position: "relative" }}
       >
+        {product.discountPercentage > 0 && (
+          <Box
+            component="img"
+            src="https://d3m9l0v76dty0.cloudfront.net/system/photos/855622/original/df87f0a987ff5442427409e9e5affbe5.gif?1700728239"
+            position="absolute"
+            top={0}
+            left={0}
+            width="85px"
+            height="85px"
+          />
+        )}
         <CardMedia
           component="img"
           alt={product.imageAlt}
@@ -51,13 +65,10 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
           <Typography gutterBottom variant="h5" component="div">
             {product.name}
           </Typography>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{ fontSize: "1.25rem" }}
-          >
-            ${product.salePrice}
-          </Typography>
+          <DiscountComponent
+            salePrice={product.salePrice}
+            discountPercentage={product.discountPercentage}
+          />
           <Typography variant="body2" color="text.secondary">
             {product.description}
           </Typography>
@@ -66,14 +77,16 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
           </Typography>
         </CardContent>
       </Card>
-      <CardActions sx={{ justifyContent: "space-evenly" }}>
+      <CardActions sx={{ justifyContent: "space-evenly", padding: 0 }}>
         <Button
           size="small"
-          sx={{ backgroundColor: "#4CAF50", color: "#fff" }}
+          sx={CardActionsButtonStyle}
           onClick={() => dispatch(addToCart(product.id))}
+          variant="contained"
           disabled={product.quantity < 1}
         >
           Add To Cart
+          <AddShoppingCartIcon />
         </Button>
       </CardActions>
     </Card>

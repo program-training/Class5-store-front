@@ -1,16 +1,17 @@
 import ProductDetailsCard from "../components/ProductDetails/ProductDetailsCard";
 import { useParams } from "react-router-dom";
-import { CssBaseline } from "@mui/material";
+import { Box, CssBaseline } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
+import Banner from "../../banners/Banner";
 const ProductDetailsPage = () => {
   const { productId } = useParams();
 
   const [product, setProduct] = useState<ProductsCardInterface | null>(null);
   useEffect(() => {
     axios
-      .get(`https://app-store-server1.onrender.com/api/products/${productId}`)
+      .get(`http://localhost:3000/api/products/${productId}`)
       .then((res) => setProduct(res.data))
       .catch((err) => console.log(err));
   }, [productId]);
@@ -18,6 +19,15 @@ const ProductDetailsPage = () => {
   return (
     <>
       <CssBaseline />
+      <Box
+        sx={{
+          position: "fixed",
+          top: "100px",
+          right: "20px",
+        }}
+      >
+        <Banner />
+      </Box>
       <ProductDetailsCard product={product} />;
     </>
   );

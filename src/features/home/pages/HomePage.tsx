@@ -1,38 +1,26 @@
-import { Box, Container, Modal, Typography } from "@mui/material";
+import { Box, Container, CssBaseline, Modal, Typography } from "@mui/material";
 import ProductsPage from "../../products/pages/ProductsPage";
-import { useEffect, useState } from "react";
-import { styleModal } from "../../layout/war/styleModal";
-import CenteredMessage from "../../layout/war/Massage";
+import Banner from "../../baners/Banner";
 const HomePage = () => {
-  const [open, setOPen] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setOPen(true);
-    }, 2000);
-  }, []);
   return (
     <>
-      <Modal open={open}>
-        <Box sx={styleModal}>
-          <CenteredMessage setModal={setOPen} />
-        </Box>
-      </Modal>
       <Container>
+        {/* <CssBaseline /> */}
         <Typography
           variant="h3"
           sx={{
-            marginTop: "60px",
-            marginBottom: "10px",
+            position: "fixed",
+            top: "100px",
+            left: "20px",
           }}
-        ></Typography>
-
+        >
+          <Banner />
+        </Box>
         <Box
           sx={{
             display: "flex",
-            maxWidth: "700px",
-            marginBottom: "60px",
-            marginTop: "10px",
+            marginBottom: "70px",
+            marginTop: "60px",
             flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",

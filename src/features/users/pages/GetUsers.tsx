@@ -8,9 +8,7 @@ const GetUsers = () => {
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const res = await axios.get(
-          `https://app-store-server1.onrender.com/api/users`
-        );
+        const res = await axios.get(`http://localhost:3000/api/users`);
         setUsers(res.data);
       } catch (error) {
         console.log(error);

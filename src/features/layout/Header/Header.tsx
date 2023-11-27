@@ -12,9 +12,6 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setThemeMode } from "../../themes/themeModeSlice";
-import { HeaderNav } from "./HeaderNav";
-import Cart from "../../cart/components/Cart";
-import HeaderSignInButton from "./HeaderSignInButton";
 
 const pages = ["Home", "Categories", "Products"];
 

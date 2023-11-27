@@ -13,8 +13,6 @@ import { useAppSelector } from "../../../store/hooks";
 import { sumCartItem } from "../utils/functions";
 import { LocalCartType } from "../types/productInCart";
 import ProductInCart from "./ProductInCart";
-import Checkout from "./Checkout";
-
 const Cart = () => {
   const cart = useAppSelector((state) => state.cart.cart);
   const [open, setOpen] = useState(false);
@@ -23,12 +21,14 @@ const Cart = () => {
   const [sum, setSum] = useState(0);
 
   useEffect(() => {
-    sumCartItem(localCart, cart).then((res) => {
-      setLocalCart(res.newLocalCart);
-      setAmount(res.sumAndAmount.amount);
-      setSum(res.sumAndAmount.sum);
-    });
-  }, [cart, localCart]);
+    setTimeout(() => {
+      sumCartItem(localCart, cart).then((res) => {
+        setLocalCart(res.newLocalCart);
+        setAmount(res.sumAndAmount.amount);
+        setSum(res.sumAndAmount.sum);
+      });
+    }, 1000);
+  }, [cart]);
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -70,7 +70,7 @@ const Cart = () => {
                   width: 260,
                   height: 260,
                   backgroundImage: `url("https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-7359557-6024626.png")`,
-                  backgroundSize: "cover",
+                  backgroundSize: "cover", // Set the background size
                   backgroundPosition: "center",
                   mb: 4,
                 }}

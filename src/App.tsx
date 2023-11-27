@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
 import { Box, Container } from "@mui/material";
 import { pullFromLocalStorage } from "./features/cart/cartSlice";
-import Hostages from "./features/layout/war/Hostages";
 
 const App = () => {
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
@@ -17,17 +16,20 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={themeMode ? themeLight : themeDark}>
-        <Container>
-          <Box>
-            <Header />
-          </Box>
-          <Box>
-            <Hostages />
+        <Container sx={{ display: "flex", justifyContent: "center" }}>
+          <Header />
+          <Box
+            className="product-grid"
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              maxWidth: "90%",
+              justifyContent: "center",
+            }}
+          >
             <RouterDOM />
           </Box>
-          <Box>
-            <Footer />
-          </Box>
+          <Footer />
         </Container>
       </ThemeProvider>
     </>

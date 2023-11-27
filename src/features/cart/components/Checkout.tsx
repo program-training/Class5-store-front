@@ -2,7 +2,8 @@ import { Box, Button } from "@mui/material";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 // import { useNavigate } from "react-router-dom";
 import DeliveryFrom from "../../Deliveryform/components/DeliveryFrom";
-import { useState } from "react";
+// import { useAppSelector } from "../../../store/hooks";
+// import { checkCart } from "../utils/checkCart";
 
 const Checkout = () => {
   // const navigate = useNavigate();

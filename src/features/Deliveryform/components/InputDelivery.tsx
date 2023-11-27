@@ -15,12 +15,12 @@ import {
 } from "../../products/helpers/validation";
 import { FieldValues, useForm } from "react-hook-form";
 import phonePrefixes from "../helpers/prefixs";
-import PersonalDetails from "./PersonalDetails";
+// import PersonalDetails from "./PersonalDetails";
 import Address from "./Address";
 import { FC } from "react";
 import { useAppDispatch } from "../../../store/hooks";
 import { clearCart } from "../../cart/cartSlice";
-import axios from "axios";
+import PersonalDetails from "./PersonalDetails";
 type PropType = {
   onBuyClick: () => void;
 };
@@ -35,11 +35,7 @@ const InputDelivery: FC<PropType> = ({ onBuyClick }) => {
 
   const onSubmit = async (data: FieldValues) => {
     try {
-      const { email } = data;
-      const userID = await axios.post("http://localhost:3000/api/users", {
-        email: email,
-      });
-      console.log(userID);
+      console.log(JSON.stringify(data));
       onBuyClick();
       dispatch(clearCart());
     } catch (error) {

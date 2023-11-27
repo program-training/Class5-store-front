@@ -9,7 +9,7 @@ const ProductsPage = () => {
 
   useEffect(() => {
     axios
-      .get("https://app-store-server1.onrender.com/api/products")
+      .get("http://localhost:3000/api/products")
       .then((res) => setProducts(res.data))
       .catch((error) => console.log(error));
   }, []);
@@ -17,17 +17,31 @@ const ProductsPage = () => {
   return (
     <>
       <CssBaseline />
-      <Box className="container" style={{ padding: "20px" }}>
-        <Typography
-          sx={{ textAlign: "center", marginBottom: "30px" }}
-        ></Typography>
-        <Box className="product-grid">
-          {products?.map((product, i) => (
-            <Box key={`${product.name}-${i}`}>
-              <ProductCard product={product} />
-            </Box>
-          ))}
-        </Box>
+      <Typography
+        sx={{ textAlign: "center", marginBottom: "30px" }}
+      ></Typography>
+      <Box
+        className="product-grid"
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          maxWidth: "90%",
+          justifyContent: "center",
+        }}
+      >
+        {products?.map((product, i) => (
+          <Box
+            key={`${product.name}-${i}`}
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              maxWidth: "90%",
+              justifyContent: "center",
+            }}
+          >
+            <ProductCard product={product} />
+          </Box>
+        ))}
       </Box>
     </>
   );
