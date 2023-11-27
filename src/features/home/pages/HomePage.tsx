@@ -1,6 +1,6 @@
 import { Box, Container } from "@mui/material";
 import ProductsPage from "../../products/pages/ProductsPage";
-import Banner from "../../baners/Banner";
+import Banner from "../../banners/Banner";
 const HomePage = () => {
   return (
     <>

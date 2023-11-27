@@ -1,18 +1,20 @@
-
+import jwt from "jsonwebtoken"
 import axios from "axios";
-export const sendEmail = async (email: string) => {
+import { OrderFromClientInterface } from "../interfaces/OrdersInterfaces";
+
+export const registerUser = async (email: string) => {
   try {
     const { data } = await axios.post("http://localhost:3000/api/users/user", {
       email,
     });
-    return data;
+    localStorage.setItem("token", data);
+    const decodedToken = jwt.decode(data)
+    return decodedToken;
   } catch (error) {
     console.error("Error sending email:", error);
     throw error;
   }
 };
-
-import { OrderFromClientInterface } from "../interfaces/OrdersInterfaces";
 
 export const registerOrder = async (order: OrderFromClientInterface) => {
   try {
