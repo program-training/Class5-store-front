@@ -16,7 +16,7 @@ const SignUp = () => {
     control,
     formState: { errors, isDirty, isValid },
   } = useForm(signupValidation , onSubmit);
-  const formValues = ["email", "password", "confirmPassword"];
+  const formValues = ["email","initialPassword", "password", "confirmPassword"];
   
   return (
     <Box
