@@ -1,20 +1,31 @@
-import { Avatar, Box, Button, Typography } from "@mui/material";
-import useFormSignin from "../hooks/useFormSignin";
+import { Box, Button} from "@mui/material";
+import useForm from "../hooks/useForm";
 import DisplayFormContext from "../components/DisplayForm";
 import { FieldValues } from "react-hook-form";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import SignInUpLink from "../components/SignUpLink";
-
+import axios from "axios";
+import signinValidation from "../models/signinValidation";
+import Icon from "../components/Icon";
 const SignIn = () => {
+  const onSubmit = async (values: FieldValues) => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:3000/api/users/signIn",
+        values
+      );
+      console.log(JSON.stringify(values));
+      console.log(JSON.stringify(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const {
     handleSubmit,
     control,
     formState: { errors, isDirty, isValid },
-  } = useFormSignin();
+  } = useForm(signinValidation, onSubmit);
   const formValues = ["email", "password"];
-  const onSubmit = (data: FieldValues) => {
-    console.log(JSON.stringify(data));
-  };  
+
   return (
     <Box
       sx={{
@@ -24,14 +35,11 @@ const SignIn = () => {
         alignItems: "center",
       }}
     >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
-      <Typography component={"h1"}>Sign in</Typography>
+      <Icon text="Signin"/>
       <Box
         noValidate
         component="form"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit}
         sx={{ width: "100%", mt: "2rem" }}
       >
         <DisplayFormContext
@@ -48,10 +56,10 @@ const SignIn = () => {
         >
           Submit
         </Button>
-        <SignInUpLink text="signup"/>
+        <SignInUpLink text="signup" />
       </Box>
     </Box>
   );
 };
 
-export default SignIn
+export default SignIn;
