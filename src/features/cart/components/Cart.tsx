@@ -32,6 +32,7 @@ const Cart = () => {
     }, 1000);
   }, [cart]);
 
+  
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (event.type === "keydown") return;

@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
 import { FC } from "react";
 import { useAppDispatch } from "../../../store/hooks";
 import { addToCart } from "../../cart/cartSlice";
@@ -12,9 +11,11 @@ import { useNavigate } from "react-router-dom";
 import { CardActionsButtonStyle, cardStyle } from "../helpers/cardStyles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DiscountComponent from "../../cart/utils/DiscountComponent";
-import { Box } from "@mui/material";
+import { Box } from "@mui/material";       
+import ProductInterface from "../interfaces/ProductInterface";
+
 type ProductsProps = {
-  product: ProductsCardInterface;
+  product: ProductInterface;
 };
 export const ProductCard: FC<ProductsProps> = ({ product }) => {
   const navigate = useNavigate();
