@@ -6,8 +6,8 @@ import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { useAppSelector } from "../../../store/hooks";
 import ProductCartButton from "./ProductCartButton";
-import { PropProductInCart } from "../types/productInCart";
 import DiscountComponent from "../utils/DiscountComponent";
+import { PropProductInCart } from "../../../order/types/types";
 const ProductInCart = ({ productCart }: PropProductInCart) => {
   const cart = useAppSelector((state) => state.cart.cart);
 
@@ -32,7 +32,9 @@ const ProductInCart = ({ productCart }: PropProductInCart) => {
         />
         <Grid>
           <Typography variant="body2" color="text.secondary">
-            amount {cart[productIndexInCart] && cart[productIndexInCart].amount}
+            amount{" "}
+            {cart[productIndexInCart] &&
+              cart[productIndexInCart].requiredQuantity}
           </Typography>
         </Grid>
         <Grid>

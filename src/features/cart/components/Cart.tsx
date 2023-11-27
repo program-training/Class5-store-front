@@ -12,9 +12,9 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCart";
 import { useAppSelector } from "../../../store/hooks";
 import Checkout from "./Checkout";
 import { countAmount, sumCartItem } from "../utils/functions";
-import { LocalCartType } from "../types/productInCart";
 import ProductInCart from "./ProductInCart";
 import EmptyCart from "./EmptyCart";
+import { LocalCartType } from "../../../order/types/types";
 const Cart = () => {
   const cart = useAppSelector((state) => state.cart.cart);
   const [open, setOpen] = useState(false);

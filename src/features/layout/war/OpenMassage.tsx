@@ -1,7 +1,7 @@
 import { Modal } from "@mui/base";
 import { Box } from "@mui/system";
 import { useState, useEffect } from "react";
-import CenteredMessage from "./Massage";
+import CenteredMessage from "./Message";
 import { styleModal } from "./styleModal";
 
 const OpenMassage = () => {
