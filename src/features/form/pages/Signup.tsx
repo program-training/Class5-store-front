@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, CssBaseline } from "@mui/material";
 import useForm from "../hooks/useForm";
 import DisplayFormContext from "../components/DisplayForm";
 import { FieldValues } from "react-hook-form";
@@ -15,9 +15,14 @@ const SignUp = () => {
     handleSubmit,
     control,
     formState: { errors, isDirty, isValid },
-  } = useForm(signupValidation , onSubmit);
-  const formValues = ["email","initialPassword", "password", "confirmPassword"];
-  
+  } = useForm(signupValidation, onSubmit);
+  const formValues = [
+    "email",
+    "initialPassword",
+    "password",
+    "confirmPassword",
+  ];
+
   return (
     <Box
       sx={{
@@ -25,9 +30,11 @@ const SignUp = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        maxWidth: "550px",
       }}
     >
-      <Icon text="Signup"/>
+      <CssBaseline />
+      <Icon text="Signup" />
       <Box
         noValidate
         component="form"
@@ -48,10 +55,10 @@ const SignUp = () => {
         >
           Submit
         </Button>
-        <SignInUpLink text="signin"/>
+        <SignInUpLink text="signin" />
       </Box>
     </Box>
   );
 };
 
-export default SignUp
+export default SignUp;

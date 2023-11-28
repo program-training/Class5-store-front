@@ -8,6 +8,15 @@ const Banner: FC<BannerProps> = ({ id }) => {
   return (
     <React.Fragment>
       <Box
+        component="img"
+        src="https://cdn.pixabay.com/animation/2023/10/10/13/26/13-26-26-701_512.gif"
+        position="absolute"
+        top="50%"
+        left={0}
+        width="85px"
+        height="85px"
+      />
+      <Box
         sx={{ width: "185px", height: "370px" }}
         component="iframe"
         src={`https://sparkly-souffle-e37dff.netlify.app/banners/vertical/products/${id}`}

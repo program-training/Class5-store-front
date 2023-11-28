@@ -1,29 +1,20 @@
-import { FC, Fragment } from "react";
+import { FC, useEffect, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import Missing from "../MissingProduct";
 import { NotInStock } from "../../../order/types/types";
 import CloseModalIcon from "../../layout/war/CloseIcon";
-import { localCheckCartType } from "../types/types";
 
 type CheckExistProps = {
   products: NotInStock[];
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setLocalCheck: React.Dispatch<
-    React.SetStateAction<localCheckCartType | null>
-  >;
 };
 
-const CheckExist: FC<CheckExistProps> = ({
-  products,
-  setModal,
-  setLocalCheck,
-}) => {
-  const onSubmit = (i: number) => {
-    setLocalCheck((prev) => {
-      prev?.notInStock.splice(i, 1);
-      return prev;
-    });
-  };
+const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
+  const [productsC, setProductsC] = useState<NotInStock[]>([]);
+
+  useEffect(() => {
+    setProductsC(products);
+  }, []);
 
   return (
     <Box>
@@ -36,10 +27,16 @@ const CheckExist: FC<CheckExistProps> = ({
         updated according to the existing products
       </Typography>
       <Box>
-        {products.map((product, i) => (
+        {productsC.map((product, i) => (
           <Box key={i} display="flex">
             <Missing product={product} />
-            <Button onClick={() => onSubmit(i)}>lll</Button>
+            <Button
+              onClick={() =>
+                setProductsC((prev) => prev.filter((_prod, ind) => i !== ind))
+              }
+            >
+              click to confirm
+            </Button>
           </Box>
         ))}
       </Box>
