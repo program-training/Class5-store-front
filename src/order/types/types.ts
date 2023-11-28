@@ -10,4 +10,9 @@ export type LocalCartType = {
 };
 export type PropProductInCart = {
   productCart: LocalCartType;
-}
+};
+
+export type NotInStock = {
+  product: ProductsCardInterface;
+  requiredQuantity: number;
+};

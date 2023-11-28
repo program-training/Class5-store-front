@@ -4,7 +4,7 @@ import { Box, CssBaseline } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
-import Banner from "../../banners/Banner";
+import Banner from "../../baners/Banner";
 const ProductDetailsPage = () => {
   const { productId } = useParams();
 
@@ -26,7 +26,7 @@ const ProductDetailsPage = () => {
           right: "20px",
         }}
       >
-        <Banner />
+        <Banner id={24} />
       </Box>
       <ProductDetailsCard product={product} />;
     </>

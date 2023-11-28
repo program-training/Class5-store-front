@@ -11,7 +11,6 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setThemeMode } from "../../themes/themeModeSlice";
-const pages = ["Home", "Categories", "Products"];
 
 const Header = () => {
   const navigate = useNavigate();
@@ -56,9 +55,7 @@ const Header = () => {
               flexGrow: 1,
               display: { xs: "flex", md: "none" },
             }}
-          >
-            <HeaderNav pages={pages} />
-          </Box>
+          ></Box>
           <Box sx={{ marginLeft: "auto", display: "flex" }}>
             <HeaderSignInButton />
             <IconButton

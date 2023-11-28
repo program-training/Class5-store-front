@@ -14,6 +14,7 @@ import GetUsers from "../users/pages/GetUsers";
 import SignIn from "../form/pages/Signin";
 import SignUp from "../form/pages/Signup";
 import DeliveryForm from "../form/pages/DeliveryForm";
+import NavigateCheckout from "../form/components/NavigateCheckout";
 const RouterDom = () => {
   return (
     <Routes>
@@ -33,7 +34,7 @@ const RouterDom = () => {
       <Route path="*" element={<NotFoundPage />} />
       <Route path="/getUsers" element={<GetUsers />} />
       <Route path="/payment" element={<Payment />} />
-      <Route path="/delivery" element={<DeliveryForm/>}/>
+      <Route path="/delivery" element={<NavigateCheckout />} />
     </Routes>
   );
 };
