@@ -1,13 +1,15 @@
+import jwt from "jsonwebtoken";
 import axios from "axios";
 import { OrderFromClientInterface } from "../interfaces/OrdersInterfaces";
 import { productInCart } from "../types/types";
-
-export const sendEmail = async (email: string) => {
+export const registerUser = async (email: string) => {
   try {
     const { data } = await axios.post("http://localhost:3000/api/users/user", {
       email,
     });
-    return data;
+    localStorage.setItem("token", data);
+    const decodedToken = jwt.decode(data);
+    return decodedToken;
   } catch (error) {
     console.error("Error sending email:", error);
     throw error;
