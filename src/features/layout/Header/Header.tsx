@@ -3,7 +3,6 @@ import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Typography, Box, IconButton } from "@mui/material";
-import { HeaderNav } from "./HeaderNav";
 import { useNavigate } from "react-router-dom";
 import Cart from "../../cart/components/Cart";
 import HeaderSignInButton from "./HeaderSignInButton";
