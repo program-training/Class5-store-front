@@ -4,7 +4,7 @@ import { Box, CssBaseline } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
-import Banner from "../../baners/Banner";
+import Banner from "../../banners/Banner";
 import WaitingComponent from "../../form/components/WaitingComponent";
 const ProductDetailsPage = () => {
   const { productId } = useParams();
