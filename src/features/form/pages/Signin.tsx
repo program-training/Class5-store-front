@@ -1,4 +1,4 @@
-import { Box, Button} from "@mui/material";
+import { Box, Button } from "@mui/material";
 import useForm from "../hooks/useForm";
 import DisplayFormContext from "../components/DisplayForm";
 import { FieldValues } from "react-hook-form";
@@ -6,15 +6,17 @@ import SignInUpLink from "../components/SignUpLink";
 import axios from "axios";
 import signinValidation from "../models/signinValidation";
 import Icon from "../components/Icon";
+import { useNavigate } from "react-router-dom";
 const SignIn = () => {
+  const navigate = useNavigate();
   const onSubmit = async (values: FieldValues) => {
     try {
       const { data } = await axios.post(
         "http://localhost:3000/api/users/signIn",
         values
       );
-      console.log(JSON.stringify(values));
-      console.log(JSON.stringify(data));
+      localStorage.setItem("token", data);
+      navigate("/home");
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +37,7 @@ const SignIn = () => {
         alignItems: "center",
       }}
     >
-      <Icon text="Signin"/>
+      <Icon text="Signin" />
       <Box
         noValidate
         component="form"
