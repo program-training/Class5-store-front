@@ -9,8 +9,8 @@ const CloseModalIcon = ({ setModal }: CloseProps) => {
     <Button
       sx={{
         position: "absolute",
-        top: "15px",
-        right: "15px",
+        top: "5px",
+        right: "5px",
         color: "black",
         fontSize: "xx-large",
       }}

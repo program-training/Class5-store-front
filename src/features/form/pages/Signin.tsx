@@ -1,4 +1,5 @@
 import { Box, Button } from "@mui/material";
+import { Box, Button, CssBaseline } from "@mui/material";
 import useForm from "../hooks/useForm";
 import DisplayFormContext from "../components/DisplayForm";
 import { FieldValues } from "react-hook-form";
@@ -35,8 +36,11 @@ const SignIn = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        maxWidth: "550px",
       }}
     >
+      <Icon text="Signin" />
+      <CssBaseline />
       <Icon text="Signin" />
       <Box
         noValidate

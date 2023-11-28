@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { productInCart } from "./types/productInCart";
+import { productInCart } from "../../order/types/types";
 import {
   handelAddOne,
   handelCart,

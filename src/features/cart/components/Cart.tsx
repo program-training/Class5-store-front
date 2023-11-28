@@ -11,10 +11,10 @@ import React, { useEffect, useState } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCart";
 import { useAppSelector } from "../../../store/hooks";
 import Checkout from "./Checkout";
-import { sumCartItem } from "../utils/functions";
-import { LocalCartType } from "../types/productInCart";
+import { countAmount, sumCartItem } from "../utils/functions";
 import ProductInCart from "./ProductInCart";
 import EmptyCart from "./EmptyCart";
+import { LocalCartType } from "../../../order/types/types";
 const Cart = () => {
   const cart = useAppSelector((state) => state.cart.cart);
   const [open, setOpen] = useState(false);
@@ -23,16 +23,19 @@ const Cart = () => {
   const [sum, setSum] = useState(0);
 
   useEffect(() => {
+    if (!open) return;
     setTimeout(() => {
       sumCartItem(localCart, cart).then((res) => {
         setLocalCart(res.newLocalCart);
-        setAmount(res.sumAndAmount.amount);
         setSum(res.sumAndAmount.sum);
       });
     }, 1000);
+  }, [open, cart]);
+
+  useEffect(() => {
+    setAmount(countAmount(cart));
   }, [cart]);
 
-  
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (event.type === "keydown") return;
