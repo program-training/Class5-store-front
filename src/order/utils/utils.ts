@@ -25,8 +25,6 @@ export const registerOrder = async (order: OrderFromClientInterface) => {
 
 export const checkCart = async (cart: productInCart[]) => {
   const body = [...cart];
-  console.log(body);
-
   const result = await axios.post(
     "http://localhost:3000/api/products/stock",
     body

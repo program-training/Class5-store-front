@@ -20,7 +20,7 @@ const NavigateCheckout = () => {
       .then((res) => {
         setTimeout(() => {
           setCheckCart(res);
-        }, 1000);
+        }, 2000);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -28,8 +28,6 @@ const NavigateCheckout = () => {
   useEffect(() => {
     if (localCheckCart?.notInStock.length) setOpenMissing(true);
   }, [localCheckCart]);
-
-  console.log(localCheckCart);
 
   if (!localCheckCart) return <WaitingComponent />;
   return (
@@ -39,7 +37,6 @@ const NavigateCheckout = () => {
           <CheckExist
             products={localCheckCart.notInStock}
             setModal={setOpenMissing}
-            setLocalCheck={setCheckCart}
           />
         </Box>
       </Modal>

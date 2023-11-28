@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
 import Banner from "../../baners/Banner";
+import WaitingComponent from "../../form/components/WaitingComponent";
 const ProductDetailsPage = () => {
   const { productId } = useParams();
 
@@ -12,10 +13,15 @@ const ProductDetailsPage = () => {
   useEffect(() => {
     axios
       .get(`http://localhost:3000/api/products/${productId}`)
-      .then((res) => setProduct(res.data))
+      .then((res) => {
+        setTimeout(() => {
+          setProduct(res.data);
+        }, 1000);
+      })
       .catch((err) => console.log(err));
   }, []);
-  if (!product) return <>null</>;
+
+  if (!product) return <WaitingComponent />;
   return (
     <>
       <CssBaseline />
