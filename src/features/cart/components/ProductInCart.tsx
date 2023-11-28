@@ -6,8 +6,8 @@ import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { useAppSelector } from "../../../store/hooks";
 import ProductCartButton from "./ProductCartButton";
-import { PropProductInCart } from "../types/productInCart";
-
+import DiscountComponent from "../utils/DiscountComponent";
+import { PropProductInCart } from "../../../order/types/types";
 const ProductInCart = ({ productCart }: PropProductInCart) => {
   const cart = useAppSelector((state) => state.cart.cart);
 
@@ -26,37 +26,20 @@ const ProductInCart = ({ productCart }: PropProductInCart) => {
         <Typography gutterBottom variant="h5" component="div">
           {productCart.product.name}
         </Typography>
+        <DiscountComponent
+          salePrice={productCart.product.salePrice}
+          discountPercentage={productCart.product.discountPercentage}
+        />
         <Grid>
-          {productCart.product.discountPercentage &&
-          productCart.product.discountPercentage > 0 ? (
-            <>
-              <Typography variant="body1" sx={{ display: "inline", margin: 1 }}>
-                {parseFloat(
-                  (
-                    ((100 - productCart.product.discountPercentage) / 100) *
-                    productCart.product.salePrice
-                  ).toFixed(1)
-                )}
-                $
-              </Typography>
-
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{ textDecoration: "line-through", display: "inline" }}
-              >
-                {productCart.product.salePrice}$
-              </Typography>
-            </>
-          ) : (
-            <Typography variant="body1" sx={{ display: "inline" }}>
-              {productCart.product.salePrice}$
-            </Typography>
-          )}
+          <Typography variant="body2" color="text.secondary">
+            amount{" "}
+            {cart[productIndexInCart] &&
+              cart[productIndexInCart].requiredQuantity}
+          </Typography>
         </Grid>
         <Grid>
           <Typography variant="body2" color="text.secondary">
-            amount {cart[productIndexInCart] && cart[productIndexInCart].amount}
+            price {productCart.sum.toFixed(2)}
           </Typography>
         </Grid>
       </CardContent>

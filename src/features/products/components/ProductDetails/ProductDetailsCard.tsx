@@ -7,6 +7,9 @@ import Button from "@mui/material/Button";
 import { useAppDispatch } from "../../../../store/hooks";
 import { addToCart } from "../../../cart/cartSlice";
 import { ProductsCardInterface } from "../../interfaces/ProductCardInterface";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+
+import DiscountComponent from "../../../cart/utils/DiscountComponent";
 interface ProductCardProps {
   product: ProductsCardInterface;
 }
@@ -35,9 +38,10 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
         <Typography variant="body2" color="text.secondary">
           {product.description}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Price: ${product.salePrice}
-        </Typography>
+        <DiscountComponent
+          salePrice={product.salePrice}
+          discountPercentage={product.discountPercentage}
+        />
         <Typography variant="body2" color="text.secondary">
           {product.quantity > 0 ? "in stock" : "not in stock"}
         </Typography>
@@ -55,6 +59,7 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
           }}
         >
           Add to Cart
+          <AddShoppingCartIcon />
         </Button>
       </CardContent>
     </Card>

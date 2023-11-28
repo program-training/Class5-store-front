@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-
 const EmptyCart = () => {
   return (
     <Box role="presentation">

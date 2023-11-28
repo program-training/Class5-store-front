@@ -4,8 +4,7 @@ import { useAppDispatch } from "../../../store/hooks";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { PropProductInCart } from "../types/productInCart";
-
+import { PropProductInCart } from "../../../order/types/types";
 const ProductCartButton = ({ productCart }: PropProductInCart) => {
   const dispatch = useAppDispatch();
   return (
@@ -20,7 +19,7 @@ const ProductCartButton = ({ productCart }: PropProductInCart) => {
       <Fab
         size="small"
         color="success"
-        disabled={productCart.amount === 1 ? true : false}
+        disabled={productCart.requiredQuantity === 1 ? true : false}
         onClick={() => dispatch(subOne(productCart.product.id))}
       >
         <RemoveIcon />

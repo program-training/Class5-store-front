@@ -1,39 +1,52 @@
-import { Box, Container, CssBaseline, Modal, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import ProductsPage from "../../products/pages/ProductsPage";
+import Banner from "../../banners/Banner";
 import { useEffect, useState } from "react";
-import { styleModal } from "../../layout/war/styleModal";
-import CenteredMessage from "../../layout/war/Massage";
+import { useAppSelector } from "../../../store/hooks";
 const HomePage = () => {
-  const [open, setOPen] = useState(false);
-
+  const sale = useAppSelector((store) => store.products.productsBySale);
+  const [ides, setIdes] = useState<number[]>([]);
   useEffect(() => {
     setTimeout(() => {
-      setOPen(true);
-    }, 2000);
-  }, []);
+      function getTwoRandomIndexes(array: number[]) {
+        const indexes: number[] = [];
+        while (indexes.length < 2) {
+          const randomIndex = Math.floor(Math.random() * array.length);
+          if (!indexes.includes(randomIndex)) {
+            indexes.push(sale[randomIndex]);
+          }
+        }
+        return indexes;
+      }
+      setIdes(getTwoRandomIndexes(sale));
+    }, 10000);
+  }, [ides]);
   return (
     <>
-      <Modal open={open}>
-        <Box sx={styleModal}>
-          <CenteredMessage setModal={setOPen} />
-        </Box>
-      </Modal>
       <Container>
-        {/* <CssBaseline /> */}
-        <Typography
-          variant="h3"
+        <Box
           sx={{
-            marginTop: "60px",
-            marginBottom: "10px",
+            position: "fixed",
+            top: "100px",
+            right: "20px",
           }}
-        ></Typography>
-
+        >
+          <Banner id={ides[0] || sale[0]} />
+        </Box>
+        <Box
+          sx={{
+            position: "fixed",
+            top: "100px",
+            left: "20px",
+          }}
+        >
+          <Banner id={ides[1] || sale[2]} />
+        </Box>
         <Box
           sx={{
             display: "flex",
-            maxWidth: "700px",
-            marginBottom: "60px",
-            marginTop: "10px",
+            marginBottom: "70px",
+            marginTop: "60px",
             flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",

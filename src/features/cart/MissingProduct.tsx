@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
-import { ProductsCardInterface } from "../products/interfaces/ProductCardInterface";
 import { FC } from "react";
-type MissingProps = { product: ProductsCardInterface };
+import { NotInStock } from "../../order/types/types";
+type MissingProps = { product: NotInStock };
 
 const Missing: FC<MissingProps> = ({ product }) => {
   return (
@@ -14,23 +14,20 @@ const Missing: FC<MissingProps> = ({ product }) => {
       <Box component="div" display="flex">
         <Box
           component="img"
-          src={product.imageUrl}
-          alt={product.imageAlt}
-          width={250}
+          src={product.product.imageUrl}
+          alt={product.product.imageAlt}
+          width={65}
+          height={65}
           borderRadius={"10px"}
           sx={{ objectFit: "cover" }}
         />
       </Box>
-      <Box component="div" width={"300px"} height="fitContent">
-        <Typography component="h3" fontWeight={800}>
-          product name:
-          <br />
-          {product.name}
-        </Typography>
-        <Typography component="h3" fontWeight={800} margin={2}>
-          reduced from the price:
-          <br />
-          {product.salePrice} $
+      <Box component="div">
+        <Typography fontWeight={700}>{product.product.name}</Typography>
+        <Typography fontWeight={700}>
+          reduced from the price: {product.product.salePrice} $ *{" "}
+          {product.requiredQuantity} ={" "}
+          {(product.product.salePrice * product.requiredQuantity).toFixed(2)}$
         </Typography>
       </Box>
     </Box>

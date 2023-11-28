@@ -1,15 +1,15 @@
 import axios, { AxiosResponse } from "axios";
-import { LocalCartType, productInCart } from "../types/productInCart";
+import { LocalCartType, productInCart } from "../../../order/types/types";
 
 export const handelCart = (newItemId: number, cart: productInCart[]) => {
-  if (!cart.length) return [{ productId: newItemId, amount: 1 }];
+  if (!cart.length) return [{ productId: newItemId, requiredQuantity: 1 }];
   const index = cart.findIndex((i) => i.productId === newItemId);
   if (index !== -1) {
-    cart[index].amount += 1;
+    cart[index].requiredQuantity += 1;
   } else {
     cart.push({
       productId: newItemId,
-      amount: 1,
+      requiredQuantity: 1,
     });
   }
   return [...cart];
@@ -17,17 +17,17 @@ export const handelCart = (newItemId: number, cart: productInCart[]) => {
 
 export const handelAddOne = (id: number, cart: productInCart[]) => {
   const index = cart.findIndex((i) => i.productId === id);
-  cart[index].amount += 1;
+  cart[index].requiredQuantity += 1;
   return [...cart];
 };
 
 export const handelSubOne = (id: number, cart: productInCart[]) => {
   const index = cart.findIndex((i) => i.productId === id);
-  if (cart[index].amount === 1) {
+  if (cart[index].requiredQuantity === 1) {
     const newCart = cart.filter((i) => i.productId !== id);
     return [...newCart];
   } else {
-    cart[index].amount -= 1;
+    cart[index].requiredQuantity -= 1;
     return [...cart];
   }
 };
@@ -47,15 +47,16 @@ export const sumCartItem = async (
   cart.forEach((product) => {
     return promises.push(
       axios
-        .get(`https://app-store-server1.onrender.com/api/products/${product.productId}`)
+        .get(`http://localhost:3000/api/products/${product.productId}`)
         .then((newProduct) => {
           const updatedProduct = newProduct.data;
           const index = newLocalCart.findIndex(
             (item) => item.product.id === updatedProduct.id
           );
           if (index !== -1) {
-            localCart[index].amount = product.amount;
-            localCart[index].sum = updatedProduct.salePrice * product.amount;
+            localCart[index].requiredQuantity = product.requiredQuantity;
+            localCart[index].sum =
+              updatedProduct.salePrice * product.requiredQuantity;
           } else {
             const priceAfterDiscount =
               updatedProduct.salePrice -
@@ -63,8 +64,8 @@ export const sumCartItem = async (
                 100;
             const newItem = {
               product: updatedProduct,
-              sum: priceAfterDiscount * product.amount,
-              amount: product.amount,
+              sum: priceAfterDiscount * product.requiredQuantity,
+              requiredQuantity: product.requiredQuantity,
             };
             newLocalCart.push(newItem);
           }
@@ -73,8 +74,16 @@ export const sumCartItem = async (
   });
   await Promise.all(promises);
   newLocalCart.forEach((val) => {
-    sumAndAmount.amount += val.amount;
+    sumAndAmount.amount += val.requiredQuantity;
     sumAndAmount.sum += val.sum;
   });
   return { newLocalCart: [...newLocalCart], sumAndAmount };
+};
+
+export const countAmount = (cart: productInCart[]) => {
+  let amount = 0;
+  cart.forEach((product) => {
+    amount += product.requiredQuantity;
+  });
+  return amount;
 };
