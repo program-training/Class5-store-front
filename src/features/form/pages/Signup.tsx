@@ -5,10 +5,20 @@ import { FieldValues } from "react-hook-form";
 import SignInUpLink from "../components/SignUpLink";
 import signupValidation from "../models/signupValidation";
 import Icon from "../components/Icon";
+import { BASE_URL } from "../../../App";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const onSubmit = (data: FieldValues) => {
-    console.log(JSON.stringify(data));
+  const navigate = useNavigate();
+  const onSubmit = async (values: FieldValues) => {
+    const { confirmPassword, ...value } = values;
+    try {
+      await axios.post(`${BASE_URL}/api/users/admin`, value);
+      navigate("/store/signin");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const {

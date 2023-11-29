@@ -25,7 +25,7 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
     <Card sx={cardStyle}>
       <Card
         onClick={() => {
-          navigate(`/home/products/${product.id}`);
+          navigate(`/store/home/products/${product.id}`);
         }}
         sx={{ height: "350px", position: "relative" }}
       >
