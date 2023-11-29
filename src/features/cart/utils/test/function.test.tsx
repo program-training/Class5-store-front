@@ -1,3 +1,5 @@
+import axios from "axios";
+import { productInCart } from "../../../../order/types/types";
 import {
   handelCart,
   handelAddOne,
@@ -7,69 +9,142 @@ import {
   countAmount,
 } from "../functions";
 
-describe("Cart Functions", () => {
-  test("handles adding an item to the cart", () => {
-    const cart = [{ productId: 1, requiredQuantity: 2 }];
-    const newItemId = 2;
-    const updatedCart = handelCart(newItemId, cart);
-    expect(updatedCart).toEqual([
-      { productId: 1, requiredQuantity: 2 },
-      { productId: 2, requiredQuantity: 1 },
+describe("cart", () => {
+  test("handelCart should add new item to empty cart", () => {
+    const newItemId = 1;
+    const cart: productInCart[] = [];
+    const result = handelCart(newItemId, cart);
+
+    expect(result).toEqual([
+      {
+        productId: newItemId,
+        requiredQuantity: 1,
+      },
     ]);
   });
 
-  test("handles adding one to the quantity of an item in the cart", () => {
-    const cart = [{ productId: 1, requiredQuantity: 2 }];
-    const updatedCart = handelAddOne(1, cart);
-    expect(updatedCart).toEqual([{ productId: 1, requiredQuantity: 3 }]);
-  });
-
-  test("handles subtracting one from the quantity of an item in the cart", () => {
-    const cart = [{ productId: 1, requiredQuantity: 2 }];
-    const updatedCart = handelSubOne(1, cart);
-    expect(updatedCart).toEqual([{ productId: 1, requiredQuantity: 1 }]);
-  });
-
-  test("removes an item from the cart", () => {
+  test("handelCart should increment quantity if item already exists", () => {
+    const newItemId = 1;
     const cart = [
-      { productId: 1, requiredQuantity: 2 },
-      { productId: 2, requiredQuantity: 1 },
+      {
+        productId: 1,
+        requiredQuantity: 2,
+      },
     ];
-    const updatedCart = removeItemFromCart(1, cart);
-    expect(updatedCart).toEqual([{ productId: 2, requiredQuantity: 1 }]);
+    const result = handelCart(newItemId, cart);
+
+    expect(result).toEqual([
+      {
+        productId: 1,
+        requiredQuantity: 3,
+      },
+    ]);
   });
 
-  test("sums cart items and fetches product details", async () => {
-    const localCart = [
-      { productId: 1, requiredQuantity: 2 },
-      { productId: 2, requiredQuantity: 1 },
-    ];
+  test("handelAddOne should increment quantity", () => {
+    const id = 1;
     const cart = [
-      { productId: 1, requiredQuantity: 2 },
-      { productId: 2, requiredQuantity: 1 },
+      {
+        productId: 1,
+        requiredQuantity: 2,
+      },
     ];
-    const result = await sumCartItem(localCart, cart);
+    const result = handelAddOne(id, cart);
 
-    result.sumAndAmount.sum = Math.round(result.sumAndAmount.sum * 100) / 100;
+    expect(result).toEqual([
+      {
+        productId: 1,
+        requiredQuantity: 3,
+      },
+    ]);
+  });
+
+  test("handelSubOne should decrement quantity", () => {
+    const id = 1;
+    const cart = [
+      {
+        productId: 1,
+        requiredQuantity: 2,
+      },
+    ];
+
+    const result = handelSubOne(id, cart);
+
+    expect(result).toEqual([
+      {
+        productId: 1,
+        requiredQuantity: 1,
+      },
+    ]);
+  });
+
+  test("removeItemFromCart should remove item", () => {
+    const id = 1;
+    const cart = [
+      {
+        productId: 1,
+        requiredQuantity: 2,
+      },
+    ];
+
+    const result = removeItemFromCart(id, cart);
+
+    expect(result).toEqual([]);
+  });
+
+  test("sumCartItem should calculate totals", async () => {
+    const cart = [
+      {
+        productId: 1,
+        requiredQuantity: 2,
+      },
+    ];
+
+    vi.mock("axios");
+
+    vi.mocked(axios.get).mockResolvedValueOnce({
+      data: {
+        id: 1,
+        salePrice: 10,
+        discountPercentage: 50,
+      },
+    });
+
+    const result = await sumCartItem([], cart);
 
     expect(result).toEqual({
       newLocalCart: [
-        { productId: 1, requiredQuantity: 2 },
-        { productId: 2, requiredQuantity: 1 },
+        {
+          product: {
+            id: 1,
+            salePrice: 10,
+            discountPercentage: 50,
+          },
+          requiredQuantity: 2,
+          sum: 10,
+        },
       ],
       sumAndAmount: {
-        sum: 5,
-        amount: 3,
+        sum: 10,
+        amount: 2,
       },
     });
   });
 
-  test("counts the total quantity of items in the cart", () => {
+  test("countAmount should sum quantities", () => {
     const cart = [
-      { productId: 1, requiredQuantity: 2 },
-      { productId: 2, requiredQuantity: 1 },
+      {
+        productId: 1,
+        requiredQuantity: 2,
+      },
+      {
+        productId: 2,
+        requiredQuantity: 3,
+      },
     ];
-    const amount = countAmount(cart);
-    expect(amount).toBe(3);
+
+    const result = countAmount(cart);
+
+    expect(result).toBe(5);
   });
 });
