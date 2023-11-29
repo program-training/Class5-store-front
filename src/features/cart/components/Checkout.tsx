@@ -6,7 +6,7 @@ const Checkout = () => {
   const navigate = useNavigate();
 
   const handelClick = () => {
-    navigate("/delivery");
+    navigate("/store/delivery");
   };
 
   return (

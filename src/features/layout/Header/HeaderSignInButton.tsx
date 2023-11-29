@@ -8,7 +8,7 @@ const HeaderSignInButton = () => {
     <Button
       color="inherit"
       onClick={() => {
-        navigate("/signin");
+        navigate("/store/signin");
       }}
       sx={{ marginLeft: "auto" }}
     >

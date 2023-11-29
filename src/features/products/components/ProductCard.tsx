@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { CardActionsButtonStyle, cardStyle } from "../helpers/cardStyles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DiscountComponent from "../../cart/utils/DiscountComponent";
-import { Box } from "@mui/material";       
+import { Box } from "@mui/material";
 import ProductInterface from "../interfaces/ProductInterface";
 
 type ProductsProps = {
@@ -25,7 +25,7 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
     <Card sx={cardStyle}>
       <Card
         onClick={() => {
-          navigate(`/home/products/${product.id}`);
+          navigate(`/store/home/products/${product.id}`);
         }}
         sx={{ height: "350px", position: "relative" }}
       >
