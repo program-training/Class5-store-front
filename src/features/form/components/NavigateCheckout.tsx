@@ -7,12 +7,7 @@ import CheckExist from "../../cart/components/CheckModal";
 import { Box, Modal } from "@mui/material";
 import { styleModalCheck } from "../../layout/war/styleModal";
 import DeliveryForm from "../pages/DeliveryForm";
-import { useLocation } from "react-router-dom";
-
 const NavigateCheckout = () => {
-  const { state } = useLocation();
-  console.log(state);
-
   const cart = useAppSelector((store) => store.cart.cart);
   const [localCheckCart, setCheckCart] = useState<localCheckCartType | null>(
     null
@@ -44,7 +39,7 @@ const NavigateCheckout = () => {
           />
         </Box>
       </Modal>
-      {!localCheckCart.notInStock.length && <DeliveryForm sum={state} />}
+      !localCheckCart.notInStock && <DeliveryForm />
     </Box>
   );
 };

@@ -10,10 +10,12 @@ import {
   convertToCartItem,
   convertToCartItemShipping,
 } from "../utils/convertToCartItem";
-type DeliveryFormProps = {
-  sum: number;
-};
-const DeliveryForm = ({ sum }: DeliveryFormProps) => {
+import { useLocation } from "react-router-dom";
+
+const DeliveryForm = () => {
+  const location = useLocation();
+  const { state } = location;
+
   const cart = useAppSelector((store) => store.cart.cart);
   const onSubmit = async (values: FieldValues) => {
     try {
@@ -28,7 +30,7 @@ const DeliveryForm = ({ sum }: DeliveryFormProps) => {
       const deliveryFormToSend = convertToCartItemShipping(
         converted,
         values,
-        sum,
+        state,
         data.id
       );
       const order = await axios.post(

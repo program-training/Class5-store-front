@@ -12,6 +12,7 @@ import GetUsers from "../users/pages/GetUsers";
 import SignIn from "../form/pages/Signin";
 import SignUp from "../form/pages/Signup";
 import NavigateCheckout from "../form/components/NavigateCheckout";
+import DeliveryForm from "../form/pages/DeliveryForm";
 const RouterDom = () => {
   return (
     <Routes>
@@ -30,6 +31,7 @@ const RouterDom = () => {
       <Route path="/getUsers" element={<GetUsers />} />
       <Route path="/payment" element={<Payment />} />
       <Route path="/checkout" element={<NavigateCheckout />} />
+      <Route path="/deliveryForm" element={<DeliveryForm />} />
     </Routes>
   );
 };
