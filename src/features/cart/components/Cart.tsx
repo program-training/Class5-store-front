@@ -9,14 +9,15 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCart";
-import { useAppSelector } from "../../../store/hooks";
 import Checkout from "./Checkout";
 import { countAmount, sumCartItem } from "../utils/functions";
 import ProductInCart from "./ProductInCart";
 import EmptyCart from "./EmptyCart";
 import { LocalCartType } from "../../../order/types/types";
+import { useCart, useIcon } from "../hooks/useCart";
 const Cart = () => {
-  const cart = useAppSelector((state) => state.cart.cart);
+  const cart = useCart();
+  const [iconOpen] = useIcon();
   const [open, setOpen] = useState(false);
   const [localCart, setLocalCart] = useState<LocalCartType[]>([]);
   const [amount, setAmount] = useState(0);
@@ -43,12 +44,16 @@ const Cart = () => {
     };
   return (
     <Box>
-      <Box component={Button} onClick={toggleDrawer(true)} variant="outlined">
+      <Box
+        component={Button}
+        onClick={() => setOpen(true)}
+        variant="outlined"
+        disabled={iconOpen === false}
+      >
         <Badge badgeContent={amount} color="primary">
           <ShoppingCartOutlinedIcon sx={{ color: "white" }} />
         </Badge>
       </Box>
-
       <SwipeableDrawer
         open={open}
         onClose={toggleDrawer(false)}
@@ -76,7 +81,7 @@ const Cart = () => {
                 </React.Fragment>
               ))}
             </Box>
-            <Checkout />
+            <Checkout sum={sum} setOpen={setOpen} />
           </>
         )}
       </SwipeableDrawer>

@@ -15,15 +15,6 @@ const OpenMassage = () => {
     }, 2000);
   }, []);
 
-  useEffect(() => {
-    const onNewTab = () => {
-      setOpen(true);
-    };
-    window.addEventListener("storage", onNewTab);
-    return () => {
-      window.removeEventListener("storage", onNewTab);
-    };
-  }, []);
   return (
     <Modal open={open}>
       <Box sx={styleModal}>

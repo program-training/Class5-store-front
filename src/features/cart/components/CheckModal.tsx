@@ -1,27 +1,50 @@
 import { FC, useEffect, useState } from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, CssBaseline, Typography } from "@mui/material";
 import Missing from "../MissingProduct";
-import { NotInStock } from "../../../order/types/types";
+import { NotInStockApterSub } from "../../../order/types/types";
 import CloseModalIcon from "../../layout/war/CloseIcon";
+import { useAppDispatch } from "../../../store/hooks";
+import { removeItem } from "../cartSlice";
 
 type CheckExistProps = {
-  products: NotInStock[];
+  products: NotInStockApterSub[];
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
-  const [productsC, setProductsC] = useState<NotInStock[]>([]);
+  const [productsC, setProductsC] = useState<NotInStockApterSub[]>([]);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setProductsC(products);
   }, []);
 
+  const handleCart = (product: NotInStockApterSub) => {
+    const newP = [...productsC];
+    const filtered = newP.filter(
+      (item) => item.product.id !== product.product.id
+    );
+    setProductsC(filtered);
+    if (!filtered.length) setModal(false);
+  };
+
+  const handleCartDeleteItem = (product: NotInStockApterSub) => {
+    dispatch(removeItem(product.product.id));
+    const newP = [...productsC];
+    const filtered = newP.filter(
+      (item) => item.product.id !== product.product.id
+    );
+    setProductsC(filtered);
+    if (!filtered.length) setModal(false);
+  };
+
   return (
     <Box>
+      <CssBaseline />
       <Box>
         <CloseModalIcon setModal={setModal} />
       </Box>
-      <Typography variant="h6" fontSize={18}>
+      <Typography variant="h6" fontSize={15} color="black">
         Dear customer, some of the products in your cart are no longer in stock,
         we apologize for the inconvenience, the price of the cart has been
         updated according to the existing products
@@ -30,13 +53,17 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
         {productsC.map((product, i) => (
           <Box key={i} display="flex">
             <Missing product={product} />
-            <Button
-              onClick={() =>
-                setProductsC((prev) => prev.filter((_prod, ind) => i !== ind))
-              }
-            >
-              click to confirm
-            </Button>
+            <Box>
+              <Button
+                onClick={() => handleCartDeleteItem(product)}
+                color="warning"
+              >
+                I don't want the rest
+              </Button>
+              <Button onClick={() => handleCart(product)} color="warning">
+                Okay, what's left is good for me
+              </Button>
+            </Box>
           </Box>
         ))}
       </Box>
