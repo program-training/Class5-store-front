@@ -8,7 +8,6 @@ type PropPersonal = {
 
 const PersonalDetails: FC<PropPersonal> = ({ name }) => {
   const { nameValidet, nameerrors, nameregister } = name;
-
   return (
     <>
       <Grid container spacing={2}>

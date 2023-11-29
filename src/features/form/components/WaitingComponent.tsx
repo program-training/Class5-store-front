@@ -3,7 +3,7 @@ import { formStyle } from "../styles/formStyle";
 
 const WaitingComponent = () => {
   return (
-    <Box sx={formStyle}>
+    <Box sx={formStyle} data-testid="test-id">
       <CssBaseline />
       <Box
         component="img"
