@@ -13,6 +13,7 @@ const NavigateCheckout = () => {
   const [localCheckCart, setCheckCart] = useState<localCheckCartType | null>(
     null
   );
+
   const [openMissing, setOpenMissing] = useState(false);
 
   useEffect(() => {
