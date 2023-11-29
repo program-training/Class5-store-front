@@ -1,15 +1,31 @@
 import axios, { AxiosResponse } from "axios";
 import { LocalCartType, productInCart } from "../../../order/types/types";
+import { ProductsCardInterface } from "../../products/interfaces/ProductCardInterface";
 
-export const handelCart = (newItemId: number, cart: productInCart[]) => {
-  if (!cart.length) return [{ productId: newItemId, requiredQuantity: 1 }];
-  const index = cart.findIndex((i) => i.productId === newItemId);
+export const handelCart = (
+  newItem: ProductsCardInterface,
+  cart: productInCart[]
+) => {
+  if (!cart.length)
+    return [
+      {
+        productId: newItem.id,
+        requiredQuantity: 1,
+        description: newItem.description,
+        name: newItem.name,
+        salePrice: parseFloat(newItem.salePrice),
+      },
+    ];
+  const index = cart.findIndex((i) => i.productId === newItem.id);
   if (index !== -1) {
     cart[index].requiredQuantity += 1;
   } else {
     cart.push({
-      productId: newItemId,
+      productId: newItem.id,
       requiredQuantity: 1,
+      description: newItem.description,
+      name: newItem.name,
+      salePrice: parseFloat(newItem.salePrice),
     });
   }
   return [...cart];
@@ -37,6 +53,14 @@ export const removeItemFromCart = (id: number, cart: productInCart[]) => {
   return [...newCart];
 };
 
+// export const addToLocalStorage = ({
+//   productId,
+//   name,
+//   description,
+//   quantity,
+//   salePrice,
+// }: CartItemFromClientInterface) => {};
+
 export const sumCartItem = async (
   localCart: LocalCartType[],
   cart: productInCart[]
@@ -55,13 +79,11 @@ export const sumCartItem = async (
           );
           if (index !== -1) {
             localCart[index].requiredQuantity = product.requiredQuantity;
-            localCart[index].sum =
-              updatedProduct.salePrice * product.requiredQuantity;
+            localCart[index].sum = product.salePrice * product.requiredQuantity;
           } else {
             const priceAfterDiscount =
-              updatedProduct.salePrice -
-              (updatedProduct.salePrice * updatedProduct.discountPercentage) /
-                100;
+              product.salePrice -
+              (product.salePrice * updatedProduct.discountPercentage) / 100;
             const newItem = {
               product: updatedProduct,
               sum: priceAfterDiscount * product.requiredQuantity,

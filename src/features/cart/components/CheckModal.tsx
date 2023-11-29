@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, CssBaseline, Typography } from "@mui/material";
 import Missing from "../MissingProduct";
 import { NotInStock } from "../../../order/types/types";
 import CloseModalIcon from "../../layout/war/CloseIcon";
@@ -18,6 +18,7 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
 
   return (
     <Box>
+      <CssBaseline />
       <Box>
         <CloseModalIcon setModal={setModal} />
       </Box>

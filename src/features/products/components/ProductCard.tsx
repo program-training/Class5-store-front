@@ -11,11 +11,11 @@ import { useNavigate } from "react-router-dom";
 import { CardActionsButtonStyle, cardStyle } from "../helpers/cardStyles";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DiscountComponent from "../../cart/utils/DiscountComponent";
-import { Box } from "@mui/material";       
-import ProductInterface from "../interfaces/ProductInterface";
+import { Box } from "@mui/material";
+import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
 
 type ProductsProps = {
-  product: ProductInterface;
+  product: ProductsCardInterface;
 };
 export const ProductCard: FC<ProductsProps> = ({ product }) => {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
             {product.name}
           </Typography>
           <DiscountComponent
-            salePrice={product.salePrice}
+            salePrice={+product.salePrice}
             discountPercentage={product.discountPercentage}
           />
           <Typography variant="body2" color="text.secondary">
@@ -68,7 +68,7 @@ export const ProductCard: FC<ProductsProps> = ({ product }) => {
         <Button
           size="small"
           sx={CardActionsButtonStyle}
-          onClick={() => dispatch(addToCart(product.id))}
+          onClick={() => dispatch(addToCart(product))}
           variant="contained"
           disabled={product.quantity < 1}
         >

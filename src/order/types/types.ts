@@ -1,7 +1,10 @@
 import { ProductsCardInterface } from "../../features/products/interfaces/ProductCardInterface";
 export type productInCart = {
   productId: number;
+  name: string;
+  salePrice: number;
   requiredQuantity: number;
+  description: string;
 };
 export type LocalCartType = {
   product: ProductsCardInterface;

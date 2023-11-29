@@ -6,6 +6,7 @@ type BannerProps = {
   id: number;
 };
 const Banner: FC<BannerProps> = ({ id }) => {
+  
   return (
     <React.Fragment>
       <Box

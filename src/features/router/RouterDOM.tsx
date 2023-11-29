@@ -29,7 +29,7 @@ const RouterDom = () => {
       <Route path="*" element={<NotFoundPage />} />
       <Route path="/getUsers" element={<GetUsers />} />
       <Route path="/payment" element={<Payment />} />
-      <Route path="/delivery" element={<NavigateCheckout />} />
+      <Route path="/checkout" element={<NavigateCheckout />} />
     </Routes>
   );
 };
