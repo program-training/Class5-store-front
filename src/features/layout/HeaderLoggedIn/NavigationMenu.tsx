@@ -35,7 +35,9 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
           key={page}
           onClick={() => {
             navigate(
-              page === "Categories" ? "/categories" : `/${page.toLowerCase()}`
+              page === "Categories"
+                ? "/store/categories"
+                : `/store/${page.toLowerCase()}`
             );
           }}
           color="inherit"

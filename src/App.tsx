@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
 import { Box, Container } from "@mui/material";
 import { pullFromLocalStorage } from "./features/cart/cartSlice";
-
 export const BASE_URL =
   import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 export const BNR_URL =
@@ -17,7 +16,6 @@ const App = () => {
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
   const dispatch = useAppDispatch();
   dispatch(pullFromLocalStorage());
-
   return (
     <>
       <ThemeProvider theme={themeMode ? themeLight : themeDark}>

@@ -14,7 +14,8 @@ const Checkout: FC<CheckoutProps> = ({ sum, setOpen }) => {
   const handelClick = () => {
     setOpen(false);
     dispatch(setIconDisabled(false));
-    navigate(`/deliveryForm`, { state: sum });
+    navigate(`/store/delivery`, { state: sum });
+
   };
 
   return (
