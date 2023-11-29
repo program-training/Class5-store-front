@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { FC } from "react";
-import { NotInStock } from "../../order/types/types";
-type MissingProps = { product: NotInStock };
+import { NotInStockApterSub } from "../../order/types/types";
+type MissingProps = { product: NotInStockApterSub };
 
 const Missing: FC<MissingProps> = ({ product }) => {
   return (
@@ -26,9 +26,10 @@ const Missing: FC<MissingProps> = ({ product }) => {
         <Typography fontWeight={700}>{product.product.name}</Typography>
         <Typography fontWeight={700}>
           reduced from the price: {product.product.salePrice} $ *{" "}
-          {product.requiredQuantity} ={" "}
-          {(product.product.salePrice * product.requiredQuantity).toFixed(2)}$
+          {product.missing} ={" "}
+          {(+product.product.salePrice * product.missing).toFixed(2)}$
         </Typography>
+        <Typography fontWeight={700}>updated cart {product.exist}</Typography>
       </Box>
     </Box>
   );

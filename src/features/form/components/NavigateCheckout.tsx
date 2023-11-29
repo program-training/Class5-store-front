@@ -7,11 +7,14 @@ import CheckExist from "../../cart/components/CheckModal";
 import { Box, Modal } from "@mui/material";
 import { styleModalCheck } from "../../layout/war/styleModal";
 import DeliveryForm from "../pages/DeliveryForm";
+import { ResultCalculation } from "../utils/resultCalculation";
+import { NotInStockApterSub } from "../../../order/types/types";
 const NavigateCheckout = () => {
   const cart = useAppSelector((store) => store.cart.cart);
-  const [localCheckCart, setCheckCart] = useState<localCheckCartType | null>(
-    null
-  );
+  const [localCheckCart, setCheckCart] = useState<localCheckCartType | null>();
+  const [updatedLocalCheckCart, setUpdatedLocalCheckCart] = useState<
+    NotInStockApterSub[]
+  >([]);
   const [openMissing, setOpenMissing] = useState(false);
 
   useEffect(() => {
@@ -25,7 +28,11 @@ const NavigateCheckout = () => {
   }, []);
 
   useEffect(() => {
-    if (localCheckCart?.notInStock.length) setOpenMissing(true);
+    if (localCheckCart?.notInStock.length) {
+      setOpenMissing(true);
+      const updatedNotInStock = ResultCalculation(localCheckCart?.notInStock);
+      setUpdatedLocalCheckCart(updatedNotInStock);
+    }
   }, [localCheckCart]);
 
   if (!localCheckCart) return <WaitingComponent />;
@@ -34,7 +41,7 @@ const NavigateCheckout = () => {
       <Modal open={openMissing}>
         <Box sx={styleModalCheck}>
           <CheckExist
-            products={localCheckCart.notInStock}
+            products={updatedLocalCheckCart}
             setModal={setOpenMissing}
           />
         </Box>
