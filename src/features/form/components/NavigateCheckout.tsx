@@ -7,7 +7,6 @@ import CheckExist from "../../cart/components/CheckModal";
 import { Box, Modal } from "@mui/material";
 import { styleModalCheck } from "../../layout/war/styleModal";
 import DeliveryForm from "../pages/DeliveryForm";
-
 const NavigateCheckout = () => {
   const cart = useAppSelector((store) => store.cart.cart);
   const [localCheckCart, setCheckCart] = useState<localCheckCartType | null>(
@@ -40,7 +39,7 @@ const NavigateCheckout = () => {
           />
         </Box>
       </Modal>
-      <DeliveryForm />
+      !localCheckCart.notInStock && <DeliveryForm />
     </Box>
   );
 };

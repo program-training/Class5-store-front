@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, CssBaseline, Typography } from "@mui/material";
 import Missing from "../MissingProduct";
 import { NotInStock } from "../../../order/types/types";
 import CloseModalIcon from "../../layout/war/CloseIcon";
@@ -16,8 +16,18 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
     setProductsC(products);
   }, []);
 
+  const handleCart = (product: NotInStock) => {
+    const newP = [...productsC];
+    const filtered = newP.filter(
+      (item) => item.product.id !== product.product.id
+    );
+    setProductsC(filtered);
+    if (!filtered.length) setModal(false);
+  };
+
   return (
     <Box>
+      <CssBaseline />
       <Box>
         <CloseModalIcon setModal={setModal} />
       </Box>
@@ -30,11 +40,7 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
         {productsC.map((product, i) => (
           <Box key={i} display="flex">
             <Missing product={product} />
-            <Button
-              onClick={() =>
-                setProductsC((prev) => prev.filter((_prod, ind) => i !== ind))
-              }
-            >
+            <Button onClick={() => handleCart(product)}>
               click to confirm
             </Button>
           </Box>

@@ -5,7 +5,7 @@ import axios from "axios";
 import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
 import { useAppDispatch } from "../../../store/hooks";
 import { setBySale } from "../productsSlice";
-import WaitingComponent from "../../form/components/WaitingComponent";
+import SpinnerComponent from "../../form/components/WaitingComponent";
 
 const ProductsPage = () => {
   const dispatch = useAppDispatch();
@@ -29,7 +29,7 @@ const ProductsPage = () => {
     dispatch(setBySale(sale));
   }, [products]);
 
-  if (!products.length) return <WaitingComponent />;
+  if (!products.length) return <SpinnerComponent />;
 
   return (
     <>
