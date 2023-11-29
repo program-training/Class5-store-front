@@ -11,7 +11,6 @@ import Payment from "../../order/pages/Payment";
 import GetUsers from "../users/pages/GetUsers";
 import SignIn from "../form/pages/Signin";
 import SignUp from "../form/pages/Signup";
-import NavigateCheckout from "../form/components/NavigateCheckout";
 import DeliveryForm from "../form/pages/DeliveryForm";
 const RouterDom = () => {
   return (
@@ -27,11 +26,12 @@ const RouterDom = () => {
       <Route path="/store/home/products" element={<ProductsPage />} />
       <Route path="/store/home/store/map" element={<StorePage />} />
       <Route path="/store/order-details/:userId" element={<OrderDetails />} />
-      <Route path="*" element={<NotFoundPage />} />
+
       <Route path="/store/getUsers" element={<GetUsers />} />
       <Route path="/store/payment" element={<Payment />} />
-      <Route path="/store/delivery" element={<NavigateCheckout />} />
-      <Route path="/store/checkout" element={<NavigateCheckout />} />
+      <Route path="/store/delivery" element={<DeliveryForm />} />
+      <Route path="*" element={<NotFoundPage />} />
+
     </Routes>
   );
 };
