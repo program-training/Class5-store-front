@@ -7,13 +7,16 @@ import {
   removeItemFromCart,
   handelSubOne,
 } from "./utils/functions";
+import { ProductsCardInterface } from "../products/interfaces/ProductCardInterface";
 
 interface InitialState {
   cart: productInCart[];
+  iconButton: boolean;
 }
 
 const initialState: InitialState = {
   cart: [],
+  iconButton: false,
 };
 
 export const cartSlice = createSlice({
@@ -22,11 +25,13 @@ export const cartSlice = createSlice({
   reducers: {
     pullFromLocalStorage(state) {
       const cartList = JSON.parse(localStorage.getItem("cartItem") || "[]");
+      cartList.length ? (state.iconButton = true) : (state.iconButton = false);
       state.cart = cartList;
     },
-    addToCart(state, action: PayloadAction<number>) {
+    addToCart(state, action: PayloadAction<ProductsCardInterface>) {
       const cartItems = [...state.cart];
       state.cart = handelCart(action.payload, cartItems);
+      state.iconButton = true;
       localStorage.setItem("cartItem", JSON.stringify(state.cart));
       return state;
     },
@@ -45,12 +50,19 @@ export const cartSlice = createSlice({
     removeItem(state, action: PayloadAction<number>) {
       const cartItems = [...state.cart];
       state.cart = removeItemFromCart(action.payload, cartItems);
+      !state.cart.length
+        ? (state.iconButton = false)
+        : (state.iconButton = true);
       localStorage.setItem("cartItem", JSON.stringify(state.cart));
       return state;
     },
-    clearCart: (state) => {
+    clearCart(state) {
       state.cart = [];
+      state.iconButton = false;
       localStorage.removeItem("cartItem");
+    },
+    setIconDisabled(state, action: PayloadAction<boolean>) {
+      state.iconButton = action.payload;
     },
   },
 });
@@ -62,5 +74,6 @@ export const {
   subOne,
   removeItem,
   clearCart,
+  setIconDisabled,
 } = cartSlice.actions;
 export default cartSlice.reducer;
