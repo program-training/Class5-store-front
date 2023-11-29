@@ -1,14 +1,13 @@
 import { Box, Container, CssBaseline } from "@mui/material";
 import ProductsPage from "../../products/pages/ProductsPage";
 import Banner from "../../banners/Banner";
-import { useCart } from "../../cart/hooks/useCart";
+import { useCartState } from "../../cart/hooks/useCart";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setIconDisabled } from "../../cart/cartSlice";
 import { useEffect, useState } from "react";
 const HomePage = () => {
   const dispatch = useAppDispatch();
-  const cart = useCart();
-  cart.length ? dispatch(setIconDisabled(true)) : false;
+  const { cart } = useCartState();
   const sale = useAppSelector((store) => store.products.productsBySale);
   const [ides, setIdes] = useState<number[]>([]);
   useEffect(() => {
@@ -25,7 +24,10 @@ const HomePage = () => {
       }
       setIdes(getTwoRandomIndexes(sale));
     }, 150000);
-  }, [ides]);
+  }, [ides, sale]);
+  useEffect(() => {
+    cart.length ? dispatch(setIconDisabled(true)) : false;
+  }, []);
   return (
     <>
       <Container>

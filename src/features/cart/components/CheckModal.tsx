@@ -16,6 +16,15 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
     setProductsC(products);
   }, []);
 
+  const handleCart = (product: NotInStock) => {
+    const newP = [...productsC];
+    const filtered = newP.filter(
+      (item) => item.product.id !== product.product.id
+    );
+    setProductsC(filtered);
+    if (!filtered.length) setModal(false);
+  };
+
   return (
     <Box>
       <CssBaseline />
@@ -31,11 +40,7 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
         {productsC.map((product, i) => (
           <Box key={i} display="flex">
             <Missing product={product} />
-            <Button
-              onClick={() =>
-                setProductsC((prev) => prev.filter((_prod, ind) => i !== ind))
-              }
-            >
+            <Button onClick={() => handleCart(product)}>
               click to confirm
             </Button>
           </Box>

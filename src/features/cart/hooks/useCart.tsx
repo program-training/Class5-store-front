@@ -12,5 +12,5 @@ export const useIcon = () => {
 
 export const useCartState = () => {
   const state = useAppSelector((store) => store.cart);
-  return [state.cart, state.iconButton];
+  return { cart: state.cart, icon: state.iconButton };
 };
