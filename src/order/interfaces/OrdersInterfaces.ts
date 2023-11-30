@@ -17,6 +17,6 @@ export interface OrdersInterface {
   status: "pending" | "processing" | "shipped" | "delivered" | "completed";
   email: string;
   price: number;
-  orderTime: string;
+  orderTime: Date;
   shippingDetails: ShippingDetailsInterface;
 }

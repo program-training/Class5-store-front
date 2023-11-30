@@ -14,10 +14,9 @@ import { countAmount, sumCartItem } from "../utils/functions";
 import ProductInCart from "./ProductInCart";
 import EmptyCart from "./EmptyCart";
 import { LocalCartType } from "../../../order/types/types";
-import { useCart, useIcon } from "../hooks/useCart";
+import { useCart } from "../hooks/useCart";
 const Cart = () => {
   const cart = useCart();
-  const [iconOpen] = useIcon();
   const [open, setOpen] = useState(false);
   const [localCart, setLocalCart] = useState<LocalCartType[]>([]);
   const [amount, setAmount] = useState(0);
@@ -44,12 +43,7 @@ const Cart = () => {
     };
   return (
     <Box>
-      <Box
-        component={Button}
-        onClick={() => setOpen(true)}
-        variant="outlined"
-        disabled={iconOpen === false}
-      >
+      <Box component={Button} onClick={() => setOpen(true)} variant="outlined">
         <Badge badgeContent={amount} color="primary">
           <ShoppingCartOutlinedIcon sx={{ color: "white" }} />
         </Badge>
