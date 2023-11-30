@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const navigate = useNavigate();
   const onSubmit = async (values: FieldValues) => {
     try {
       const { data } = await axios.post(`${BASE_URL}/api/users/signIn`, values);
@@ -37,6 +38,7 @@ const SignIn = () => {
         maxWidth: "550px",
       }}
     >
+      <Icon text="Signin" />
       <CssBaseline />
       <Icon text="Signin" />
       <Box
