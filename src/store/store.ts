@@ -11,6 +11,9 @@ export const store = configureStore({
     cart: cartSlice,
     themeMode: themeModeSlice,
   },
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware().concat();
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
