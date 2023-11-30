@@ -3,6 +3,7 @@ import productsSlice from "../features/products/productsSlice";
 import usersSlice from "../features/users/usersSlice";
 import cartSlice from "../features/cart/cartSlice";
 import themeModeSlice from "../features/themes/themeModeSlice";
+import axiosInterceptors from "./services/axiosInterceptors";
 
 export const store = configureStore({
   reducer: {
@@ -12,7 +13,9 @@ export const store = configureStore({
     themeMode: themeModeSlice,
   },
   middleware(getDefaultMiddleware) {
-    return getDefaultMiddleware().concat();
+    return getDefaultMiddleware({ serializableCheck: false }).concat(
+      axiosInterceptors
+    );
   },
 });
 
