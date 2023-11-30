@@ -25,7 +25,7 @@ const ProductsPage = () => {
   }, [products]);
 
   if (pending) return <SpinnerComponent />;
-  if (error) navigate("http://localhost:5173/store/notFound");
+  if (error) navigate("/store/notFound");
   return (
     <>
       <CssBaseline />

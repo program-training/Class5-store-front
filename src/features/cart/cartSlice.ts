@@ -11,7 +11,6 @@ import { ProductsCardInterface } from "../products/interfaces/ProductCardInterfa
 
 interface InitialState {
   cart: productInCart[];
-  iconButton: boolean;
 }
 interface CertSet {
   id: number;
@@ -20,7 +19,6 @@ interface CertSet {
 
 const initialState: InitialState = {
   cart: [],
-  iconButton: false,
 };
 
 export const cartSlice = createSlice({
@@ -29,13 +27,11 @@ export const cartSlice = createSlice({
   reducers: {
     pullFromLocalStorage(state) {
       const cartList = JSON.parse(localStorage.getItem("cartItem") || "[]");
-      cartList.length ? (state.iconButton = true) : (state.iconButton = false);
       state.cart = cartList;
     },
     addToCart(state, action: PayloadAction<ProductsCardInterface>) {
       const cartItems = [...state.cart];
       state.cart = handelCart(action.payload, cartItems);
-      state.iconButton = true;
       localStorage.setItem("cartItem", JSON.stringify(state.cart));
       return state;
     },
@@ -54,15 +50,11 @@ export const cartSlice = createSlice({
     removeItem(state, action: PayloadAction<number>) {
       const cartItems = [...state.cart];
       state.cart = removeItemFromCart(action.payload, cartItems);
-      !state.cart.length
-        ? (state.iconButton = false)
-        : (state.iconButton = true);
       localStorage.setItem("cartItem", JSON.stringify(state.cart));
       return state;
     },
     clearCart(state) {
       state.cart = [];
-      state.iconButton = false;
       localStorage.removeItem("cartItem");
     },
     setAfterCheck(state, action: PayloadAction<CertSet>) {
@@ -75,9 +67,6 @@ export const cartSlice = createSlice({
       localStorage.setItem("cartItem", JSON.stringify(state.cart));
       return state;
     },
-    setIconDisabled(state, action: PayloadAction<boolean>) {
-      state.iconButton = action.payload;
-    },
   },
 });
 
@@ -88,7 +77,6 @@ export const {
   subOne,
   removeItem,
   clearCart,
-  setIconDisabled,
   setAfterCheck,
 } = cartSlice.actions;
 export default cartSlice.reducer;
