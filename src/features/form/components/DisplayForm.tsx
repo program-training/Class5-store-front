@@ -5,7 +5,7 @@ import ControlledPasswordField from "./PasswordField";
 import ControlledTextField from "./TextField";
 import splitCamelCase from "../utils/splitCamelCase";
 
-type DisplayFormContextProps = {
+export type DisplayFormContextProps = {
   formValues: string[];
   control: Control<FormValues, unknown>;
   errors: FieldErrors;
@@ -17,7 +17,7 @@ const DisplayFormContext: FC<DisplayFormContextProps> = ({
   errors,
 }) => {
   return formValues.map((value, i) => {
-    const label = splitCamelCase(value)
+    const label = splitCamelCase(value);
     if (value.toLocaleLowerCase().includes("password"))
       return (
         <ControlledPasswordField
