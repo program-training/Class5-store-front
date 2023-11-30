@@ -3,23 +3,19 @@ import useForm from "../hooks/useForm";
 import DisplayFormContext from "../components/DisplayForm";
 import { FieldValues } from "react-hook-form";
 import SignInUpLink from "../components/SignUpLink";
-import axios from "axios";
 import signinValidation from "../models/signinValidation";
 import Icon from "../components/Icon";
-import { BASE_URL } from "../../../App";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../store/hooks";
+import { SignInRequest } from "../services/usersRequests";
+import { loginUser } from "../../users/interfaces/UserInterface";
 
 const SignIn = () => {
   const navigate = useNavigate();
-
+  const dispatch = useAppDispatch();
   const onSubmit = async (values: FieldValues) => {
-    try {
-      const { data } = await axios.post(`${BASE_URL}/users/signIn`, values);
-      localStorage.setItem("token", data);
-      navigate("/store/home");
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(SignInRequest(values as loginUser));
+    navigate("/store/home");
   };
   const {
     handleSubmit,
