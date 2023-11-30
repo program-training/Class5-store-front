@@ -8,11 +8,13 @@ import { OrdersInterface } from "../../../order/interfaces/OrdersInterfaces";
 
 const OrderDetails = () => {
   const { userId } = useParams();
-  const [order, setOrder] = useState<OrdersInterface | null>(null);
+  const [order, setOrder] = useState<OrdersInterface[] | []>([]);
   useEffect(() => {
     const getOrder = async () => {
       try {
-        const { data } = await axios.get(`${BASE_URL}/api/orders/${userId}`);
+        const { data } = await axios.get(`${BASE_URL}/orders/${userId}`);
+        console.log(data);
+
         setOrder(data);
       } catch (error) {
         console.log(error);
@@ -20,20 +22,29 @@ const OrderDetails = () => {
     };
     getOrder();
   }, [userId]);
+  if (!order.length)
+    return (
+      <Box mt={"100px"}>
+        <Typography>sorry there is nothing to show</Typography>{" "}
+      </Box>
+    );
   return (
     <Box mt={"100px"}>
-      {!order ? (
-        <Typography>sorry there is nothing to show</Typography>
-      ) : (
-        <>
-          <Typography>order time {order?.orderTime.toDateString()}</Typography>
-          <Typography>status order {order?.status}</Typography>
-          {order.cartItems.map((product) => (
-            <ProductDetails product={product} />
-          ))}
-          <Typography>total price{order?.price}</Typography>
-        </>
-      )}
+      <Box>
+        {order.map((order) => {
+          const date = new Date(order.orderTime).toLocaleString();
+          return (
+            <>
+              <Typography>order time {date}</Typography>
+              <Typography>status order {order.status}</Typography>
+              {order.cartItems.map((product) => (
+                <ProductDetails product={product} />
+              ))}
+              <Typography>total price{order.price}</Typography>
+            </>
+          );
+        })}
+      </Box>
     </Box>
   );
 };

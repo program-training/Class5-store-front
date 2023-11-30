@@ -13,7 +13,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const onSubmit = async (values: FieldValues) => {
     try {
-      const { data } = await axios.post(`${BASE_URL}/api/users/signIn`, values);
+      const { data } = await axios.post(`${BASE_URL}/users/signIn`, values);
       localStorage.setItem("token", data);
       navigate("/store/home");
     } catch (error) {
