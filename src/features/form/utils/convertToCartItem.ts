@@ -6,6 +6,7 @@ import { checkCart } from "../../../order/utils/utils";
 import { ResultCalculation } from "./ResultCalculation";
 import { jwtDecode } from "jwt-decode";
 import { TokenType } from "../../layout/types/token";
+import { BASE_URL } from "../../../App";
 export const convertToCartItem = (
   cart: productInCart[]
 ): CartItemFromClientInterface[] => {
@@ -48,7 +49,7 @@ export const onSubmitHelper = async (
 ) => {
   try {
     const { email } = values;
-    const { data } = await axios.post("http://localhost:3000/api/users/user", {
+    const { data } = await axios.post(`${BASE_URL}/api/users/user`, {
       email,
     });
 

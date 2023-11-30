@@ -60,7 +60,7 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
               >
                 I don't want the rest
               </Button>
-              <Button onClick={() => handleCart(product)} color="warning">
+              <Button onClick={() => handleCart(product)} color="success">
                 Okay, what's left is good for me
               </Button>
             </Box>

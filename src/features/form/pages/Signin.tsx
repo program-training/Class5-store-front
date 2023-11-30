@@ -40,7 +40,6 @@ const SignIn = () => {
     >
       <Icon text="Signin" />
       <CssBaseline />
-      <Icon text="Signin" />
       <Box
         noValidate
         component="form"
