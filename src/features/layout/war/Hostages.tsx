@@ -13,7 +13,6 @@ const Hostages = () => {
     document.getElementsByTagName("head")[0].appendChild(script);
 
     return () => {
-      // Cleanup script on component unmount
       document.getElementsByTagName("head")[0].removeChild(script);
     };
   }, []);

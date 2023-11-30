@@ -14,7 +14,7 @@ const SignUp = () => {
   const onSubmit = async (values: FieldValues) => {
     const { confirmPassword, ...value } = values;
     try {
-      await axios.post(`${BASE_URL}/api/users/admin`, value);
+      await axios.post(`${BASE_URL}/users/admin`, value);
       navigate("/store/signin");
     } catch (error) {
       console.log(error);

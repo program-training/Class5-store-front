@@ -1,7 +1,10 @@
-import { CartItemFromClientInterface, CartItemInterface } from "./CartItemsInterfaces";
+import {
+  CartItemFromClientInterface,
+  CartItemInterface,
+} from "./CartItemsInterfaces";
 import { ShippingDetailsInterface } from "./ShippingDetailsInterface";
 
-export interface OrderFromClientInterface  {
+export interface OrderFromClientInterface {
   email: string;
   price: number;
   cartItems: CartItemFromClientInterface[];

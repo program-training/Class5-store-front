@@ -13,7 +13,7 @@ const ProductsPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [pending, error, products] = useFetch<ProductsCardInterface[]>(
-    `${BASE_URL}/api/products`
+    `${BASE_URL}/products`
   );
 
   useEffect(() => {
