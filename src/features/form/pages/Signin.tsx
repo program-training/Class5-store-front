@@ -6,17 +6,16 @@ import SignInUpLink from "../components/SignUpLink";
 import axios from "axios";
 import signinValidation from "../models/signinValidation";
 import Icon from "../components/Icon";
+import { BASE_URL } from "../../../App";
 import { useNavigate } from "react-router-dom";
+
 const SignIn = () => {
   const navigate = useNavigate();
   const onSubmit = async (values: FieldValues) => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:3000/api/users/signIn",
-        values
-      );
+      const { data } = await axios.post(`${BASE_URL}/api/users/signIn`, values);
       localStorage.setItem("token", data);
-      navigate("/home");
+      navigate("/store/home");
     } catch (error) {
       console.log(error);
     }

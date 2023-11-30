@@ -27,7 +27,7 @@ const ProductInCart = ({ productCart }: PropProductInCart) => {
           {productCart.product.name}
         </Typography>
         <DiscountComponent
-          salePrice={productCart.product.salePrice}
+          salePrice={+productCart.product.salePrice}
           discountPercentage={productCart.product.discountPercentage}
         />
         <Grid>

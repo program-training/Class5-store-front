@@ -1,9 +1,13 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 import ProductsPage from "../../products/pages/ProductsPage";
 import Banner from "../../banners/Banner";
+import { useCartState } from "../../cart/hooks/useCart";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { setIconDisabled } from "../../cart/cartSlice";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../../store/hooks";
 const HomePage = () => {
+  const dispatch = useAppDispatch();
+  const { cart } = useCartState();
   const sale = useAppSelector((store) => store.products.productsBySale);
   const [ides, setIdes] = useState<number[]>([]);
   useEffect(() => {
@@ -19,11 +23,15 @@ const HomePage = () => {
         return indexes;
       }
       setIdes(getTwoRandomIndexes(sale));
-    }, 10000);
-  }, [ides]);
+    }, 150000);
+  }, [ides, sale]);
+  useEffect(() => {
+    cart.length ? dispatch(setIconDisabled(true)) : false;
+  }, []);
   return (
     <>
       <Container>
+        <CssBaseline />
         <Box
           sx={{
             position: "fixed",
@@ -31,7 +39,7 @@ const HomePage = () => {
             right: "20px",
           }}
         >
-          <Banner id={ides[0] || sale[0]} />
+          <Banner id={ides[0] || sale[5]} />
         </Box>
         <Box
           sx={{
@@ -40,7 +48,7 @@ const HomePage = () => {
             left: "20px",
           }}
         >
-          <Banner id={ides[1] || sale[2]} />
+          <Banner id={ides[0] || sale[7]} />
         </Box>
         <Box
           sx={{

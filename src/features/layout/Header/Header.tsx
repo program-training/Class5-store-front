@@ -10,6 +10,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setThemeMode } from "../../themes/themeModeSlice";
+import ShowOrdersHistory from "../HeaderLoggedIn/ShowOrders";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -29,12 +30,13 @@ const Header = () => {
                 mr: 1,
               }}
             />
+            <ShowOrdersHistory />
             <Typography
               variant="h6"
               noWrap
               component="a"
               onClick={() => {
-                navigate("/home");
+                navigate("/store/home");
               }}
               sx={{
                 mr: 2,

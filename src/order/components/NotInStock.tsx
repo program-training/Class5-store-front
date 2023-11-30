@@ -21,11 +21,11 @@ const NotInStock: React.FC<SimpleDialogProps> = ({ open, onClose }) => {
   };
   const handleToPayment = () => {
     setOpen(false);
-    navigate("/payment");
+    navigate("/store/payment");
   };
   const handleBackToHome = () => {
     setOpen(false);
-    navigate("/home");
+    navigate("/store/home");
   };
   return (
     <React.Fragment>

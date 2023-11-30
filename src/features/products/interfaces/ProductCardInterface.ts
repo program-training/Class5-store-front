@@ -1,7 +1,7 @@
 export interface ProductsCardInterface {
   id: number;
   name: string;
-  salePrice: number;
+  salePrice: string;
   quantity: number;
   description: string;
   category: string;

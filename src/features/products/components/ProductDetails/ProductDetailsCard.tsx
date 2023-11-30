@@ -39,7 +39,7 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
           {product.description}
         </Typography>
         <DiscountComponent
-          salePrice={product.salePrice}
+          salePrice={+product.salePrice}
           discountPercentage={product.discountPercentage}
         />
         <Typography variant="body2" color="text.secondary">
@@ -48,7 +48,7 @@ const ProductDetailsCard: React.FC<ProductCardProps> = ({ product }) => {
         <Button
           variant="contained"
           onClick={() => {
-            dispatch(addToCart(product.id));
+            dispatch(addToCart(product));
           }}
           disabled={product.quantity < 1}
           sx={{

@@ -1,7 +1,7 @@
 import { Box, CssBaseline } from "@mui/material";
 import { formStyle } from "../styles/formStyle";
 
-const WaitingComponent = () => {
+const SpinnerComponent = () => {
   return (
     <Box sx={formStyle} data-testid="test-id">
       <CssBaseline />
@@ -15,4 +15,4 @@ const WaitingComponent = () => {
   );
 };
 
-export default WaitingComponent;
+export default SpinnerComponent;

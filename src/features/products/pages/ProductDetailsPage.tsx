@@ -1,27 +1,22 @@
 import ProductDetailsCard from "../components/ProductDetails/ProductDetailsCard";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Box, CssBaseline } from "@mui/material";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
 import Banner from "../../banners/Banner";
-import WaitingComponent from "../../form/components/WaitingComponent";
+import SpinnerComponent from "../../form/components/WaitingComponent";
+import useFetch from "../../hooks/useFetch";
+import NotFoundError from "../../hooks/NotFoundError";
+import { BASE_URL } from "../../../App";
 const ProductDetailsPage = () => {
   const { productId } = useParams();
+  const navigate = useNavigate();
+  const [pending, error, product] = useFetch<ProductsCardInterface>(
+    `${BASE_URL}/api/products/${productId}`
+  );
 
-  const [product, setProduct] = useState<ProductsCardInterface | null>(null);
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3000/api/products/${productId}`)
-      .then((res) => {
-        setTimeout(() => {
-          setProduct(res.data);
-        }, 1000);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  if (!product) return <WaitingComponent />;
+  if (pending) return <SpinnerComponent />;
+  if (!product) return <NotFoundError message="product in not found" />;
+  if (error) navigate("/store/notFound");
   return (
     <>
       <CssBaseline />

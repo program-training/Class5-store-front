@@ -45,7 +45,7 @@ const Footer = () => {
       <Button
         variant="contained"
         onClick={() => {
-          navigate("/home/store/map");
+          navigate("/store/home/store/map");
         }}
       >
         Location

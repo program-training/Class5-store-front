@@ -13,7 +13,7 @@ const HeaderLogo = () => {
         noWrap
         component="a"
         onClick={() => {
-          navigate("/home");
+          navigate("/store/home");
         }}
         sx={{
           mr: 2,
