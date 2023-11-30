@@ -14,4 +14,10 @@ export interface loginUser {
   email: string;
   password: string;
 }
+
+export interface SignUpUser {
+  password: string;
+  initialPassword: string;
+  email: string;
+}
 export default UserInterface;

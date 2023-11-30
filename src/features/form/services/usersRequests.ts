@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { loginUser } from "../../users/interfaces/UserInterface";
+import UserInterface, { loginUser } from "../../users/interfaces/UserInterface";
 import axios from "axios";
 import { BASE_URL } from "../../../App";
 
@@ -12,6 +12,17 @@ export const SignInRequest = createAsyncThunk(
         userFromClient
       );
       return data;
+    } catch (error) {
+      return apiThunk.rejectWithValue(error);
+    }
+  }
+);
+
+export const SignUpRequest = createAsyncThunk(
+  "user/SignUpRequest",
+  async (userFromClient: UserInterface, apiThunk) => {
+    try {
+      await axios.post(`${BASE_URL}/api/users/admin`, userFromClient);
     } catch (error) {
       return apiThunk.rejectWithValue(error);
     }

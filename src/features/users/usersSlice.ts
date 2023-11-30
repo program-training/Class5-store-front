@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { SerializedError } from "@reduxjs/toolkit";
 import { getUser, setItem } from "../form/services/localStorageService";
 import { logedInUser } from "./interfaces/UserInterface";
-import { SignInRequest } from "../form/services/usersRequests";
+import { SignInRequest, SignUpRequest } from "../form/services/usersRequests";
 
 interface InitialState {
   user: logedInUser | null;
@@ -36,6 +36,19 @@ export const userSlice = createSlice({
         state.error = error;
         return state;
       });
+    builder.addCase(SignUpRequest.pending, (state) => {
+      state.pending = true;
+      return state;
+    });
+    builder.addCase(SignUpRequest.fulfilled, (state) => {
+      state.pending = false;
+      return state;
+    });
+    builder.addCase(SignUpRequest.rejected, (state, { error }) => {
+      state.pending = false;
+      state.error = error;
+      return state;
+    });
   },
 });
 
