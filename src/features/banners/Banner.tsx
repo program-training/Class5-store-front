@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { Box } from "@mui/material";
 import { BNR_URL } from "../../App";
 
+
 type BannerProps = {
   id: number;
 };
