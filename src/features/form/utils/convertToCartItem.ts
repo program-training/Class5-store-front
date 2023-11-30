@@ -4,7 +4,8 @@ import { productInCart } from "../../../order/types/types";
 import axios from "axios";
 import { checkCart } from "../../../order/utils/utils";
 import { ResultCalculation } from "./ResultCalculation";
-
+import { jwtDecode } from "jwt-decode";
+import { TokenType } from "../../layout/types/token";
 export const convertToCartItem = (
   cart: productInCart[]
 ): CartItemFromClientInterface[] => {
@@ -50,6 +51,9 @@ export const onSubmitHelper = async (
     const { data } = await axios.post("http://localhost:3000/api/users/user", {
       email,
     });
+
+    const decodedToken = jwtDecode(data) as TokenType;
+    console.log(decodedToken);
     const checkCartRes = await checkCart(cart);
     if (checkCartRes.notInStock.length) {
       const updatedNotInStock = await ResultCalculation(
@@ -62,8 +66,10 @@ export const onSubmitHelper = async (
       converted,
       values,
       sum,
-      data.id
+      decodedToken._id
     );
+    console.log(deliveryFormToSend);
+
     const order = await axios.post(
       "http://localhost:3000/api/orders",
       deliveryFormToSend
