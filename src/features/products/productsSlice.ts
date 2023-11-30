@@ -1,12 +1,41 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction, SerializedError } from "@reduxjs/toolkit";
+import ProductInterface from "./interfaces/ProductInterface";
+import { create } from "domain";
+import axios from "axios";
+import { BASE_URL } from "../../App";
+import ProductInterface from "./interfaces/ProductInterface";
 
-interface InitialState {
-  productsBySale: number[];
+
+export const getAllProducts = createAsyncThunk("products/getAllProducts", async (_, thunkAPI) => {
+  try {
+    const{data} = await axios.get(`${BASE_URL}/products`);
+    return data;
+
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error)
+    
+  }
 }
+
+
+
+  const initialState = {
+    productsBySale: [],
+    allProducts: null,
+    error: '',
+    pending: false,
+  };
+
+
+
+
 
 const initialState: InitialState = {
   productsBySale: [],
+  allProducts: null,
+  error: "",
+  pending: false
 };
 
 export const productsSlice = createSlice({
