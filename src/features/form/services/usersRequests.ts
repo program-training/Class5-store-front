@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import UserInterface, { loginUser } from "../../users/interfaces/UserInterface";
+import { SignUpUser, loginUser } from "../../users/interfaces/UserInterface";
 import axios from "axios";
 import { BASE_URL } from "../../../App";
 
@@ -8,7 +8,7 @@ export const SignInRequest = createAsyncThunk(
   async (userFromClient: loginUser, apiThunk) => {
     try {
       const { data } = await axios.post(
-        `${BASE_URL}/api/users/signIn`,
+        `${BASE_URL}/users/signIn`,
         userFromClient
       );
       return data;
@@ -20,9 +20,9 @@ export const SignInRequest = createAsyncThunk(
 
 export const SignUpRequest = createAsyncThunk(
   "user/SignUpRequest",
-  async (userFromClient: UserInterface, apiThunk) => {
+  async (userFromClient: SignUpUser, apiThunk) => {
     try {
-      await axios.post(`${BASE_URL}/api/users/admin`, userFromClient);
+      await axios.post(`${BASE_URL}/users/admin`, userFromClient);
     } catch (error) {
       return apiThunk.rejectWithValue(error);
     }
