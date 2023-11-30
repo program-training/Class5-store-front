@@ -1,23 +1,55 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import type { SerializedError } from "@reduxjs/toolkit";
+import { getUser, setItem } from "../form/services/localStorageService";
+import { logedInUser } from "./interfaces/UserInterface";
+import { SignInRequest, SignUpRequest } from "../form/services/usersRequests";
 
 interface InitialState {
-  users: [];
+  user: logedInUser | null;
+  pending: boolean;
+  error: string | SerializedError;
 }
 
 const initialState: InitialState = {
-  users: [],
+  user: getUser(),
+  pending: false,
+  error: "",
 };
 
-export const usersSlice = createSlice({
-  name: "users",
+export const userSlice = createSlice({
+  name: "user",
   initialState,
-  reducers: {
-    setUsers: (state, action: PayloadAction<[]>) => {
-      state.users = action.payload;
-    },
+  reducers: {},
+  extraReducers(builder) {
+    builder.addCase(SignInRequest.pending, (state) => {
+      state.pending = true;
+      return state;
+    });
+    builder.addCase(SignInRequest.fulfilled, (state, { payload }) => {
+      state.pending = false;
+      setItem("token", payload);
+      state.user = getUser();
+      return state;
+    }),
+      builder.addCase(SignInRequest.rejected, (state, { error }) => {
+        state.pending = false;
+        state.error = error;
+        return state;
+      });
+    builder.addCase(SignUpRequest.pending, (state) => {
+      state.pending = true;
+      return state;
+    });
+    builder.addCase(SignUpRequest.fulfilled, (state) => {
+      state.pending = false;
+      return state;
+    });
+    builder.addCase(SignUpRequest.rejected, (state, { error }) => {
+      state.pending = false;
+      state.error = error;
+      return state;
+    });
   },
 });
 
-export const { setUsers } = usersSlice.actions;
-export default usersSlice.reducer;
+export default userSlice.reducer;

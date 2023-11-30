@@ -31,7 +31,6 @@ const Footer = () => {
         backgroundColor: "#3f51b5",
         color: "white",
         padding: "10px 0",
-        // position: "fixed",
         bottom: 0,
         width: "100%",
         borderRadius: "3px",
@@ -45,7 +44,7 @@ const Footer = () => {
       <Button
         variant="contained"
         onClick={() => {
-          navigate("/home/store/map");
+          navigate("/store/home/store/map");
         }}
       >
         Location

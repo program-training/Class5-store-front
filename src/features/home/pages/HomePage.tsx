@@ -1,8 +1,8 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 import ProductsPage from "../../products/pages/ProductsPage";
 import Banner from "../../banners/Banner";
-import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../store/hooks";
+import { useEffect, useState } from "react";
 const HomePage = () => {
   const sale = useAppSelector((store) => store.products.productsBySale);
   const [ides, setIdes] = useState<number[]>([]);
@@ -19,11 +19,13 @@ const HomePage = () => {
         return indexes;
       }
       setIdes(getTwoRandomIndexes(sale));
-    }, 10000);
-  }, [ides]);
+    }, 150000);
+  }, [ides, sale]);
+
   return (
     <>
       <Container>
+        <CssBaseline />
         <Box
           sx={{
             position: "fixed",
@@ -31,7 +33,7 @@ const HomePage = () => {
             right: "20px",
           }}
         >
-          <Banner id={ides[0] || sale[0]} />
+          <Banner id={6} />
         </Box>
         <Box
           sx={{
@@ -40,7 +42,7 @@ const HomePage = () => {
             left: "20px",
           }}
         >
-          <Banner id={ides[1] || sale[2]} />
+          <Banner id={6} />
         </Box>
         <Box
           sx={{

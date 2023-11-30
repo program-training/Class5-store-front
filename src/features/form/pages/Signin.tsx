@@ -3,21 +3,19 @@ import useForm from "../hooks/useForm";
 import DisplayFormContext from "../components/DisplayForm";
 import { FieldValues } from "react-hook-form";
 import SignInUpLink from "../components/SignUpLink";
-import axios from "axios";
 import signinValidation from "../models/signinValidation";
 import Icon from "../components/Icon";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../store/hooks";
+import { SignInRequest } from "../services/usersRequests";
+import { loginUser } from "../../users/interfaces/UserInterface";
+
 const SignIn = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const onSubmit = async (values: FieldValues) => {
-    try {
-      const { data } = await axios.post(
-        "http://localhost:3000/api/users/signIn",
-        values
-      );
-      console.log(JSON.stringify(values));
-      console.log(JSON.stringify(data));
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(SignInRequest(values as loginUser));
+    navigate("/store/home");
   };
   const {
     handleSubmit,
@@ -36,8 +34,8 @@ const SignIn = () => {
         maxWidth: "550px",
       }}
     >
-      <CssBaseline />
       <Icon text="Signin" />
+      <CssBaseline />
       <Box
         noValidate
         component="form"

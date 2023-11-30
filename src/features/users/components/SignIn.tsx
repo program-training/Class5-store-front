@@ -12,8 +12,8 @@ import {
   emailValidate,
   passwordValidate,
 } from "../../products/helpers/validation";
-
 import SignInUpButton from "./SignInUpButton";
+
 export const SignIn = () => {
   const {
     register,
@@ -80,7 +80,6 @@ export const SignIn = () => {
             label="Remember me"
           />
           <SignInUpButton text="Sign In" isValid={isValid}></SignInUpButton>
-          {/* <SignInUpLink text="signup" /> */}
         </Box>
       </Box>
     </Container>

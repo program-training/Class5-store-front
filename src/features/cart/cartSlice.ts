@@ -7,9 +7,14 @@ import {
   removeItemFromCart,
   handelSubOne,
 } from "./utils/functions";
+import { ProductsCardInterface } from "../products/interfaces/ProductCardInterface";
 
 interface InitialState {
   cart: productInCart[];
+}
+interface CertSet {
+  id: number;
+  toRemove: number;
 }
 
 const initialState: InitialState = {
@@ -24,7 +29,7 @@ export const cartSlice = createSlice({
       const cartList = JSON.parse(localStorage.getItem("cartItem") || "[]");
       state.cart = cartList;
     },
-    addToCart(state, action: PayloadAction<number>) {
+    addToCart(state, action: PayloadAction<ProductsCardInterface>) {
       const cartItems = [...state.cart];
       state.cart = handelCart(action.payload, cartItems);
       localStorage.setItem("cartItem", JSON.stringify(state.cart));
@@ -48,9 +53,19 @@ export const cartSlice = createSlice({
       localStorage.setItem("cartItem", JSON.stringify(state.cart));
       return state;
     },
-    clearCart: (state) => {
+    clearCart(state) {
       state.cart = [];
       localStorage.removeItem("cartItem");
+    },
+    setAfterCheck(state, action: PayloadAction<CertSet>) {
+      const cartItems = [...state.cart];
+      state.cart = handelSubOne(
+        action.payload.id,
+        cartItems,
+        action.payload.toRemove
+      );
+      localStorage.setItem("cartItem", JSON.stringify(state.cart));
+      return state;
     },
   },
 });
@@ -62,5 +77,6 @@ export const {
   subOne,
   removeItem,
   clearCart,
+  setAfterCheck,
 } = cartSlice.actions;
 export default cartSlice.reducer;

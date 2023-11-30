@@ -9,31 +9,26 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCart";
-import { useAppSelector } from "../../../store/hooks";
 import Checkout from "./Checkout";
-import { countAmount, sumCartItem } from "../utils/functions";
+import { countAmount, sumCart } from "../utils/functions";
 import ProductInCart from "./ProductInCart";
 import EmptyCart from "./EmptyCart";
-import { LocalCartType } from "../../../order/types/types";
+import { productInCart } from "../../../order/types/types";
+import { useCart } from "../hooks/useCart";
 const Cart = () => {
-  const cart = useAppSelector((state) => state.cart.cart);
+  const cart = useCart();
   const [open, setOpen] = useState(false);
-  const [localCart, setLocalCart] = useState<LocalCartType[]>([]);
+  const [localCart, setLocalCart] = useState<productInCart[]>([]);
   const [amount, setAmount] = useState(0);
   const [sum, setSum] = useState(0);
 
   useEffect(() => {
-    if (!open) return;
-    setTimeout(() => {
-      sumCartItem(localCart, cart).then((res) => {
-        setLocalCart(res.newLocalCart);
-        setSum(res.sumAndAmount.sum);
-      });
-    }, 1000);
+    setLocalCart(cart);
   }, [open, cart]);
 
   useEffect(() => {
     setAmount(countAmount(cart));
+    setSum(sumCart(cart));
   }, [cart]);
 
   const toggleDrawer =
@@ -43,12 +38,11 @@ const Cart = () => {
     };
   return (
     <Box>
-      <Box component={Button} onClick={toggleDrawer(true)} variant="outlined">
+      <Box component={Button} onClick={() => setOpen(true)} variant="outlined">
         <Badge badgeContent={amount} color="primary">
           <ShoppingCartOutlinedIcon sx={{ color: "white" }} />
         </Badge>
       </Box>
-
       <SwipeableDrawer
         open={open}
         onClose={toggleDrawer(false)}
@@ -76,7 +70,7 @@ const Cart = () => {
                 </React.Fragment>
               ))}
             </Box>
-            <Checkout />
+            <Checkout sum={sum} setOpen={setOpen} />
           </>
         )}
       </SwipeableDrawer>

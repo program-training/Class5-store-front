@@ -1,12 +1,16 @@
 import { Button } from "@mui/material";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { useNavigate } from "react-router";
-
-const Checkout = () => {
+import { FC } from "react";
+type CheckoutProps = {
+  sum: number;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+const Checkout: FC<CheckoutProps> = ({ sum, setOpen }) => {
   const navigate = useNavigate();
-
   const handelClick = () => {
-    navigate("/delivery");
+    setOpen(false);
+    navigate(`/store/delivery`, { state: sum });
   };
 
   return (
