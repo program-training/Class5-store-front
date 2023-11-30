@@ -37,13 +37,17 @@ export const handelAddOne = (id: number, cart: productInCart[]) => {
   return [...cart];
 };
 
-export const handelSubOne = (id: number, cart: productInCart[]) => {
+export const handelSubOne = (
+  id: number,
+  cart: productInCart[],
+  amountToRemove?: number
+) => {
   const index = cart.findIndex((i) => i.productId === id);
   if (cart[index].requiredQuantity === 1) {
     const newCart = cart.filter((i) => i.productId !== id);
     return [...newCart];
   } else {
-    cart[index].requiredQuantity -= 1;
+    cart[index].requiredQuantity -= amountToRemove || 1;
     return [...cart];
   }
 };

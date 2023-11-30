@@ -13,6 +13,10 @@ interface InitialState {
   cart: productInCart[];
   iconButton: boolean;
 }
+interface CertSet {
+  id: number;
+  toRemove: number;
+}
 
 const initialState: InitialState = {
   cart: [],
@@ -61,6 +65,16 @@ export const cartSlice = createSlice({
       state.iconButton = false;
       localStorage.removeItem("cartItem");
     },
+    setAfterCheck(state, action: PayloadAction<CertSet>) {
+      const cartItems = [...state.cart];
+      state.cart = handelSubOne(
+        action.payload.id,
+        cartItems,
+        action.payload.toRemove
+      );
+      localStorage.setItem("cartItem", JSON.stringify(state.cart));
+      return state;
+    },
     setIconDisabled(state, action: PayloadAction<boolean>) {
       state.iconButton = action.payload;
     },
@@ -75,5 +89,6 @@ export const {
   removeItem,
   clearCart,
   setIconDisabled,
+  setAfterCheck,
 } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -2,42 +2,31 @@ import useForm from "../hooks/useForm";
 import { FieldValues } from "react-hook-form";
 import deliveryValidation from "../models/deliveryValidation";
 import DisplayFormContext from "../components/DisplayForm";
-import { Box, Button, CssBaseline, Typography } from "@mui/material";
+import { Box, Button, CssBaseline, Modal, Typography } from "@mui/material";
 import { formStyle } from "../styles/formStyle";
-import axios from "axios";
 import { useAppSelector } from "../../../store/hooks";
-import {
-  convertToCartItem,
-  convertToCartItemShipping,
-} from "../utils/convertToCartItem";
+import { onSubmitHelper } from "../utils/convertToCartItem";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import CheckExist from "../../cart/components/CheckModal";
+import { styleModalCheck } from "../../layout/war/styleModal";
+import { NotInStockApterSub } from "../../../order/types/types";
 
 const DeliveryForm = () => {
-  const location = useLocation();
-  const { state } = location;
-
+  const { state } = useLocation();
   const cart = useAppSelector((store) => store.cart.cart);
+  const [openMissing, setOpenMissing] = useState(false);
+  const [listMissing, setListMissing] = useState<NotInStockApterSub[]>([]);
+
   const onSubmit = async (values: FieldValues) => {
     try {
-      const { email } = values;
-      const { data } = await axios.post(
-        "http://localhost:3000/api/users/user",
-        {
-          email,
-        }
-      );
-      const converted = convertToCartItem(cart);
-      const deliveryFormToSend = convertToCartItemShipping(
-        converted,
-        values,
-        state,
-        data.id
-      );
-      const order = await axios.post(
-        "http://localhost:3000/api/orders",
-        deliveryFormToSend
-      );
-      console.log(order.data);
+      const result = await onSubmitHelper(cart, values, state);
+      if (result instanceof Array) {
+        setListMissing(result);
+        setOpenMissing(true);
+      } else if (result instanceof Object) {
+        console.log("success");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -50,7 +39,14 @@ const DeliveryForm = () => {
   const formValues = ["address", "contactNumber", "email", "note"];
   return (
     <Box sx={formStyle}>
-      <CssBaseline />
+      <CssBaseline />{" "}
+      <Box>
+        <Modal open={openMissing}>
+          <Box sx={styleModalCheck}>
+            <CheckExist products={listMissing} setModal={setOpenMissing} />
+          </Box>
+        </Modal>
+      </Box>
       <Typography>Your details</Typography>
       <Box
         component="form"

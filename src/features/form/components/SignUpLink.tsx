@@ -17,7 +17,7 @@ const SignInUpLink: FC<SignInUpLinkProps> = ({ text }) => {
           <Link
             variant="body2"
             onClick={() => {
-              navigate(`/${text}`);
+              navigate(`/store/${text}`);
             }}
           >
             {linkText}
