@@ -53,14 +53,12 @@ export const onSubmitHelper = async (
     const { data } = await axios.post(`${BASE_URL}/users/user`, {
       email,
     });
-
+    localStorage.setItem("token", data);
     const decodedToken = jwtDecode(data) as TokenType;
     console.log(decodedToken);
     const checkCartRes = await checkCart(cart);
     if (checkCartRes.notInStock.length) {
-      const updatedNotInStock =  ResultCalculation(
-        checkCartRes.notInStock
-      );
+      const updatedNotInStock = ResultCalculation(checkCartRes.notInStock);
       return updatedNotInStock;
     }
     const converted = convertToCartItem(cart);
@@ -72,10 +70,7 @@ export const onSubmitHelper = async (
     );
     console.log(deliveryFormToSend);
 
-    const order = await axios.post(
-      `${BASE_URL}/orders`,
-      deliveryFormToSend
-    );
+    const order = await axios.post(`${BASE_URL}/orders`, deliveryFormToSend);
     return order.data;
   } catch (error) {
     console.log(error);

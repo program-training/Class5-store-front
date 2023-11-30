@@ -39,7 +39,7 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
     const cancel = [
       { productId: product.product.id, requiredQuantity: product.exist },
     ];
-    axios.post(`${BASE_URL}/api/products/cancel`, cancel);
+    axios.post(`${BASE_URL}/products/cancel`, cancel);
     setProductsC(filtered);
     if (!filtered.length) setModal(false);
   };
