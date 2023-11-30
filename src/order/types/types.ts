@@ -6,6 +6,7 @@ export type productInCart = {
   requiredQuantity: number;
   description: string;
 };
+
 export type LocalCartType = {
   product: ProductsCardInterface;
   requiredQuantity: number;
