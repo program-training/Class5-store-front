@@ -13,10 +13,10 @@ export const convertToCartItem = (
 ): CartItemFromClientInterface[] => {
   return cart.map((item) => {
     return {
-      productId: item.productId,
-      description: item.description,
-      name: item.name,
-      salePrice: item.salePrice.toString(),
+      productId: item.product.id,
+      description: item.product.description,
+      name: item.product.name,
+      salePrice: item.product.salePrice.toString(),
       quantity: item.requiredQuantity,
     };
   });
