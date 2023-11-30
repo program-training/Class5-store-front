@@ -17,7 +17,7 @@ const EmptyCart = () => {
             width: 260,
             height: 260,
             backgroundImage: `url("https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-7359557-6024626.png")`,
-            backgroundSize: "cover", // Set the background size
+            backgroundSize: "cover", 
             backgroundPosition: "center",
             mb: 4,
           }}

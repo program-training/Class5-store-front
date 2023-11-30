@@ -12,7 +12,7 @@ const ProductInCart = ({ productCart }: PropProductInCart) => {
   const cart = useAppSelector((state) => state.cart.cart);
 
   const productIndexInCart = cart.findIndex(
-    (p) => p.productId === productCart.product.id
+    (p) => p.product.id === productCart.product.id
   );
 
   return (
@@ -39,7 +39,7 @@ const ProductInCart = ({ productCart }: PropProductInCart) => {
         </Grid>
         <Grid>
           <Typography variant="body2" color="text.secondary">
-            price {productCart.sum.toFixed(2)}
+            price {productCart.sumProductInCart.toFixed(2)}
           </Typography>
         </Grid>
       </CardContent>

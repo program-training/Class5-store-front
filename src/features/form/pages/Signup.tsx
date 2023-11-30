@@ -15,8 +15,7 @@ const SignUp = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const onSubmit = async (values: FieldValues) => {
-    const { ...value } = values;
-
+     const { confirmPassword, ...value } = values;
     dispatch(SignUpRequest(value as UserInterface));
     navigate("/store/signin");
   };

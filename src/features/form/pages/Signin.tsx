@@ -14,7 +14,6 @@ const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const onSubmit = async (values: FieldValues) => {
-    console.log(values);
     dispatch(SignInRequest(values as loginUser));
     navigate("/store/home");
   };

@@ -5,6 +5,8 @@ import { NotInStockApterSub } from "../../../order/types/types";
 import CloseModalIcon from "../../layout/war/CloseIcon";
 import { useAppDispatch } from "../../../store/hooks";
 import { removeItem } from "../cartSlice";
+import axios from "axios";
+import { BASE_URL } from "../../../App";
 
 type CheckExistProps = {
   products: NotInStockApterSub[];
@@ -34,6 +36,10 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
     const filtered = newP.filter(
       (item) => item.product.id !== product.product.id
     );
+    const cancel = [
+      { productId: product.product.id, requiredQuantity: product.exist },
+    ];
+    axios.post(`${BASE_URL}/api/products/cancel`, cancel);
     setProductsC(filtered);
     if (!filtered.length) setModal(false);
   };
