@@ -5,7 +5,7 @@ import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
 import Banner from "../../banners/Banner";
 import SpinnerComponent from "../../form/components/WaitingComponent";
 import useFetch from "../../hooks/useFetch";
-import NotFoundError from "../../hooks/NotFoundError";
+import NotFoundError from "../../router/NotFoundError";
 import { BASE_URL } from "../../../App";
 const ProductDetailsPage = () => {
   const { productId } = useParams();
