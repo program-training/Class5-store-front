@@ -11,7 +11,7 @@ const ProductDetailsPage = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const [pending, error, product] = useFetch<ProductsCardInterface>(
-    `${BASE_URL}/api/products/${productId}`
+    `${BASE_URL}/products/${productId}`
   );
 
   if (pending) return <SpinnerComponent />;
