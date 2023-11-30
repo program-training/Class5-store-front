@@ -5,18 +5,17 @@ import { FieldValues } from "react-hook-form";
 import SignInUpLink from "../components/SignUpLink";
 import signupValidation from "../models/signupValidation";
 import Icon from "../components/Icon";
-
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../store/hooks";
 import { SignUpRequest } from "../services/usersRequests";
-import UserInterface from "../../users/interfaces/UserInterface";
 
 const SignUp = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const onSubmit = async (values: FieldValues) => {
-     const { confirmPassword, ...value } = values;
-    dispatch(SignUpRequest(value as UserInterface));
+    const { email, password, initialPassword } = values;
+    const value = { email, password, initialPassword };
+    dispatch(SignUpRequest(value));
     navigate("/store/signin");
   };
 
