@@ -4,17 +4,29 @@ import { Box, CssBaseline } from "@mui/material";
 import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
 import Banner from "../../banners/Banner";
 import SpinnerComponent from "../../form/components/WaitingComponent";
-import useFetch from "../../hooks/useFetch";
+// import useFetch from "../../hooks/useFetch";
 import NotFoundError from "../../router/NotFoundError";
-import { BASE_URL } from "../../../App";
+// import { BASE_URL } from "../../../App";
+import { useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
+import { QUERY_PRODUCTS } from "../../../services/apollo/queries";
 const ProductDetailsPage = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
-  const [pending, error, product] = useFetch<ProductsCardInterface>(
-    `${BASE_URL}/products/${productId}`
-  );
+  // const [pending, error, product] = useFetch<ProductsCardInterface>(
+  //   `${BASE_URL}/products/${productId}`
+  // );
+  const { loading, error, data } = useQuery(QUERY_PRODUCTS, {
+    variables: {
+      getProductId: productId,
+    },
+  });
+  const [product, setProduct] = useState<ProductsCardInterface>();
 
-  if (pending) return <SpinnerComponent />;
+  useEffect(() => {
+    if (data) setProduct(data.getProduct);
+  }, [data]);
+  if (loading) return <SpinnerComponent />;
   if (!product) return <NotFoundError message="product in not found" />;
   if (error) navigate("/store/notFound");
   return (

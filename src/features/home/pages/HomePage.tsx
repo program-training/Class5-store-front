@@ -33,7 +33,7 @@ const HomePage = () => {
             right: "20px",
           }}
         >
-          <Banner id={6} />
+          {/* <Banner id={6} /> */}
         </Box>
         <Box
           sx={{
@@ -42,7 +42,7 @@ const HomePage = () => {
             left: "20px",
           }}
         >
-          <Banner id={6} />
+          {/* <Banner id={6} /> */}
         </Box>
         <Box
           sx={{

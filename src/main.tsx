@@ -12,9 +12,9 @@ import client from "./apollo/apolloApi.ts";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <BrowserRouter>
-      <Hostages />
-      <OpenMassage />
       <ApolloProvider client={client}>
+        <Hostages />
+        <OpenMassage />
         <App />
       </ApolloProvider>
     </BrowserRouter>

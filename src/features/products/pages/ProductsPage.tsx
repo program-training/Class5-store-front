@@ -1,31 +1,40 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ProductCard } from "../components/ProductCard";
 import { Box, CssBaseline, Typography } from "@mui/material";
 import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
 import { useAppDispatch } from "../../../store/hooks";
 import { setBySale } from "../productsSlice";
 import SpinnerComponent from "../../form/components/WaitingComponent";
-import useFetch from "../../hooks/useFetch";
+// import useFetch from "../../hooks/useFetch";
 import { useNavigate } from "react-router";
-import { BASE_URL } from "../../../App";
+// import { BASE_URL } from "../../../App";
+import { useQuery } from "@apollo/client";
+import { QUERY_PRODUCTS } from "../../../services/apollo/queries";
+import NotFoundPage from "../../layout/NotFoundPage/NotFoundPage";
 
 const ProductsPage = () => {
+  const [products, setProducts] = useState<ProductsCardInterface[]>([]);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [pending, error, products] = useFetch<ProductsCardInterface[]>(
-    `${BASE_URL}/products`
-  );
+  // const [pending, error, products] = useFetch<ProductsCardInterface[]>(
+  //   `${BASE_URL}/products`
+  // );
+  const { loading, error, data } = useQuery(QUERY_PRODUCTS);
 
   useEffect(() => {
-    if (!products) return;
-    const sale = products
-      .filter((item) => item.discountPercentage > 0)
-      .map((item) => item.id);
-    dispatch(setBySale(sale));
-  }, [products]);
+    if (data) {
+      console.log(data.getProducts);
 
-  if (pending) return <SpinnerComponent />;
-  if (error) navigate("/store/notFound");
+      setProducts(data.getProducts);
+      const sale = products
+        .filter((item) => item.discountPercentage > 0)
+        .map((item) => item.id);
+      dispatch(setBySale(sale));
+    }
+  }, [data]);
+
+  if (loading) return <SpinnerComponent />;
+  if (error) return <NotFoundPage />;
   return (
     <>
       <CssBaseline />
@@ -41,19 +50,20 @@ const ProductsPage = () => {
           justifyContent: "center",
         }}
       >
-        {products?.map((product, i) => (
-          <Box
-            key={`${product.name}-${i}`}
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              maxWidth: "90%",
-              justifyContent: "center",
-            }}
-          >
-            <ProductCard product={product} />
-          </Box>
-        ))}
+        {products.length &&
+          products.map((product, i) => (
+            <Box
+              key={`${product.name}-${i}`}
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                maxWidth: "90%",
+                justifyContent: "center",
+              }}
+            >
+              <ProductCard product={product} />
+            </Box>
+          ))}
       </Box>
     </>
   );
