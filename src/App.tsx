@@ -12,9 +12,6 @@ export const BASE_URL =
 export const BNR_URL =
   import.meta.env.VITE_BNR_URL || "https://sparkly-souffle-e37dff.netlify.app";
 
-export const BASE_URL = import meta.env.VITE_BASE_URL || "http://localhost:3000";
-export const BNR_URL = import meta.env.VITE_BNR_URL || "https://sparkly-souffle-e37dff.netlify.app";
-
 const App = () => {
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
   const dispatch = useAppDispatch();
