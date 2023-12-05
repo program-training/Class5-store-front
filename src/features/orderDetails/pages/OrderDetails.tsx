@@ -1,19 +1,19 @@
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import ProductDetails from "../components/ProductDetails";
 import { Box, Typography } from "@mui/material";
-import { BASE_URL } from "../../../App";
 import { OrdersInterface } from "../../../order/interfaces/OrdersInterfaces";
+import { useQuery } from "@apollo/client";
+import { QUERY_ORDERS } from "../../services/apollo/queries";
 
 const OrderDetails = () => {
   const { userId } = useParams();
   const [orders, setOrders] = useState<OrdersInterface[] | []>([]);
+  const { data } = useQuery(QUERY_ORDERS, { variables: { id: userId } });
   useEffect(() => {
     const getOrder = async () => {
       try {
-        const { data } = await axios.get(`${BASE_URL}/orders/${userId}`);
-        setOrders(data as OrdersInterface[]);
+        data && setOrders(data.getOrder as OrdersInterface[]);
       } catch (error) {
         console.log(error);
       }
