@@ -21,7 +21,7 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
     setProductsC(products);
   }, []);
 
-  const [cancelProduct] = useMutation(MUTATION_CANCEL);
+  const [cancelProductsInOrder] = useMutation(MUTATION_CANCEL);
 
   const handleCart = (product: NotInStockApterSub) => {
     const newP = [...productsC];
@@ -39,7 +39,7 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
       (item) => item.product.id !== product.product.id
     );
     try {
-      await cancelProduct({
+      await cancelProductsInOrder({
         variables: {
           cart: {
             productId: product.product.id,
