@@ -19,7 +19,7 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
 
   useEffect(() => {
     setProductsC(products);
-  }, []);
+  }, [products]);
 
   const [cancelProductsInOrder] = useMutation(MUTATION_CANCEL);
 
