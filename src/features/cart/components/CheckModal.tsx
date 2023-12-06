@@ -5,8 +5,8 @@ import { NotInStockApterSub } from "../../../order/types/types";
 import CloseModalIcon from "../../layout/war/CloseIcon";
 import { useAppDispatch } from "../../../store/hooks";
 import { removeItem } from "../cartSlice";
-import axios from "axios";
-import { BASE_URL } from "../../../App";
+import { MUTATION_CANCEL } from "../../../services/apollo/queries";
+import { useMutation } from "@apollo/client";
 
 type CheckExistProps = {
   products: NotInStockApterSub[];
@@ -21,6 +21,8 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
     setProductsC(products);
   }, []);
 
+  const [cancelProduct] = useMutation(MUTATION_CANCEL);
+
   const handleCart = (product: NotInStockApterSub) => {
     const newP = [...productsC];
     const filtered = newP.filter(
@@ -30,16 +32,24 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
     if (!filtered.length) setModal(false);
   };
 
-  const handleCartDeleteItem = (product: NotInStockApterSub) => {
+  const handleCartDeleteItem = async (product: NotInStockApterSub) => {
     dispatch(removeItem(product.product.id));
     const newP = [...productsC];
     const filtered = newP.filter(
       (item) => item.product.id !== product.product.id
     );
-    const cancel = [
-      { productId: product.product.id, requiredQuantity: product.exist },
-    ];
-    axios.post(`${BASE_URL}/products/cancel`, cancel);
+    try {
+      await cancelProduct({
+        variables: {
+          cart: {
+            productId: product.product.id,
+            requiredQuantity: product.exist,
+          },
+        },
+      });
+    } catch (error) {
+      console.error("Error while canceling product:", error);
+    }
     setProductsC(filtered);
     if (!filtered.length) setModal(false);
   };

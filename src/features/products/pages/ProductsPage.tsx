@@ -6,26 +6,27 @@ import { useAppDispatch } from "../../../store/hooks";
 import { setBySale } from "../productsSlice";
 import SpinnerComponent from "../../form/components/WaitingComponent";
 // import useFetch from "../../hooks/useFetch";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 // import { BASE_URL } from "../../../App";
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../../../services/apollo/queries";
 import NotFoundPage from "../../layout/NotFoundPage/NotFoundPage";
+// import useFetch from "../../hooks/useFetch";
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState<ProductsCardInterface[]>([]);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   // const [pending, error, products] = useFetch<ProductsCardInterface[]>(
   //   `${BASE_URL}/products`
   // );
+  const [products, setProducts] = useState<ProductsCardInterface[]>([]);
+  const dispatch = useAppDispatch();
+
   const { loading, error, data } = useQuery(QUERY_PRODUCTS);
 
   useEffect(() => {
     if (data) {
-      console.log(data.getProducts);
-
       setProducts(data.getProducts);
+      console.log(data);
+
       const sale = products
         .filter((item) => item.discountPercentage > 0)
         .map((item) => item.id);
