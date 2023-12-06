@@ -9,14 +9,14 @@ import NotFoundError from "../../router/NotFoundError";
 // import { BASE_URL } from "../../../App";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { QUERY_PRODUCTS } from "../../../services/apollo/queries";
+import { QUERY_PRODUCT } from "../../../services/apollo/queries";
 const ProductDetailsPage = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
   // const [pending, error, product] = useFetch<ProductsCardInterface>(
   //   `${BASE_URL}/products/${productId}`
   // );
-  const { loading, error, data } = useQuery(QUERY_PRODUCTS, {
+  const { loading, error, data } = useQuery(QUERY_PRODUCT, {
     variables: {
       getProductId: productId,
     },
