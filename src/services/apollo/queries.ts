@@ -30,3 +30,8 @@ export const QUERY_PRODUCT = gql`
     }
   }
 `;
+export const MUTATION_CANCEL = gql`
+  mutation CancelProductsInStock($cart: [CheckQuantity!]) {
+    cancelProductsInStock(cart: $cart)
+  }
+`;
