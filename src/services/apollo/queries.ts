@@ -30,3 +30,18 @@ export const QUERY_PRODUCT = gql`
     }
   }
 `;
+export const QUERY_USER_SIGNUP = gql`
+  query RegisterUserInput($getProductId: ID) {
+    getProduct(id: $getProductId) {
+      id
+      name
+      salePrice
+      quantity
+      description
+      category
+      discountPercentage
+      imageUrl
+      imageAlt
+    }
+  }
+`;
