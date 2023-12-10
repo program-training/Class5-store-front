@@ -3,11 +3,12 @@ import { Box, Button, CssBaseline, Typography } from "@mui/material";
 import Missing from "../MissingProduct";
 import { NotInStockApterSub } from "../../../order/types/types";
 import CloseModalIcon from "../../layout/war/CloseIcon";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { removeItem } from "../cartSlice";
 
-import { useMutation } from "@apollo/client";
-import { MUTATION_CANCEL } from "../../../services/apollo/mutations";
+// import { useMutation } from "@apollo/client";
+// import { MUTATION_CANCEL } from "../../../services/apollo/mutations";
+import cancelProductsInOrder from "../services/cancelProductsInOrder";
 
 type CheckExistProps = {
   products: NotInStockApterSub[];
@@ -22,7 +23,8 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
     setProductsC(products);
   }, [products]);
 
-  const [cancelProductsInOrder] = useMutation(MUTATION_CANCEL);
+  // const [cancelProductsInOrder] = useMutation(MUTATION_CANCEL);
+  const { error } = useAppSelector((store) => store.cart);
 
   const handleCart = (product: NotInStockApterSub) => {
     const newP = [...productsC];
@@ -39,18 +41,15 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
     const filtered = newP.filter(
       (item) => item.product.id !== product.product.id
     );
-    try {
-      await cancelProductsInOrder({
-        variables: {
-          cart: {
-            productId: product.product.id,
-            requiredQuantity: product.exist,
-          },
-        },
-      });
-    } catch (error) {
-      console.error("Error while canceling product:", error);
-    }
+
+    dispatch(
+      cancelProductsInOrder({
+        productId: product.product.id,
+        requiredQuantity: product.exist,
+      })
+    );
+    if (error) console.error("Error while canceling product:", error);
+
     setProductsC(filtered);
     if (!filtered.length) setModal(false);
   };

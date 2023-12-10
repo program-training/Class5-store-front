@@ -3,7 +3,7 @@ import { QUERY_PRODUCT } from "../../../services/apollo/queries";
 import client from "../../../apollo/apolloApi";
 
 const getProduct = createAsyncThunk(
-  "products/getProductById",
+  "products/getProduct",
   async (productId: string) => {
     try {
       const { data } = await client.query({

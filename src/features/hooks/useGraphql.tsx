@@ -1,20 +1,20 @@
 import { jwtDecode } from "jwt-decode";
-import { ResultCalculation } from "../form/utils/ResultCalculation";
+// import { ResultCalculation } from "../form/utils/ResultCalculation";
 import {
   convertToCartItem,
   convertToCartItemShipping,
 } from "../form/utils/convertToCartItem";
-import { useMutation } from "@apollo/client";
 import axios from "axios";
 import { BASE_URL } from "../../App";
 import { TokenType } from "../layout/types/token";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { FieldValues } from "react-hook-form";
-import { MUTATION_CHECK_IN_STOCK } from "../../services/apollo/mutations";
+import checkProductsInStock from "../products/services/checkProductsInStock";
 
 const useGraphql = () => {
-  const [checkInStock] = useMutation(MUTATION_CHECK_IN_STOCK);
+  const dispatch = useAppDispatch();
   const cartList = useAppSelector((store) => store.cart.cart);
+  const { checkProducts } = useAppSelector((store) => store.products);
   const onSubmitHelper = async (values: FieldValues, sum: number) => {
     try {
       const { email } = values;
@@ -25,26 +25,26 @@ const useGraphql = () => {
       const decodedToken = jwtDecode(data) as TokenType;
       console.log(decodedToken);
 
-      const newCart = cartList.map((item) => {
+      const checkCart = cartList.map((item) => {
         return {
           productId: item.product.id,
           requiredQuantity: item.requiredQuantity,
         };
       });
-
-      const checkCartRes = await checkInStock({
-        variables: {
-          cart: newCart,
-        },
-      });
+      dispatch(checkProductsInStock(checkCart));
+      const checkCartRes = checkProducts;
+      //   variables: {
+      //     cart: newCart,
+      //   },
+      // });
       console.log(checkCartRes);
 
-      if (checkCartRes.data.checkProductsInStock.notInStock.length) {
-        const updatedNotInStock = ResultCalculation(
-          checkCartRes.data.notInStock
-        );
-        return updatedNotInStock;
-      }
+      // if (checkCartRes.data.checkProductsInStock.notInStock.length) {
+      //   const updatedNotInStock = ResultCalculation(
+      //     checkCartRes.data.notInStock
+      //   );
+      //   return updatedNotInStock;
+      // }
       const converted = convertToCartItem(cartList);
       const deliveryFormToSend = convertToCartItemShipping(
         converted,

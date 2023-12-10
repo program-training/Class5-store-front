@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import type { PayloadAction, SerializedError } from "@reduxjs/toolkit";
 import { productInCart } from "../../order/types/types";
 import {
   handelAddOne,
@@ -8,9 +8,12 @@ import {
   handelSubOne,
 } from "./utils/functions";
 import { ProductsCardInterface } from "../products/interfaces/ProductCardInterface";
+import cancelProductsInOrder from "./services/cancelProductsInOrder";
 
 interface InitialState {
   cart: productInCart[];
+  pending: boolean;
+  error: string | SerializedError;
 }
 interface CertSet {
   id: number;
@@ -19,6 +22,8 @@ interface CertSet {
 
 const initialState: InitialState = {
   cart: [],
+  pending: false,
+  error: "",
 };
 
 export const cartSlice = createSlice({
@@ -67,6 +72,21 @@ export const cartSlice = createSlice({
       localStorage.setItem("cartItem", JSON.stringify(state.cart));
       return state;
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(cancelProductsInOrder.pending, (state) => {
+      state.pending = true;
+      return state;
+    });
+    builder.addCase(cancelProductsInOrder.fulfilled, (state) => {
+      state.pending = false;
+      return state;
+    });
+    builder.addCase(cancelProductsInOrder.rejected, (state, action) => {
+      state.pending = false;
+      state.error = action.error;
+      return state;
+    });
   },
 });
 

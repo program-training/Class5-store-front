@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const MUTATION_CANCEL = gql`
-  mutation CancelProductsInStock($cart: [CheckQuantity!]) {
+  mutation CancelProductsInStock($cart: [ProductToCheck!]) {
     cancelProductsInStock(cart: $cart)
   }
 `;
