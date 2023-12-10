@@ -5,12 +5,12 @@ import {
   convertToCartItemShipping,
 } from "../form/utils/convertToCartItem";
 import { useMutation } from "@apollo/client";
-import { MUTATION_CHECK_IN_STOCK } from "../../services/apollo/queries";
 import axios from "axios";
 import { BASE_URL } from "../../App";
 import { TokenType } from "../layout/types/token";
 import { useAppSelector } from "../../store/hooks";
 import { FieldValues } from "react-hook-form";
+import { MUTATION_CHECK_IN_STOCK } from "../../services/apollo/mutations";
 
 const useGraphql = () => {
   const [checkInStock] = useMutation(MUTATION_CHECK_IN_STOCK);

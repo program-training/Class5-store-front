@@ -5,8 +5,9 @@ import { NotInStockApterSub } from "../../../order/types/types";
 import CloseModalIcon from "../../layout/war/CloseIcon";
 import { useAppDispatch } from "../../../store/hooks";
 import { removeItem } from "../cartSlice";
-import { MUTATION_CANCEL } from "../../../services/apollo/queries";
+
 import { useMutation } from "@apollo/client";
+import { MUTATION_CANCEL } from "../../../services/apollo/mutations";
 
 type CheckExistProps = {
   products: NotInStockApterSub[];
