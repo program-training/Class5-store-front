@@ -16,8 +16,8 @@ export interface loginUser {
 }
 
 export interface SignUpUser {
-  password: string;
-  initialPassword: string;
   email: string;
+  password: string;
+  isAdmin: boolean;
 }
 export default UserInterface;

@@ -13,8 +13,8 @@ const SignUp = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const onSubmit = async (values: FieldValues) => {
-    const { email, password, initialPassword } = values;
-    const value = { email, password, initialPassword };
+    const { email, password } = values;
+    const value = { email, password, isAdmin: false };
     dispatch(SignUpRequest(value));
     navigate("/store/signin");
   };

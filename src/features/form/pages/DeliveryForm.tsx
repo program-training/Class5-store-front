@@ -36,7 +36,7 @@ const DeliveryForm = () => {
     handleSubmit,
     formState: { errors, isDirty, isValid },
   } = useForm(deliveryValidation, onSubmit);
-  const formValues = ["address", "contactNumber", "email", "note"];
+  const formValues = ["address", "contactNumber", "email", "password", "note"];
   return (
     <Box sx={formStyle}>
       <CssBaseline />{" "}
