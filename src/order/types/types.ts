@@ -5,6 +5,11 @@ export type productInCart = {
   sumProductInCart: number;
 };
 
+export type ProductToCheck = {
+  productId: number;
+  requiredQuantity: number;
+};
+
 export type PropProductInCart = {
   productCart: productInCart;
 };

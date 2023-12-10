@@ -6,7 +6,7 @@ import SpinnerComponent from "../../form/components/WaitingComponent";
 import NotFoundError from "../../router/NotFoundError";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import getProduct from "../services/GetProduct";
+import getProduct from "../services/getProduct";
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
