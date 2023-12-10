@@ -70,6 +70,7 @@ const Cart = () => {
                 </React.Fragment>
               ))}
             </Box>
+
             <Checkout sum={sum} setOpen={setOpen} />
           </>
         )}

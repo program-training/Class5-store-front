@@ -4,7 +4,7 @@ import deliveryValidation from "../models/deliveryValidation";
 import DisplayFormContext from "../components/DisplayForm";
 import { Box, Button, CssBaseline, Modal, Typography } from "@mui/material";
 import { formStyle } from "../styles/formStyle";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import CheckExist from "../../cart/components/CheckModal";
 import { styleModalCheck } from "../../layout/war/styleModal";
@@ -17,8 +17,12 @@ const DeliveryForm = () => {
   const { state } = useLocation();
   const [openMissing, setOpenMissing] = useState(false);
   const [listMissing, setListMissing] = useState<NotInStockApterSub[]>([]);
+  const navigate = useNavigate();
 
   const onSubmit = async (values: FieldValues) => {
+    console.log(values);
+    navigate(`/store/home`);
+
     try {
       const result = await onSubmitHelper(values, state);
       if (result instanceof Array) {
@@ -36,7 +40,7 @@ const DeliveryForm = () => {
     handleSubmit,
     formState: { errors, isDirty, isValid },
   } = useForm(deliveryValidation, onSubmit);
-  const formValues = ["address", "contactNumber", "email", "password", "note"];
+  const formValues = ["address", "contactNumber", "email", "note"];
   return (
     <Box sx={formStyle}>
       <CssBaseline />{" "}

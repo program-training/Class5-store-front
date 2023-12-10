@@ -3,6 +3,7 @@ import ProductsPage from "../../products/pages/ProductsPage";
 import Banner from "../../banners/Banner";
 import { useAppSelector } from "../../../store/hooks";
 import { useEffect, useState } from "react";
+import BuyMessage from "../../cart/components/BuyMessage";
 const HomePage = () => {
   const sale = useAppSelector((store) => store.products.productsBySale);
   const [ides, setIdes] = useState<number[]>([]);
@@ -57,6 +58,7 @@ const HomePage = () => {
           <ProductsPage />
         </Box>
       </Container>
+      <BuyMessage />
     </>
   );
 };

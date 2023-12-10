@@ -11,6 +11,7 @@ import { ProductsCardInterface } from "../products/interfaces/ProductCardInterfa
 
 interface InitialState {
   cart: productInCart[];
+  openMessage: boolean;
 }
 interface CertSet {
   id: number;
@@ -19,6 +20,7 @@ interface CertSet {
 
 const initialState: InitialState = {
   cart: [],
+  openMessage: false,
 };
 
 export const cartSlice = createSlice({
@@ -67,11 +69,15 @@ export const cartSlice = createSlice({
       localStorage.setItem("cartItem", JSON.stringify(state.cart));
       return state;
     },
+    setOpen(state, action: PayloadAction<boolean>) {
+      state.openMessage = action.payload;
+    },
   },
 });
 
 export const {
   pullFromLocalStorage,
+  setOpen,
   addToCart,
   addOne,
   subOne,
