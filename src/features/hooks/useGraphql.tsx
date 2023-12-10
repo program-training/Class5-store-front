@@ -1,5 +1,5 @@
 import { jwtDecode } from "jwt-decode";
-// import { ResultCalculation } from "../form/utils/ResultCalculation";
+import { ResultCalculation } from "../form/utils/ResultCalculation";
 import {
   convertToCartItem,
   convertToCartItemShipping,
@@ -33,18 +33,12 @@ const useGraphql = () => {
       });
       dispatch(checkProductsInStock(checkCart));
       const checkCartRes = checkProducts;
-      //   variables: {
-      //     cart: newCart,
-      //   },
-      // });
       console.log(checkCartRes);
 
-      // if (checkCartRes.data.checkProductsInStock.notInStock.length) {
-      //   const updatedNotInStock = ResultCalculation(
-      //     checkCartRes.data.notInStock
-      //   );
-      //   return updatedNotInStock;
-      // }
+      if (checkCartRes?.notInStock.length) {
+        const updatedNotInStock = ResultCalculation(checkCartRes.notInStock);
+        return updatedNotInStock;
+      }
       const converted = convertToCartItem(cartList);
       const deliveryFormToSend = convertToCartItemShipping(
         converted,

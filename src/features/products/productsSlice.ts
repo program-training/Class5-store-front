@@ -4,7 +4,19 @@ import getAllProducts from "./services/getAllProducts";
 import { ProductsCardInterface } from "./interfaces/ProductCardInterface";
 import getProduct from "./services/getProduct";
 import checkProductsInStock from "./services/checkProductsInStock";
-import { ProductToCheck } from "../../order/types/types";
+
+type InStock = {
+  productId: number;
+  requiredQuantity: number;
+};
+type NotInStock = {
+  product: ProductsCardInterface;
+  requiredQuantity: number;
+};
+type Response = {
+  inStock: InStock[];
+  notInStock: NotInStock[];
+};
 
 interface InitialState {
   productsBySale: number[];
@@ -12,7 +24,7 @@ interface InitialState {
   error: string | SerializedError;
   products: ProductsCardInterface[];
   product: ProductsCardInterface | null;
-  checkProducts: ProductToCheck[];
+  checkProducts: Response | null;
 }
 
 const initialState: InitialState = {
@@ -21,7 +33,7 @@ const initialState: InitialState = {
   error: "",
   products: [],
   product: null,
-  checkProducts: [],
+  checkProducts: null,
 };
 
 export const productsSlice = createSlice({
