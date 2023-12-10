@@ -4,7 +4,7 @@ import ProductDetails from "../components/ProductDetails";
 import { Box, Typography } from "@mui/material";
 import { OrdersInterface } from "../../../order/interfaces/OrdersInterfaces";
 import { useQuery } from "@apollo/client";
-import { QUERY_ORDERS } from "../../services/apollo/queries";
+import { QUERY_ORDERS } from "../../../services/apollo/queries";
 
 const OrderDetails = () => {
   const { userId } = useParams();
