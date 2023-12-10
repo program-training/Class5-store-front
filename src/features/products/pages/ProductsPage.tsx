@@ -4,18 +4,10 @@ import { Box, CssBaseline, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setBySale } from "../productsSlice";
 import SpinnerComponent from "../../form/components/WaitingComponent";
-// import useFetch from "../../hooks/useFetch";
-// import { useNavigate } from "react-router";
-// import { BASE_URL } from "../../../App";
 import NotFoundPage from "../../layout/NotFoundPage/NotFoundPage";
 import getAllProducts from "../services/getAllProducts";
-// import useFetch from "../../hooks/useFetch";
 
 const ProductsPage = () => {
-  // const [pending, error, products] = useFetch<ProductsCardInterface[]>(
-  //   `${BASE_URL}/products`
-  // );
-  // const [products, setProducts] = useState<ProductsCardInterface[]>([]);
   const dispatch = useAppDispatch();
   const { error, pending, products } = useAppSelector(
     (store) => store.products

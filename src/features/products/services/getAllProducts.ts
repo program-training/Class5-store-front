@@ -6,7 +6,6 @@ const getAllProducts = createAsyncThunk("products/getAllProducts", async () => {
   try {
     const { data } = await client.query({ query: QUERY_PRODUCTS });
     console.log("Success");
-    console.log(data);
     return data.getProducts;
   } catch (error) {
     console.error("Error connecting to the products server");

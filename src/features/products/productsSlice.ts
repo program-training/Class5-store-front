@@ -2,12 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction, SerializedError } from "@reduxjs/toolkit";
 import getAllProducts from "./services/getAllProducts";
 import { ProductsCardInterface } from "./interfaces/ProductCardInterface";
+import getProduct from "./services/GetProduct";
 
 interface InitialState {
   productsBySale: number[];
   pending: boolean;
   error: string | SerializedError;
   products: ProductsCardInterface[];
+  product: ProductsCardInterface | null;
 }
 
 const initialState: InitialState = {
@@ -15,6 +17,7 @@ const initialState: InitialState = {
   pending: false,
   error: "",
   products: [],
+  product: null,
 };
 
 export const productsSlice = createSlice({
@@ -36,6 +39,20 @@ export const productsSlice = createSlice({
       return state;
     });
     builder.addCase(getAllProducts.rejected, (state, action) => {
+      state.pending = false;
+      state.error = action.error;
+      return state;
+    });
+    builder.addCase(getProduct.pending, (state) => {
+      state.pending = true;
+      return state;
+    });
+    builder.addCase(getProduct.fulfilled, (state, action) => {
+      state.pending = false;
+      state.product = action.payload;
+      return state;
+    });
+    builder.addCase(getProduct.rejected, (state, action) => {
       state.pending = false;
       state.error = action.error;
       return state;
