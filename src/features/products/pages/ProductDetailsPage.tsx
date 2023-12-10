@@ -10,6 +10,7 @@ import NotFoundError from "../../router/NotFoundError";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { QUERY_PRODUCT } from "../../../services/apollo/queries";
+
 const ProductDetailsPage = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const ProductDetailsPage = () => {
   if (loading) return <SpinnerComponent />;
   if (!product) return <NotFoundError message="product in not found" />;
   if (error) navigate("/store/notFound");
+
   return (
     <>
       <CssBaseline />
