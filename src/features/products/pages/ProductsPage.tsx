@@ -1,38 +1,37 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ProductCard } from "../components/ProductCard";
 import { Box, CssBaseline, Typography } from "@mui/material";
-import { ProductsCardInterface } from "../interfaces/ProductCardInterface";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setBySale } from "../productsSlice";
 import SpinnerComponent from "../../form/components/WaitingComponent";
 // import useFetch from "../../hooks/useFetch";
 // import { useNavigate } from "react-router";
 // import { BASE_URL } from "../../../App";
-import { useQuery } from "@apollo/client";
-import { QUERY_PRODUCTS } from "../../../services/apollo/queries";
 import NotFoundPage from "../../layout/NotFoundPage/NotFoundPage";
+import getAllProducts from "../services/getAllProducts";
 // import useFetch from "../../hooks/useFetch";
 
 const ProductsPage = () => {
   // const [pending, error, products] = useFetch<ProductsCardInterface[]>(
   //   `${BASE_URL}/products`
   // );
-  const [products, setProducts] = useState<ProductsCardInterface[]>([]);
+  // const [products, setProducts] = useState<ProductsCardInterface[]>([]);
   const dispatch = useAppDispatch();
-
-  const { loading, error, data } = useQuery(QUERY_PRODUCTS);
+  const { error, pending, products } = useAppSelector(
+    (store) => store.products
+  );
 
   useEffect(() => {
-    if (data) {
-      setProducts(data.getProducts);
+    dispatch(getAllProducts());
+    if (products) {
       const sale = products
         .filter((item) => item.discountPercentage > 0)
         .map((item) => item.id);
       dispatch(setBySale(sale));
     }
-  }, [data]);
+  }, [products]);
 
-  if (loading) return <SpinnerComponent />;
+  if (pending) return <SpinnerComponent />;
   if (error) return <NotFoundPage />;
   return (
     <>
