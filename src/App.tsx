@@ -10,9 +10,12 @@ import { pullFromLocalStorage } from "./features/cart/cartSlice";
 export const BASE_URL = "http://localhost:3000";
 export const BNR_URL = "https://sparkly-souffle-e37dff.netlify.app";
 
+<<<<<<< HEAD
 // export const BASE_URL = "http://localhost:3000";
 // export const BNR_URL = import meta.env.VITE_BNR_URL || "https://sparkly-souffle-e37dff.netlify.app";
 
+=======
+>>>>>>> 11eed75bb1a796e8105fcb3659867c7b377836c0
 const App = () => {
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
   const dispatch = useAppDispatch();
