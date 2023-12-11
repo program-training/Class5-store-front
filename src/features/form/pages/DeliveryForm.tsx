@@ -20,7 +20,7 @@ const DeliveryForm = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (values: FieldValues) => {
-    console.log(values);
+    // console.log(values);
     navigate(`/store/home`);
 
     try {
@@ -28,8 +28,9 @@ const DeliveryForm = () => {
       if (result instanceof Array) {
         setListMissing(result);
         setOpenMissing(true);
+        // console.log("d");
       } else if (result instanceof Object) {
-        console.log("success");
+        // console.log("success");
       }
     } catch (error) {
       console.log(error);

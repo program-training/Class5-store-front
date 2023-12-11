@@ -1,6 +1,5 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import WaitingComponent from "../WaitingComponent";
-import { formStyle } from "../../styles/formStyle";
 describe("waiting component", () => {
   it("renders correctly", () => {
     render(<WaitingComponent />);

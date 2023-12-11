@@ -10,7 +10,8 @@ import { BASE_URL } from "../../App";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { FieldValues } from "react-hook-form";
 import checkProductsInStock from "../products/services/checkProductsInStock";
-import { useEffect } from "react";
+import { setOpen as setOpenMessage } from "../cart/cartSlice";
+// import { useEffect } from "react";
 
 const useGraphql = () => {
   const dispatch = useAppDispatch();
@@ -36,9 +37,10 @@ const useGraphql = () => {
         };
       });
       dispatch(checkProductsInStock(checkCart));
+      dispatch(setOpenMessage(true));
 
       const checkCartRes = checkProducts;
-      console.log(checkCartRes);
+      // console.log(checkCartRes);
 
       if (checkCartRes?.notInStock.length) {
         const updatedNotInStock = ResultCalculation(checkCartRes.notInStock);
@@ -51,7 +53,7 @@ const useGraphql = () => {
         sum
         // decodedToken._id
       );
-      console.log(deliveryFormToSend);
+      // console.log(deliveryFormToSend);
 
       const order = await axios.post(`${BASE_URL}/orders`, deliveryFormToSend);
       return order.data;

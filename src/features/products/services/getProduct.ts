@@ -12,7 +12,6 @@ const getProduct = createAsyncThunk(
           getProductId: productId,
         },
       });
-      console.log("Success");
       return data.getProduct;
     } catch (error) {
       console.error("Error connecting to the product server");

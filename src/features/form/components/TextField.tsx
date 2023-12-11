@@ -20,6 +20,7 @@ const ControlledTextField: FC<TextFieldsProps> = ({
       <Controller
         name={name}
         control={control}
+        defaultValue=""
         render={({ field }) => (
           <TextField
             {...field}
