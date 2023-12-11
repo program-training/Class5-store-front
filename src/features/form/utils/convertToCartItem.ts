@@ -19,13 +19,13 @@ export const convertToCartItem = (
 export const convertToCartItemShipping = (
   cart: CartItemFromClientInterface[],
   details: FieldValues,
-  sum: number,
-  userId: string
+  sum: number
+  // userId: string
 ) => {
   const shippingDetails = {
     address: details.address,
     contactNumber: details.contactNumber,
-    userId: userId,
+    // userId: userId,
     orderType: "standard",
   };
   const orderFromClint = {

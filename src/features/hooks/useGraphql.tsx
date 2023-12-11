@@ -1,4 +1,4 @@
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 import { ResultCalculation } from "../form/utils/ResultCalculation";
 import {
   convertToCartItem,
@@ -6,24 +6,28 @@ import {
 } from "../form/utils/convertToCartItem";
 import axios from "axios";
 import { BASE_URL } from "../../App";
-import { TokenType } from "../layout/types/token";
+// import { TokenType } from "../layout/types/token";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { FieldValues } from "react-hook-form";
 import checkProductsInStock from "../products/services/checkProductsInStock";
+import { useEffect } from "react";
 
 const useGraphql = () => {
   const dispatch = useAppDispatch();
   const cartList = useAppSelector((store) => store.cart.cart);
   const { checkProducts } = useAppSelector((store) => store.products);
+  // useEffect(() => {
+  //   const checkCartRes = checkProducts;
+  // }, [checkProducts]);
   const onSubmitHelper = async (values: FieldValues, sum: number) => {
     try {
-      const { email } = values;
-      const { data } = await axios.post(`${BASE_URL}/users/user`, {
-        email,
-      });
-      localStorage.setItem("token", data);
-      const decodedToken = jwtDecode(data) as TokenType;
-      console.log(decodedToken);
+      // const { email } = values;
+      // const { data } = await axios.post(`${BASE_URL}/users/user`, {
+      //   email,
+      // });
+      // localStorage.setItem("token", data);
+      // const decodedToken = jwtDecode(data) as TokenType;
+      // console.log(decodedToken);
 
       const checkCart = cartList.map((item) => {
         return {
@@ -32,6 +36,7 @@ const useGraphql = () => {
         };
       });
       dispatch(checkProductsInStock(checkCart));
+
       const checkCartRes = checkProducts;
       console.log(checkCartRes);
 
@@ -43,8 +48,8 @@ const useGraphql = () => {
       const deliveryFormToSend = convertToCartItemShipping(
         converted,
         values,
-        sum,
-        decodedToken._id
+        sum
+        // decodedToken._id
       );
       console.log(deliveryFormToSend);
 
