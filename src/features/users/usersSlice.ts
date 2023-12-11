@@ -27,7 +27,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(SignInRequest.fulfilled, (state, { payload }) => {
       state.pending = false;
-      setItem("token", payload);
+      setItem("token", payload.SignInUser.token);
       state.user = getUser();
       return state;
     }),
