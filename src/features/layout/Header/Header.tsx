@@ -11,11 +11,21 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setThemeMode } from "../../themes/themeModeSlice";
 import ShowOrdersHistory from "../HeaderLoggedIn/ShowOrders";
+import { jwtDecode } from "jwt-decode";
+import { TokenType } from "../types/token";
+import HeaderLogOutButton from "./HeaderLogOutButton ";
 
 const Header = () => {
   const navigate = useNavigate();
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
+  const token = localStorage.getItem("token");
   const dispatch = useAppDispatch();
+  let decodedToken: TokenType | boolean = false;
+  if (token) {
+    decodedToken = jwtDecode(token) as TokenType;
+  } else {
+    decodedToken = false;
+  }
   return (
     <AppBar position="fixed" sx={{ width: "100%" }}>
       <Container maxWidth="xl">
@@ -58,7 +68,7 @@ const Header = () => {
             }}
           ></Box>
           <Box sx={{ marginLeft: "auto", display: "flex" }}>
-            <HeaderSignInButton />
+            {!decodedToken ? <HeaderSignInButton /> : <HeaderLogOutButton />}
             <IconButton
               sx={{ ml: 1 }}
               onClick={() => {
