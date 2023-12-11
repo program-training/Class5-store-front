@@ -8,6 +8,13 @@ export const MUTATIONS_USER_SIGNUP = gql`
     }
   }
 `;
+export const MUTATIONS_USER_SIGNIN = gql`
+  mutation SignInUser($input: LoginUserInput) {
+    SignInUser(input: $input) {
+      token
+    }
+  }
+`;
 
 export const MUTATION_CANCEL = gql`
   mutation CancelProductsInStock($cart: [CheckQuantity!]) {
