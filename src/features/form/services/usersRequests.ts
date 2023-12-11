@@ -1,18 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { SignUpUser, loginUser } from "../../users/interfaces/UserInterface";
-import axios from "axios";
-import { BASE_URL } from "../../../App";
-import { MUTATIONS_USER_SIGNUP } from "../../../services/apollo/mutations";
+import {
+  MUTATIONS_USER_SIGNIN,
+  MUTATIONS_USER_SIGNUP,
+} from "../../../services/apollo/mutations";
 import client from "../../../apollo/apolloApi";
 
 export const SignInRequest = createAsyncThunk(
   "user/SignInRequest",
   async (userFromClient: loginUser, apiThunk) => {
     try {
-      const { data } = await axios.post(
-        `${BASE_URL}/users/signIn`,
-        userFromClient
-      );
+      const { data } = await client.mutate({
+        mutation: MUTATIONS_USER_SIGNIN,
+        variables: { input: userFromClient },
+      });
+      console.log(data.SignInUser);
+
       return data;
     } catch (error) {
       return apiThunk.rejectWithValue(error);
