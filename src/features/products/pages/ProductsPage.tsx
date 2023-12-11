@@ -49,7 +49,7 @@ const ProductsPage = () => {
           justifyContent: "center",
         }}
       >
-        {products.length &&
+        {products?.length &&
           products.map((product, i) => (
             <Box
               key={`${product.name}-${i}`}
