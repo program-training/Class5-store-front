@@ -9,6 +9,7 @@ type CheckoutProps = {
   sum: number;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
 const Checkout: FC<CheckoutProps> = ({ sum, setOpen }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
