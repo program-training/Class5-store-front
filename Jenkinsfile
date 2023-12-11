@@ -12,7 +12,7 @@ pipeline {
         stage('client build') {
             steps {
                 script {
-                        sh 'echo "Building..."'
+                        sh 'echo "Buildingggg..."'
                         sh 'docker build -t eslint-front-store-devops .'
                 }
             }
