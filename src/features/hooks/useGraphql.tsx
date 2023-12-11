@@ -16,9 +16,9 @@ const useGraphql = () => {
   const dispatch = useAppDispatch();
   const cartList = useAppSelector((store) => store.cart.cart);
   const { checkProducts } = useAppSelector((store) => store.products);
-  // useEffect(() => {
-  //   const checkCartRes = checkProducts;
-  // }, [checkProducts]);
+  useEffect(() => {
+    const checkCartRes = checkProducts;
+  }, [checkProducts]);
   const onSubmitHelper = async (values: FieldValues, sum: number) => {
     try {
       // const { email } = values;
