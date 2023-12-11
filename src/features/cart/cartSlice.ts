@@ -74,6 +74,9 @@ export const cartSlice = createSlice({
       localStorage.setItem("cartItem", JSON.stringify(state.cart));
       return state;
     },
+    setOpen(state, action: PayloadAction<boolean>) {
+      state.openMessage = action.payload;
+    },
   },
   extraReducers(builder) {
     builder.addCase(cancelProductsInOrder.pending, (state) => {
