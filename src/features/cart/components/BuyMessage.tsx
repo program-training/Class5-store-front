@@ -9,16 +9,14 @@ const BuyMessage = () => {
     dispatch(setOpen(false));
   };
   return (
-    //     <>
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle id="alert-dialog-title">
-        {"your purchase has been made successfully!"}
+        {"Your purchase has been made successfully!"}
       </DialogTitle>
       <DialogActions>
         <Button onClick={handleClose}>ok</Button>
       </DialogActions>
     </Dialog>
-    // <>
   );
 };
 export default BuyMessage;

@@ -40,8 +40,9 @@ export const userSlice = createSlice({
       state.pending = true;
       return state;
     });
-    builder.addCase(SignUpRequest.fulfilled, (state) => {
+    builder.addCase(SignUpRequest.fulfilled, (state, action) => {
       state.pending = false;
+      state.user = action.payload;
       return state;
     });
     builder.addCase(SignUpRequest.rejected, (state, { error }) => {
