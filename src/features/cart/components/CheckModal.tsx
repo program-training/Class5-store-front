@@ -5,9 +5,6 @@ import { NotInStockApterSub } from "../../../order/types/types";
 import CloseModalIcon from "../../layout/war/CloseIcon";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { removeItem } from "../cartSlice";
-
-// import { useMutation } from "@apollo/client";
-// import { MUTATION_CANCEL } from "../../../services/apollo/mutations";
 import cancelProductsInOrder from "../services/cancelProductsInOrder";
 
 type CheckExistProps = {
@@ -23,7 +20,6 @@ const CheckExist: FC<CheckExistProps> = ({ products, setModal }) => {
     setProductsC(products);
   }, [products]);
 
-  // const [cancelProductsInOrder] = useMutation(MUTATION_CANCEL);
   const { error } = useAppSelector((store) => store.cart);
 
   const handleCart = (product: NotInStockApterSub) => {
