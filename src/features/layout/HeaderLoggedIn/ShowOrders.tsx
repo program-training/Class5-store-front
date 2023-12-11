@@ -22,7 +22,7 @@ const ShowOrdersHistory = () => {
           onClick={() => navigate(`/store/order-details/${userId}`)}
           sx={{ ml: "5px", mr: "5px" }}
         >
-          show order history
+          Show order history
         </Button>
       </>
     </Box>
