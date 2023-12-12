@@ -11,11 +11,11 @@ pipeline {
                 }
             }
         }
-        stage('client build') {
+        stage('client lint') {
             steps {
                 script {
-                        sh 'echo "Buildingsssss..."'
-                        sh 'docker build -t eslint-front-store-main .'
+                        sh 'echo "linting.."'
+                        sh 'npm run lint'
                 }
             }
         }
