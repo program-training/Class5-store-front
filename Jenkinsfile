@@ -11,16 +11,22 @@ pipeline {
                 }
             }
         }
-        stage('client lint') {
+        stage('Fetch ESLint Config') {
             steps {
                 script {
-                        sh 'echo "linting.."'
-                        sh 'eslint --init'
-                        sh 'npm run lint'
+                    sh 'git fetch origin main:refs/remotes/origin/main'
+                    sh 'git checkout origin/main -- .eslintrc.cjs'
                 }
             }
         }
-        
+        stage('Client Lint') {
+            steps {
+                script {
+                    echo 'Linting...'
+                    sh 'npm run lint'
+                }
+            }
+        }
     }
     post {
         success {
@@ -29,7 +35,7 @@ pipeline {
                 setGitHubPullRequestStatus(
                     state: 'SUCCESS',
                     context: 'ESLINT_CLASS_5',
-                    message: 'Build passed',
+                    message: 'Linting passed',
                 )
             }
         }
@@ -39,7 +45,7 @@ pipeline {
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
                     context: 'ESLINT_CLASS_5',
-                    message: 'Build failed  run npm run build to see errors',
+                    message: 'Linting failed. Check ESLint output for details.',
                 )
             }
         }
