@@ -11,6 +11,15 @@ pipeline {
                 }
             }
         }
+        stage('Debugging') {
+            steps {
+                script {
+                    // Debugging information
+                    sh 'ls -al'  // List files in the current directory
+                    sh 'cat .eslintrc.cjs'  // Display the content of .eslintrc.cjs
+                }
+            }
+        }
         stage('Fetch ESLint Config') {
             steps {
                 script {
