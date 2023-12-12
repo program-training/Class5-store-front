@@ -15,6 +15,28 @@ export const MUTATIONS_USER_SIGNIN = gql`
     }
   }
 `;
+export const REGISTER_ORDER = gql`
+  mutation RegisterOrder($order: OrderFromClient!) {
+    registerOrder(order: $order) {
+      _id
+      cartItems {
+        description
+        price
+        name
+        productId
+        quantity
+      }
+      orderTime
+      price
+      shippingDetails {
+        address
+        contactNumber
+        orderType
+      }
+      status
+    }
+  }
+`;
 
 export const MUTATION_CANCEL = gql`
   mutation CancelProductsInStock($cart: [ProductToCheck!]) {
