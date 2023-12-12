@@ -10,22 +10,26 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setThemeMode } from "../../themes/themeModeSlice";
-import ShowOrdersHistory from "../HeaderLoggedIn/ShowOrders";
+import ShowOrdersHistory from "../HeaderLoggedIn/ShowOrdersHistory";
+import HeaderLogOutButton from "./HeaderLogOutButton ";
+import { setDecodedToken } from "../../token/tokenSlice";
 import { jwtDecode } from "jwt-decode";
 import { TokenType } from "../types/token";
-import HeaderLogOutButton from "./HeaderLogOutButton ";
+import { useEffect } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
-  const token = localStorage.getItem("token");
+  const { decodedToken } = useAppSelector((store) => store.token);
+  const { token } = useAppSelector((store) => store.users);
   const dispatch = useAppDispatch();
-  let decodedToken: TokenType | boolean = false;
-  if (token) {
-    decodedToken = jwtDecode(token) as TokenType;
-  } else {
-    decodedToken = false;
-  }
+  useEffect(() => {
+    if (token) {
+      dispatch(setDecodedToken(jwtDecode(token) as TokenType));
+    } else {
+      dispatch(setDecodedToken(null));
+    }
+  }, [token]);
   return (
     <AppBar position="fixed" sx={{ width: "100%" }}>
       <Container maxWidth="xl">
@@ -40,7 +44,7 @@ const Header = () => {
                 mr: 1,
               }}
             />
-            <ShowOrdersHistory />
+            {decodedToken && <ShowOrdersHistory />}
             <Typography
               variant="h6"
               noWrap
@@ -68,7 +72,11 @@ const Header = () => {
             }}
           ></Box>
           <Box sx={{ marginLeft: "auto", display: "flex" }}>
-            {!decodedToken ? <HeaderSignInButton /> : <HeaderLogOutButton />}
+            {decodedToken === null ? (
+              <HeaderSignInButton />
+            ) : (
+              <HeaderLogOutButton />
+            )}
             <IconButton
               sx={{ ml: 1 }}
               onClick={() => {

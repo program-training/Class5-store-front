@@ -14,7 +14,7 @@ export const SignInRequest = createAsyncThunk(
         mutation: MUTATIONS_USER_SIGNIN,
         variables: { input: userFromClient },
       });
-      console.log(data.SignInUser);
+      console.log("insignin", data.SignInUser);
 
       return data;
     } catch (error) {

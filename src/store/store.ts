@@ -4,6 +4,7 @@ import usersSlice from "../features/users/usersSlice";
 import cartSlice from "../features/cart/cartSlice";
 import themeModeSlice from "../features/themes/themeModeSlice";
 import axiosInterceptors from "./services/axiosInterceptors";
+import tokenSlice from "../features/token/tokenSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     users: usersSlice,
     cart: cartSlice,
     themeMode: themeModeSlice,
+    token: tokenSlice,
   },
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware({ serializableCheck: false }).concat(
