@@ -11,15 +11,6 @@ pipeline {
                 }
             }
         }
-        stage('Debugging') {
-            steps {
-                script {
-                    // Debugging information
-                    sh 'ls -al'  // List files in the current directory
-                    sh 'cat .eslintrc.cjs'  // Display the content of .eslintrc.cjs
-                }
-            }
-        }
         stage('Fetch ESLint Config') {
             steps {
                 script {
@@ -35,8 +26,11 @@ pipeline {
         stage('Client Lint') {
             steps {
                 script {
+                    // Set ESLint configuration file path
+                    env.ESLINT_CONFIG_PATH = '.eslintrc.cjs'
+                    
                     echo 'Linting...'
-                    sh 'npm run lint'
+                    sh 'npm run lint -- --config $ESLINT_CONFIG_PATH'
                 }
             }
         }
