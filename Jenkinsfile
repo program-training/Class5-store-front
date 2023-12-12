@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // Clean workspace before copying
-                    sh 'rm -rf .eslintrc.cjs'
+                    deleteDir()
                     
                     // Fetch the .eslintrc.cjs file from the main branch
                     sh 'git fetch origin main:refs/remotes/origin/main'
@@ -33,8 +33,9 @@ pipeline {
             steps {
                 script {
                     echo 'Linting...'
-                    sh 'npm install'  // Install npm dependencies
-                    sh 'npm run lint -- --config $ESLINT_CONFIG_PATH'
+                    // Run npm install and linting inside a Node.js Docker container
+                    sh 'docker run -v $PWD:/app -w /app node:14 npm install'
+                    sh 'docker run -v $PWD:/app -w /app node:14 npm run lint -- --config $ESLINT_CONFIG_PATH'
                 }
             }
         }
