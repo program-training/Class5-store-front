@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        ESLINT_CONFIG_PATH = '.eslintrc.cjs'
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -20,16 +23,17 @@ pipeline {
                     // Fetch the .eslintrc.cjs file from the main branch
                     sh 'git fetch origin main:refs/remotes/origin/main'
                     sh 'git checkout origin/main -- .eslintrc.cjs'
+                    
+                    // Copy the configuration file to the root directory
+                    sh 'cp .eslintrc.cjs .'
                 }
             }
         }
         stage('Client Lint') {
             steps {
                 script {
-                    // Set ESLint configuration file path
-                    env.ESLINT_CONFIG_PATH = '.eslintrc.cjs'
-                    
                     echo 'Linting...'
+                    sh 'npm install'  // Install npm dependencies
                     sh 'npm run lint -- --config $ESLINT_CONFIG_PATH'
                 }
             }
