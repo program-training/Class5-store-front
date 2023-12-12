@@ -14,7 +14,7 @@ pipeline {
         stage('client lint') {
             steps {
                 script {
-                        sh 'echo "linting.."'
+                        sh 'echo "lintingkkkk.."'
                         sh 'npm run lint'
                 }
             }
