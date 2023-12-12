@@ -15,6 +15,7 @@ pipeline {
             steps {
                 script {
                         sh 'echo "linting.."'
+                        sh 'eslint --init'
                         sh 'npm run lint'
                 }
             }
