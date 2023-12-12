@@ -23,7 +23,7 @@ pipeline {
     post {
         success {
             script {
-                echo 'Linting passed. You may now merge.'
+                echo 'Linting passeeed. You may now merge.'
                 setGitHubPullRequestStatus(
                     state: 'SUCCESS',
                     context: 'ESLINT_CLASS_5',
