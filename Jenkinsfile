@@ -32,7 +32,7 @@ pipeline {
         stage('Client Lint') {
             steps {
                 script {
-                    echo 'Linting...'
+                    echo 'Lintingggg...'
                     // Run npm install and linting inside a Node.js Docker container
                     sh 'docker run -v $PWD:/app -w /app node:14 npm install'
                     sh 'docker run -v $PWD:/app -w /app node:14 npm run lint -- --config $ESLINT_CONFIG_PATH'
