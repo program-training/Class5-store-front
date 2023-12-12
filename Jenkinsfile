@@ -4,8 +4,10 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH
-                    checkout([$class: 'GitSCM', branches: [[name: "*/${pullRequestBranch}"]], userRemoteConfigs: [[url: 'https://github.com/program-training/Class5-store-front.git']]])
+                    def pullRequestBranch = env.GITHUB_PR_SOURCE_BRANCH ?: 'main'
+                    checkout([$class: 'GitSCM', 
+                              branches: [[name: "*/${pullRequestBranch}"]],
+                              userRemoteConfigs: [[url: 'https://github.com/program-training/Class5-store-front.git']]])
                 }
             }
         }
