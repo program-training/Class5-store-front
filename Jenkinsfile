@@ -14,6 +14,10 @@ pipeline {
         stage('Fetch ESLint Config') {
             steps {
                 script {
+                    // Clean workspace before copying
+                    sh 'rm -rf .eslintrc.cjs'
+                    
+                    // Fetch the .eslintrc.cjs file from the main branch
                     sh 'git fetch origin main:refs/remotes/origin/main'
                     sh 'git checkout origin/main -- .eslintrc.cjs'
                 }
