@@ -27,7 +27,7 @@ pipeline {
                 echo 'Linting passeeed. You may now merge.'
                 setGitHubPullRequestStatus(
                     state: 'SUCCESS',
-                    context: 'ESLINT_CLASS_5',
+                    context: 'ESLINT_CLASS_5_STORE_FRONT',
                     message: 'lint passed',
                 )
             }
@@ -37,7 +37,7 @@ pipeline {
                 echo 'Pipeline failed. Blocking pull request merge.'
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
-                    context: 'ESLINT_CLASS_5',
+                    context: 'ESLINT_CLASS_5_STORE_FRONT',
                     message: 'lint failed. Run npm run build to see errors.',
                 )
             }
