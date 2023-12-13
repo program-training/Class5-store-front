@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     echo 'Lintingjj.jhjj..'
-                    sh 'npm i'
+                    sh 'npm i  eslint eslint-plugin-react-hooks eslint-plugin-react-refresh'
                     sh 'npm run lint'
                 }
             }
