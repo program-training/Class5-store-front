@@ -11,7 +11,7 @@ pipeline {
                 }
             }
         }
-        stage('Client Lint') {
+        stage('Lint') {
             steps {
                 script {
                     echo 'Linting...'
@@ -27,7 +27,7 @@ pipeline {
                 setGitHubPullRequestStatus(
                     state: 'SUCCESS',
                     context: 'ESLINT_CLASS_5',
-                    message: 'Build passed',
+                    message: 'lint passed',
                 )
             }
         }
@@ -37,7 +37,7 @@ pipeline {
                 setGitHubPullRequestStatus(
                     state: 'FAILURE',
                     context: 'ESLINT_CLASS_5',
-                    message: 'Build failed. Run npm run build to see errors.',
+                    message: 'lint failed. Run npm run build to see errors.',
                 )
             }
         }
