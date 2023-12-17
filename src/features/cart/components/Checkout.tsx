@@ -2,8 +2,8 @@ import { Button } from "@mui/material";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { useNavigate } from "react-router";
 import { FC } from "react";
-import { useAppDispatch } from "../../../store/hooks";
-import { setOpen as setOpenMessage } from "../cartSlice";
+// import { useAppDispatch } from "../../../store/hooks";
+// import { setOpen as setOpenMessage } from "../cartSlice";
 
 type CheckoutProps = {
   sum: number;
@@ -11,12 +11,12 @@ type CheckoutProps = {
 };
 
 const Checkout: FC<CheckoutProps> = ({ sum, setOpen }) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handelClick = () => {
     setOpen(false);
     navigate(`/store/delivery`, { state: sum });
-    dispatch(setOpenMessage(true));
+    // dispatch(setOpenMessage(true));
   };
 
   return (
