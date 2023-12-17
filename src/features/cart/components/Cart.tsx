@@ -2,7 +2,7 @@ import {
   SwipeableDrawer,
   Button,
   Box,
-  Typography,
+  // Typography,
   Badge,
   List,
   Divider,
@@ -56,11 +56,14 @@ const Cart = () => {
         {!cart.length ? (
           <EmptyCart />
         ) : (
-          <>
-            <Box sx={{ width: 260 }} role="presentation">
-              <Typography variant="h5">
-                Total cost: {sum.toFixed(2)}$
-              </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <Box sx={{ width: 350 }} role="presentation">
               {localCart.map((productOnCart) => (
                 <React.Fragment key={productOnCart.product.name}>
                   <List>
@@ -70,9 +73,10 @@ const Cart = () => {
                 </React.Fragment>
               ))}
             </Box>
-
-            <Checkout sum={sum} setOpen={setOpen} />
-          </>
+            <Box sx={{ padding: 3, paddingTop: 7, width: 350 }}>
+              <Checkout sum={sum} setOpen={setOpen} />
+            </Box>
+          </Box>
         )}
       </SwipeableDrawer>
     </Box>

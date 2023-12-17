@@ -1,6 +1,6 @@
 import { Box, Container, CssBaseline } from "@mui/material";
 import ProductsPage from "../../products/pages/ProductsPage";
-import Banner from "../../banners/Banner";
+// import Banner from "../../banners/Banner";
 import { useAppSelector } from "../../../store/hooks";
 import { useEffect, useState } from "react";
 import BuyMessage from "../../cart/components/BuyMessage";
