@@ -10,7 +10,8 @@ import CheckExist from "../../cart/components/CheckModal";
 import { styleModalCheck } from "../../layout/war/styleModal";
 import { NotInStockApterSub } from "../../../order/types/types";
 import useGraphql from "../../hooks/useGraphql";
-
+import { useAppDispatch } from "../../../store/hooks";
+import { setOpen } from "../../cart/cartSlice";
 const DeliveryForm = () => {
   // const dispatch = useAppDispatch();
   const { onSubmitHelper } = useGraphql();
@@ -18,6 +19,8 @@ const DeliveryForm = () => {
   const [openMissing, setOpenMissing] = useState(false);
   const [listMissing, setListMissing] = useState<NotInStockApterSub[]>([]);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  dispatch(setOpen(true));
 
   const onSubmit = async (values: FieldValues) => {
     console.log(values);
@@ -25,6 +28,8 @@ const DeliveryForm = () => {
 
     try {
       const result = await onSubmitHelper(values, state);
+      console.log(result);
+
       if (result instanceof Array) {
         setListMissing(result);
         setOpenMissing(true);
@@ -35,6 +40,7 @@ const DeliveryForm = () => {
       console.log(error);
     }
   };
+
   const {
     control,
     handleSubmit,

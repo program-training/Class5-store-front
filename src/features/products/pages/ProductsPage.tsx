@@ -25,6 +25,8 @@ const ProductsPage = () => {
 
   if (pending) return <SpinnerComponent />;
   if (error) return <NotFoundPage />;
+  // if (products) console.log(products);
+
   return (
     <>
       <CssBaseline />

@@ -24,7 +24,7 @@ interface InitialState {
   error: string | SerializedError;
   products: ProductsCardInterface[];
   product: ProductsCardInterface | null;
-  checkProducts: Response | null;
+  availabilityStatusProductsStock: Response;
 }
 
 const initialState: InitialState = {
@@ -33,7 +33,7 @@ const initialState: InitialState = {
   error: "",
   products: [],
   product: null,
-  checkProducts: null,
+  availabilityStatusProductsStock: { inStock: [], notInStock: [] },
 };
 
 export const productsSlice = createSlice({
@@ -79,7 +79,7 @@ export const productsSlice = createSlice({
     });
     builder.addCase(checkProductsInStock.fulfilled, (state, action) => {
       state.pending = false;
-      state.checkProducts = action.payload;
+      state.availabilityStatusProductsStock = action.payload;
       return state;
     });
     builder.addCase(checkProductsInStock.rejected, (state, action) => {

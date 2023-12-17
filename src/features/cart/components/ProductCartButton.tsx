@@ -6,12 +6,20 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { PropProductInCart } from "../../../order/types/types";
 const ProductCartButton = ({ productCart }: PropProductInCart) => {
+  console.log(productCart.requiredQuantity);
+  console.log(productCart.product.quantity);
+
   const dispatch = useAppDispatch();
   return (
     <Box sx={{ "& > :not(style)": { m: 1 } }}>
       <Fab
         size="small"
         color="success"
+        disabled={
+          productCart.requiredQuantity + 1 <= productCart.product.quantity
+            ? false
+            : true
+        }
         onClick={() => dispatch(addOne(productCart.product.id))}
       >
         <AddIcon />

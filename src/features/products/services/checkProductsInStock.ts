@@ -13,7 +13,7 @@ const checkProductsInStock = createAsyncThunk(
           cart: checkCart,
         },
       });
-      console.log("Success");
+      // console.log(data.checkProductsInStock);
       return data.checkProductsInStock;
     } catch (error) {
       console.error("Error connecting to the products server");
