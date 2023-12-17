@@ -26,12 +26,8 @@ const useGraphql = () => {
       });
       dispatch(checkProductsInStock(checkCart));
 
-      console.log(checkProducts);
-
       if (checkProducts && checkProducts.notInStock.length) {
         const updatedNotInStock = ResultCalculation(checkProducts.notInStock);
-        console.log(updatedNotInStock);
-
         return updatedNotInStock;
       }
       const converted = convertToCartItem(cartList);
@@ -40,7 +36,6 @@ const useGraphql = () => {
         values,
         sum
       );
-      console.log(deliveryFormToSend);
 
       dispatch(registerOrder(deliveryFormToSend));
       return dataRegisterOrder;
