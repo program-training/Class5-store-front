@@ -32,14 +32,19 @@ const ProductInCart = ({ productCart }: PropProductInCart) => {
         />
         <Grid>
           <Typography variant="body2" color="text.secondary">
-            amount{" "}
-            {cart[productIndexInCart] &&
-              cart[productIndexInCart].requiredQuantity}
+            quantity available to buy:{" "}
+            {cart[productIndexInCart].product.quantity}
           </Typography>
         </Grid>
         <Grid>
-          <Typography variant="body2" color="text.secondary">
-            price {productCart.sumProductInCart.toFixed(2)}
+          <Typography variant="body1" color="text.secondary">
+            quantity of units to order:{" "}
+            {cart[productIndexInCart].requiredQuantity}
+          </Typography>
+        </Grid>
+        <Grid>
+          <Typography variant="body1" color="text.secondary">
+            price: {productCart.sumProductInCart.toFixed(2)}
           </Typography>
         </Grid>
       </CardContent>

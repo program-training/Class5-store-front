@@ -11,7 +11,9 @@ import registerOrder from "../../order/services/registerOrder";
 const useGraphql = () => {
   const dispatch = useAppDispatch();
   const cartList = useAppSelector((store) => store.cart.cart);
-  const checkProducts = useAppSelector((store) => store.products.checkProducts);
+  const checkProducts = useAppSelector(
+    (store) => store.products.availabilityStatusProductsStock
+  );
   const dataRegisterOrder = useAppSelector(
     (store) => store.order.registerOrder
   );
@@ -25,6 +27,7 @@ const useGraphql = () => {
         };
       });
       dispatch(checkProductsInStock(checkCart));
+      console.log(checkProducts);
 
       if (checkProducts && checkProducts.notInStock.length) {
         const updatedNotInStock = ResultCalculation(checkProducts.notInStock);
