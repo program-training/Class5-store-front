@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import useForm from "../hooks/useForm";
 import { FieldValues } from "react-hook-form";
 import deliveryValidation from "../models/deliveryValidation";
@@ -22,7 +23,7 @@ const DeliveryForm = () => {
   const dispatch = useAppDispatch();
   const price = useAppSelector(state);
   const onSubmit = async (values: FieldValues) => {
-    console.log(values);
+    // console.log(values);
     navigate(`/store/home`);
     dispatch(setOpen(true));
     console.log(state);
@@ -33,6 +34,84 @@ const DeliveryForm = () => {
     };
     // try {
     //   const result = await onSubmitHelper(values, state);
+      if (result instanceof Array) {
+        setListMissing(result);
+        setOpenMissing(true);
+        // console.log("d");
+      } else if (result instanceof Object) {
+        // console.log("success");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isDirty, isValid },
+  } = useForm(deliveryValidation, onSubmit);
+  const formValues = ["address", "contactNumber", "email", "note"];
+  return (
+    <Box sx={formStyle}>
+      <CssBaseline />{" "}
+      <Box>
+        <Modal open={openMissing}>
+          <Box sx={styleModalCheck}>
+            <CheckExist products={listMissing} setModal={setOpenMissing} />
+          </Box>
+        </Modal>
+      </Box>
+      <Typography>Your details</Typography>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        noValidate
+        sx={{ width: "100%", mt: "2rem" }}
+      >
+        <DisplayFormContext
+          control={control}
+          errors={errors}
+          formValues={formValues}
+        />
+        <Button
+          disabled={!isValid || !isDirty}
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
+          Buy
+        </Button>
+      </Box>
+    </Box>
+  );
+};
+
+export default DeliveryForm;
+=======
+import useForm from "../hooks/useForm";
+import { FieldValues } from "react-hook-form";
+import deliveryValidation from "../models/deliveryValidation";
+import DisplayFormContext from "../components/DisplayForm";
+import { Box, Button, CssBaseline, Modal, Typography } from "@mui/material";
+import { formStyle } from "../styles/formStyle";
+import { useAppSelector } from "../../../store/hooks";
+import { onSubmitHelper } from "../utils/convertToCartItem";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import CheckExist from "../../cart/components/CheckModal";
+import { styleModalCheck } from "../../layout/war/styleModal";
+import { NotInStockApterSub } from "../../../order/types/types";
+
+const DeliveryForm = () => {
+  const { state } = useLocation();
+  const cart = useAppSelector((store) => store.cart.cart);
+  const [openMissing, setOpenMissing] = useState(false);
+  const [listMissing, setListMissing] = useState<NotInStockApterSub[]>([]);
+
+  const onSubmit = async (values: FieldValues) => {
+    try {
+      const result = await onSubmitHelper(cart, values, state);
     //   console.log(result);
 
     //   if (result instanceof Array) {
@@ -90,3 +169,4 @@ const DeliveryForm = () => {
 };
 
 export default DeliveryForm;
+>>>>>>> acc98a17e7c3d9fdbc16a561a0b091def3e2d3d8
