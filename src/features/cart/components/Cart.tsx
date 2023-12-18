@@ -73,7 +73,7 @@ const Cart = () => {
                 </React.Fragment>
               ))}
             </Box>
-            <Box sx={{ padding: 3, paddingTop: 7, width: 350 }}>
+            <Box>
               <Checkout sum={sum} setOpen={setOpen} />
             </Box>
           </Box>

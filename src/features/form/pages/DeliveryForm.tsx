@@ -3,27 +3,33 @@ import useForm from "../hooks/useForm";
 import { FieldValues } from "react-hook-form";
 import deliveryValidation from "../models/deliveryValidation";
 import DisplayFormContext from "../components/DisplayForm";
-import { Box, Button, CssBaseline, Modal, Typography } from "@mui/material";
+import { Box, Button, CssBaseline, Typography } from "@mui/material";
 import { formStyle } from "../styles/formStyle";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import CheckExist from "../../cart/components/CheckModal";
-import { styleModalCheck } from "../../layout/war/styleModal";
-import { NotInStockApterSub } from "../../../order/types/types";
-import useGraphql from "../../hooks/useGraphql";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useNavigate } from "react-router-dom";
+// import { useState } from "react";
+// import CheckExist from "../../cart/components/CheckModal";
+// import { styleModalCheck } from "../../layout/war/styleModal";
+// import { NotInStockApterSub } from "../../../order/types/types";
+// import useGraphql from "../../hooks/useGraphql";
+import { useAppDispatch } from "../../../store/hooks";
 import { setOpen } from "../../cart/cartSlice";
 const DeliveryForm = () => {
   // const dispatch = useAppDispatch();
   // const { onSubmitHelper } = useGraphql();
-  const { state } = useLocation();
+  // const { state } = useLocation();
   // const [openMissing, setOpenMissing] = useState(false);
   // const [listMissing, setListMissing] = useState<NotInStockApterSub[]>([]);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const price = useAppSelector(state);
   const onSubmit = async (values: FieldValues) => {
-    // console.log(values);
+    // const newOrder = {
+    //   email: values.email,
+    //   price: values.price,
+    //   cartItems: values.cartItems,
+    //   shippingDetails: values.RegisterShippingDetailsInput,
+    // };
+    console.log(values);
     navigate(`/store/home`);
     dispatch(setOpen(true));
     console.log(state);

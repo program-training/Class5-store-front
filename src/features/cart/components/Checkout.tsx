@@ -53,17 +53,25 @@ const Checkout: FC<CheckoutProps> = ({ sum, setOpen }) => {
   return (
     <Box
       sx={{
+        color: "black",
+        backgroundColor: "#22242d",
+        padding: "10px 0",
         position: "fixed",
         bottom: 0,
-        left: "4%",
-        backgroundColor: "black",
+        left: 0,
+        width: 350,
+        alignItems: "center",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      <Typography variant="h5">Total cost: {sum.toFixed(2)}$</Typography>
+      <Typography variant="h5" sx={{ color: "white", textAlign: "center" }}>
+        Total cost: {sum.toFixed(2)}$
+      </Typography>
       <Button
         fullWidth
         variant="contained"
-        sx={{ mb: 1 }}
+        sx={{ mb: 1, width: 250 }}
         onClick={handelClick}
       >
         <ShoppingCartCheckoutIcon sx={{ mr: 1 }} /> Checkout
