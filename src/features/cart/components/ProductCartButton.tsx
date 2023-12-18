@@ -18,6 +18,7 @@ const ProductCartButton = ({ productCart }: PropProductInCart) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        zIndex: 0,
       }}
     >
       <Fab

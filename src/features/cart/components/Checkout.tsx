@@ -21,6 +21,7 @@ const Checkout: FC<CheckoutProps> = ({ sum, setOpen }) => {
         position: "fixed",
         bottom: 0,
         left: "4%",
+        backgroundColor: "black",
       }}
     >
       <Typography variant="h5">Total cost: {sum.toFixed(2)}$</Typography>
