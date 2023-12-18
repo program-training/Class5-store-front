@@ -9,7 +9,7 @@ import ProductCartButton from "./ProductCartButton";
 import DiscountComponent from "../utils/DiscountComponent";
 import { PropProductInCart } from "../../../order/types/types";
 const ProductInCart = ({ productCart }: PropProductInCart) => {
-  const cart = useAppSelector((state) => state.cart.cart);
+  const cart = useAppSelector((state) => state.cart.cartItems);
 
   const productIndexInCart = cart.findIndex(
     (p) => p.product.id === productCart.product.id

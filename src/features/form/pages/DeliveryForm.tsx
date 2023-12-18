@@ -23,12 +23,13 @@ const DeliveryForm = () => {
   const shippingType = useAppSelector(
     (state) => state.order.registerOrder?.shippingDetails.orderType
   );
+  const cartItems = useAppSelector((state) => state.cart.cartItems);
 
   const onSubmit = async (values: FieldValues) => {
     const newOrder = {
       email: values.email,
       price: values.price,
-      cartItems: values.cartItems,
+      cartItems,
       shippingDetails: {
         address: values.address,
         contactNumber: values.contactNumber,

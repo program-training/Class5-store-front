@@ -10,7 +10,7 @@ import registerOrder from "../../order/services/registerOrder";
 
 const useGraphql = () => {
   const dispatch = useAppDispatch();
-  const cartList = useAppSelector((store) => store.cart.cart);
+  const cartList = useAppSelector((store) => store.cart.cartItems);
   const checkProducts = useAppSelector(
     (store) => store.products.availabilityStatusProductsStock
   );

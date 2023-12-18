@@ -14,45 +14,51 @@ import ProductInCart from "./ProductInCart";
 import EmptyCart from "./EmptyCart";
 import { productInCart } from "../../../order/types/types";
 import { useCart } from "../hooks/useCart";
+import useRedux from "../../../store/useStore";
 const Cart = () => {
-  const cart = useCart();
-  const [open, setOpen] = useState(false);
-  const [localCart, setLocalCart] = useState<productInCart[]>([]);
+  const { cartItems } = useRedux();
+  const [openCart, setOpenCart] = useState(false);
+  // const [localCart, setLocalCart] = useState<productInCart[]>([]);
   const [amount, setAmount] = useState(0);
   const [sum, setSum] = useState(0);
 
-  useEffect(() => {
-    setLocalCart(cart);
-  }, [open, cart]);
+  // useEffect(() => {
+  //   setLocalCart(cart);
+  // }, [openCart, cart]);
 
   useEffect(() => {
-    setAmount(countAmount(cart));
-    setSum(sumCart(cart));
-  }, [cart]);
+    setAmount(countAmount(cartItems));
+    setSum(sumCart(cartItems));
+  }, [cartItems]);
 
-  const toggleDrawer =
+  const toggleOpenCart =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (event.type === "keydown") return;
-      setOpen(open);
+      setOpenCart(open);
     };
+
   return (
     <Box>
-      <Box component={Button} onClick={() => setOpen(true)} variant="outlined">
+      <Box
+        component={Button}
+        onClick={() => setOpenCart(true)}
+        variant="outlined"
+      >
         <Badge badgeContent={amount} color="primary">
           <ShoppingCartOutlinedIcon sx={{ color: "white" }} />
         </Badge>
       </Box>
       <SwipeableDrawer
-        open={open}
-        onClose={toggleDrawer(false)}
-        onOpen={toggleDrawer(true)}
+        open={openCart}
+        onClose={toggleOpenCart(false)}
+        onOpen={toggleOpenCart(true)}
         sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        {!cart.length ? (
+        {!cartItems.length ? (
           <EmptyCart />
         ) : (
           <Box
@@ -63,7 +69,7 @@ const Cart = () => {
             }}
           >
             <Box sx={{ width: 350 }} role="presentation">
-              {localCart.map((productOnCart) => (
+              {cartItems.map((productOnCart) => (
                 <React.Fragment key={productOnCart.product.name}>
                   <List>
                     <ProductInCart productCart={productOnCart} />
@@ -73,7 +79,7 @@ const Cart = () => {
               ))}
             </Box>
             <Box sx={{ marginTop: 35 }}>
-              <Checkout sum={sum} setOpen={setOpen} />
+              <Checkout sum={sum} setOpen={setOpenCart} />
             </Box>
           </Box>
         )}

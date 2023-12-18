@@ -16,7 +16,6 @@ const Checkout: FC<CheckoutProps> = ({ sum, setOpen }) => {
   const [shipping, setShipping] = useState<ShippingType>("standard");
   const dispatch = useAppDispatch();
   dispatch(setShippingDetails(shipping));
-  console.log(shipping);
 
   const navigate = useNavigate();
   const handelClick = () => {

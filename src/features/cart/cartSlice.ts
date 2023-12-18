@@ -11,7 +11,7 @@ import { ProductsCardInterface } from "../products/interfaces/ProductCardInterfa
 import cancelProductsInOrder from "./services/cancelProductsInOrder";
 
 interface InitialState {
-  cart: productInCart[];
+  cartItems: productInCart[];
   openMessage: boolean;
   pending: boolean;
   error: string | SerializedError;
@@ -20,58 +20,56 @@ interface CertSet {
   id: number;
   toRemove: number;
 }
-
 const initialState: InitialState = {
-  cart: [],
+  cartItems: [],
   pending: false,
   error: "",
   openMessage: false,
 };
-
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     pullFromLocalStorage(state) {
       const cartList = JSON.parse(localStorage.getItem("cartItem") || "[]");
-      state.cart = cartList;
+      state.cartItems = cartList;
     },
     addToCart(state, action: PayloadAction<ProductsCardInterface>) {
-      const cartItems = [...state.cart];
-      state.cart = handelCart(action.payload, cartItems);
-      localStorage.setItem("cartItem", JSON.stringify(state.cart));
+      const cartItems = [...state.cartItems];
+      state.cartItems = handelCart(action.payload, cartItems);
+      localStorage.setItem("cartItem", JSON.stringify(state.cartItems));
       return state;
     },
     addOne(state, action: PayloadAction<number>) {
-      const cartItems = [...state.cart];
-      state.cart = handelAddOne(action.payload, cartItems);
-      localStorage.setItem("cartItem", JSON.stringify(state.cart));
+      const cartItems = [...state.cartItems];
+      state.cartItems = handelAddOne(action.payload, cartItems);
+      localStorage.setItem("cartItem", JSON.stringify(state.cartItems));
       return state;
     },
     subOne(state, action: PayloadAction<number>) {
-      const cartItems = [...state.cart];
-      state.cart = handelSubOne(action.payload, cartItems);
-      localStorage.setItem("cartItem", JSON.stringify(state.cart));
+      const cartItems = [...state.cartItems];
+      state.cartItems = handelSubOne(action.payload, cartItems);
+      localStorage.setItem("cartItem", JSON.stringify(state.cartItems));
       return state;
     },
     removeItem(state, action: PayloadAction<number>) {
-      const cartItems = [...state.cart];
-      state.cart = removeItemFromCart(action.payload, cartItems);
-      localStorage.setItem("cartItem", JSON.stringify(state.cart));
+      const cartItems = [...state.cartItems];
+      state.cartItems = removeItemFromCart(action.payload, cartItems);
+      localStorage.setItem("cartItem", JSON.stringify(state.cartItems));
       return state;
     },
     clearCart(state) {
-      state.cart = [];
+      state.cartItems = [];
       localStorage.removeItem("cartItem");
     },
     setAfterCheck(state, action: PayloadAction<CertSet>) {
-      const cartItems = [...state.cart];
-      state.cart = handelSubOne(
+      const cartItems = [...state.cartItems];
+      state.cartItems = handelSubOne(
         action.payload.id,
         cartItems,
         action.payload.toRemove
       );
-      localStorage.setItem("cartItem", JSON.stringify(state.cart));
+      localStorage.setItem("cartItem", JSON.stringify(state.cartItems));
       return state;
     },
     setOpen(state, action: PayloadAction<boolean>) {
