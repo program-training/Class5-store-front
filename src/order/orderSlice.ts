@@ -46,7 +46,13 @@ const initialState: InitialState = {
 export const orderSlice = createSlice({
   name: "order",
   initialState,
-  reducers: {},
+  reducers: {
+    setShippingDetails: (state, action) => {
+      if (state.registerOrder) {
+        state.registerOrder.shippingDetails.orderType = action.payload;
+      }
+    },
+  },
   extraReducers(builder) {
     builder.addCase(registerOrder.pending, (state) => {
       state.pending = true;
@@ -65,4 +71,5 @@ export const orderSlice = createSlice({
   },
 });
 
+export const { setShippingDetails } = orderSlice.actions;
 export default orderSlice.reducer;

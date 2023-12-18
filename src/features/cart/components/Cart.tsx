@@ -2,7 +2,6 @@ import {
   SwipeableDrawer,
   Button,
   Box,
-  // Typography,
   Badge,
   List,
   Divider,
@@ -73,7 +72,7 @@ const Cart = () => {
                 </React.Fragment>
               ))}
             </Box>
-            <Box>
+            <Box sx={{ marginTop: 35 }}>
               <Checkout sum={sum} setOpen={setOpen} />
             </Box>
           </Box>
