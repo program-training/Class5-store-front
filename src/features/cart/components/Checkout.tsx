@@ -1,7 +1,11 @@
 import { Box, Button, Typography } from "@mui/material";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { useNavigate } from "react-router";
-import { FC } from "react";
+import { FC, useState } from "react";
+import Shipping from "./Shipping";
+import { ShippingType } from "../types/types";
+import { useAppDispatch } from "../../../store/hooks";
+import { setShippingDetails } from "../../../order/orderSlice";
 
 type CheckoutProps = {
   sum: number;
@@ -9,6 +13,11 @@ type CheckoutProps = {
 };
 
 const Checkout: FC<CheckoutProps> = ({ sum, setOpen }) => {
+  const [shipping, setShipping] = useState<ShippingType>("standard");
+  const dispatch = useAppDispatch();
+  dispatch(setShippingDetails(shipping));
+  console.log(shipping);
+
   const navigate = useNavigate();
   const handelClick = () => {
     setOpen(false);
@@ -30,6 +39,7 @@ const Checkout: FC<CheckoutProps> = ({ sum, setOpen }) => {
         flexDirection: "column",
       }}
     >
+      <Shipping shipping={shipping} onPick={setShipping} />
       <Typography variant="h5" sx={{ color: "white", textAlign: "center" }}>
         Total cost: {sum.toFixed(2)}$
       </Typography>
