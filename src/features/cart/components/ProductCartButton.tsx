@@ -11,7 +11,15 @@ const ProductCartButton = ({ productCart }: PropProductInCart) => {
 
   const dispatch = useAppDispatch();
   return (
-    <Box sx={{ "& > :not(style)": { m: 1 } }}>
+    <Box
+      sx={{
+        "& > :not(style)": { m: 1 },
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Fab
         size="small"
         color="success"

@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { useNavigate } from "react-router";
 import { FC } from "react";
@@ -16,7 +16,14 @@ const Checkout: FC<CheckoutProps> = ({ sum, setOpen }) => {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        position: "fixed",
+        bottom: 0,
+        left: "4%",
+      }}
+    >
+      <Typography variant="h5">Total cost: {sum.toFixed(2)}$</Typography>
       <Button
         fullWidth
         variant="contained"
@@ -25,7 +32,7 @@ const Checkout: FC<CheckoutProps> = ({ sum, setOpen }) => {
       >
         <ShoppingCartCheckoutIcon sx={{ mr: 1 }} /> Checkout
       </Button>
-    </>
+    </Box>
   );
 };
 export default Checkout;

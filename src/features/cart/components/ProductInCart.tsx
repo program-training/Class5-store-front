@@ -16,13 +16,24 @@ const ProductInCart = ({ productCart }: PropProductInCart) => {
   );
 
   return (
-    <Card sx={{ width: 250, margin: 1 }}>
+    <Card
+      sx={{
+        width: 330,
+        margin: 1,
+      }}
+    >
       <CardMedia
-        sx={{ height: 140, maxWidth: 250 }}
+        sx={{ height: 200, maxWidth: 330 }}
         image={productCart.product.imageUrl}
         title={productCart.product.name}
       />
-      <CardContent>
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <Typography gutterBottom variant="h5" component="div">
           {productCart.product.name}
         </Typography>
