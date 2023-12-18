@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
   SwipeableDrawer,
   Button,
@@ -165,4 +164,3 @@ const Cart = () => {
   );
 };
 export default Cart;
->>>>>>> acc98a17e7c3d9fdbc16a561a0b091def3e2d3d8
