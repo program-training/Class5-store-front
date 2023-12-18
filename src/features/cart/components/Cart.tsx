@@ -12,23 +12,17 @@ import Checkout from "./Checkout";
 import { countAmount, sumCart } from "../utils/functions";
 import ProductInCart from "./ProductInCart";
 import EmptyCart from "./EmptyCart";
-import { productInCart } from "../../../order/types/types";
-import { useCart } from "../hooks/useCart";
 import useRedux from "../../../store/useStore";
+import { useAppDispatch } from "../../../store/hooks";
+import { setTotal } from "../../../order/orderSlice";
 const Cart = () => {
   const { cartItems } = useRedux();
   const [openCart, setOpenCart] = useState(false);
-  // const [localCart, setLocalCart] = useState<productInCart[]>([]);
   const [amount, setAmount] = useState(0);
-  const [sum, setSum] = useState(0);
-
-  // useEffect(() => {
-  //   setLocalCart(cart);
-  // }, [openCart, cart]);
-
+  const dispatch = useAppDispatch();
   useEffect(() => {
     setAmount(countAmount(cartItems));
-    setSum(sumCart(cartItems));
+    dispatch(setTotal(sumCart(cartItems)));
   }, [cartItems]);
 
   const toggleOpenCart =
@@ -79,7 +73,7 @@ const Cart = () => {
               ))}
             </Box>
             <Box sx={{ marginTop: 35 }}>
-              <Checkout sum={sum} setOpen={setOpenCart} />
+              <Checkout setOpen={setOpenCart} />
             </Box>
           </Box>
         )}

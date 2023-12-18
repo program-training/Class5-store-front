@@ -5,54 +5,28 @@ import DisplayFormContext from "../components/DisplayForm";
 import { Box, Button, CssBaseline, Typography } from "@mui/material";
 import { formStyle } from "../styles/formStyle";
 import { useNavigate } from "react-router-dom";
-// import { useState } from "react";
-// import CheckExist from "../../cart/components/CheckModal";
-// import { styleModalCheck } from "../../layout/war/styleModal";
-// import { NotInStockApterSub } from "../../../order/types/types";
-// import useGraphql from "../../hooks/useGraphql";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setOpen } from "../../cart/cartSlice";
 const DeliveryForm = () => {
-  // const dispatch = useAppDispatch();
-  // const { onSubmitHelper } = useGraphql();
-  // const { state } = useLocation();
-  // const [openMissing, setOpenMissing] = useState(false);
-  // const [listMissing, setListMissing] = useState<NotInStockApterSub[]>([]);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const shippingType = useAppSelector(
-    (state) => state.order.registerOrder?.shippingDetails.orderType
-  );
+  const orderType = useAppSelector((state) => state.order.orderType);
   const cartItems = useAppSelector((state) => state.cart.cartItems);
-
+  const total = useAppSelector((state) => state.order.total);
   const onSubmit = async (values: FieldValues) => {
     const newOrder = {
       email: values.email,
-      price: values.price,
+      price: total.toString(),
       cartItems,
       shippingDetails: {
         address: values.address,
         contactNumber: values.contactNumber,
-        orderType: shippingType,
+        orderType,
       },
     };
     console.log(newOrder);
     navigate(`/store/home`);
     dispatch(setOpen(true));
-
-    // try {
-    //   const result = await onSubmitHelper(values, state);
-    //   console.log(result);
-
-    //   if (result instanceof Array) {
-    //     setListMissing(result);
-    //     setOpenMissing(true);
-    //   } else if (result instanceof Object) {
-    //     console.log("success");
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   const {
@@ -63,15 +37,7 @@ const DeliveryForm = () => {
   const formValues = ["address", "contactNumber", "email", "note"];
   return (
     <Box sx={formStyle}>
-      <CssBaseline />{" "}
-      {/* <Box>
-        <Modal open={openMissing}>
-          <Box sx={styleModalCheck}>
-            <CheckExist products={listMissing} setModal={setOpenMissing} />
-          </Box>
-        </Modal>
-      </Box> */}
-      <Typography>Your details</Typography>
+      <CssBaseline /> <Typography>Your details</Typography>
       <Box
         component="form"
         onSubmit={handleSubmit}

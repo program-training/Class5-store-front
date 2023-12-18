@@ -11,16 +11,11 @@ type CartItemSchema = {
   quantity: number;
 };
 
-enum RegisterOrderType {
-  "standard",
-  "express",
-  "pickup",
-}
+type RegisterOrderType = "standard" | "express" | "pickup";
 
 type RegisterShippingDetails = {
   address: string;
   contactNumber: string;
-  orderType: RegisterOrderType;
 };
 type RegisterOrder = {
   _id: string;
@@ -35,12 +30,16 @@ interface InitialState {
   pending: boolean;
   error: string | SerializedError;
   registerOrder: RegisterOrder | null;
+  orderType: RegisterOrderType;
+  total: number;
 }
 
 const initialState: InitialState = {
   pending: false,
   error: "",
   registerOrder: null,
+  orderType: "standard",
+  total: 0,
 };
 
 export const orderSlice = createSlice({
@@ -48,9 +47,12 @@ export const orderSlice = createSlice({
   initialState,
   reducers: {
     setShippingDetails: (state, action) => {
-      if (state.registerOrder) {
-        state.registerOrder.shippingDetails.orderType = action.payload;
+      if (state.orderType) {
+        state.orderType = action.payload;
       }
+    },
+    setTotal: (state, action) => {
+      state.total = action.payload;
     },
   },
   extraReducers(builder) {
@@ -71,5 +73,5 @@ export const orderSlice = createSlice({
   },
 });
 
-export const { setShippingDetails } = orderSlice.actions;
+export const { setShippingDetails, setTotal } = orderSlice.actions;
 export default orderSlice.reducer;

@@ -1,26 +1,27 @@
 import { Box, Button, Typography } from "@mui/material";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { useNavigate } from "react-router";
-import { FC, useState } from "react";
+import { FC } from "react";
 import Shipping from "./Shipping";
-import { ShippingType } from "../types/types";
-import { useAppDispatch } from "../../../store/hooks";
-import { setShippingDetails } from "../../../order/orderSlice";
+import { useAppSelector } from "../../../store/hooks";
+// import { ShippingType } from "../types/types";
+// import { useAppDispatch } from "../../../store/hooks";
+// import { setShippingDetails } from "../../../order/orderSlice";
 
 type CheckoutProps = {
-  sum: number;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Checkout: FC<CheckoutProps> = ({ sum, setOpen }) => {
-  const [shipping, setShipping] = useState<ShippingType>("standard");
-  const dispatch = useAppDispatch();
-  dispatch(setShippingDetails(shipping));
+const Checkout: FC<CheckoutProps> = ({ setOpen }) => {
+  const total = useAppSelector((store) => store.order.total);
+  // const [shipping, setShipping] = useState<ShippingType>("standard");
+  // const dispatch = useAppDispatch();
+  // dispatch(setShippingDetails(shipping));
 
   const navigate = useNavigate();
   const handelClick = () => {
     setOpen(false);
-    navigate(`/store/delivery`, { state: sum });
+    navigate(`/store/delivery`, { state: total });
   };
 
   return (
@@ -38,9 +39,9 @@ const Checkout: FC<CheckoutProps> = ({ sum, setOpen }) => {
         flexDirection: "column",
       }}
     >
-      <Shipping shipping={shipping} onPick={setShipping} />
+      <Shipping />
       <Typography variant="h5" sx={{ color: "white", textAlign: "center" }}>
-        Total cost: {sum.toFixed(2)}$
+        Total cost: {total.toFixed(2)}$
       </Typography>
       <Button
         fullWidth
