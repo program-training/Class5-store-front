@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { Box } from "@mui/material";
 import { BNR_URL } from "../../App";
 
-
 type BannerProps = {
   id: number;
 };
@@ -21,7 +20,7 @@ const Banner: FC<BannerProps> = ({ id }) => {
       <Box
         sx={{ width: "185px", height: "370px" }}
         component="iframe"
-        src={`${BNR_URL}/banners/vertical/products/${id}`}
+        src={`${BNR_URL}/vertical/products/${id}`}
       />
     </React.Fragment>
   );
