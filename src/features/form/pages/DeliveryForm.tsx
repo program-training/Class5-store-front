@@ -10,7 +10,7 @@ import CheckExist from "../../cart/components/CheckModal";
 import { styleModalCheck } from "../../layout/war/styleModal";
 import { NotInStockApterSub } from "../../../order/types/types";
 import useGraphql from "../../hooks/useGraphql";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setOpen } from "../../cart/cartSlice";
 const DeliveryForm = () => {
   // const dispatch = useAppDispatch();
@@ -20,12 +20,17 @@ const DeliveryForm = () => {
   // const [listMissing, setListMissing] = useState<NotInStockApterSub[]>([]);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  const price = useAppSelector(state);
   const onSubmit = async (values: FieldValues) => {
     console.log(values);
     navigate(`/store/home`);
     dispatch(setOpen(true));
+    console.log(state);
 
+    const input = {
+      email: values.email,
+      price: price,
+    };
     // try {
     //   const result = await onSubmitHelper(values, state);
     //   console.log(result);
@@ -46,7 +51,7 @@ const DeliveryForm = () => {
     handleSubmit,
     formState: { errors, isDirty, isValid },
   } = useForm(deliveryValidation, onSubmit);
-  const formValues = ["address", "contact number", "email", "note"];
+  const formValues = ["address", "contactNumber", "email", "note"];
   return (
     <Box sx={formStyle}>
       <CssBaseline />{" "}
