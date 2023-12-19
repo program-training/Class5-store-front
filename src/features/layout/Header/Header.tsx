@@ -87,7 +87,8 @@ const Header = () => {
             >
               {themeMode ? <Brightness4Icon /> : <Brightness7Icon />}
             </IconButton>
-            <GridButton />
+            {decodedToken && <GridButton />}
+
             <Cart />
           </Box>
         </Toolbar>
