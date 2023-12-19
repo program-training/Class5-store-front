@@ -12,11 +12,11 @@ import Checkout from "./Checkout";
 import { countAmount, sumCart } from "../utils/functions";
 import ProductInCart from "./ProductInCart";
 import EmptyCart from "./EmptyCart";
-import useRedux from "../../../store/useStore";
-import { useAppDispatch } from "../../../store/hooks";
+// import useRedux from "../../../store/useStore";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setTotal } from "../../../order/orderSlice";
 const Cart = () => {
-  const { cartItems } = useRedux();
+  const cartItems = useAppSelector((store) => store.cart.cartItems);
   const [openCart, setOpenCart] = useState(false);
   const [amount, setAmount] = useState(0);
   const dispatch = useAppDispatch();
