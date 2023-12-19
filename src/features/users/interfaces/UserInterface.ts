@@ -3,6 +3,7 @@ interface UserInterface {
   email: string;
   isAdmin?: true;
   password?: string;
+  loginCount?: number;
 }
 
 export interface logedInUser {

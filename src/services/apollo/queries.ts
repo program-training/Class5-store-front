@@ -43,3 +43,15 @@ export const QUERY_PRODUCT = gql`
     }
   }
 `;
+
+export const QUERY_USERS = gql`
+  query GetUsers {
+    getUsers {
+      _id
+      email
+      isAdmin
+      password
+      loginCount
+    }
+  }
+`;

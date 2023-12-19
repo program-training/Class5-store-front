@@ -9,6 +9,7 @@ import Payment from "../../order/pages/Payment";
 import SignIn from "../form/pages/Signin";
 import SignUp from "../form/pages/Signup";
 import DeliveryForm from "../form/pages/DeliveryForm";
+import UsersGrid from "../grid/UsersGrid";
 const RouterDom = () => {
   return (
     <Routes>
@@ -21,6 +22,7 @@ const RouterDom = () => {
         element={<ProductDetailsPage />}
       />
       <Route path="/store/home/products" element={<ProductsPage />} />
+      <Route path="/store/home/grid" element={<UsersGrid />} />
       <Route path="/store/home/store/map" element={<StorePage />} />
       <Route path="/store/order-details/:userId" element={<OrderDetails />} />
       <Route path="/store/payment" element={<Payment />} />

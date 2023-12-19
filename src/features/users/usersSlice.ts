@@ -5,10 +5,15 @@ import {
   getUser,
   setItem,
 } from "../form/services/localStorageService";
-import { logedInUser } from "./interfaces/UserInterface";
-import { SignInRequest, SignUpRequest } from "../form/services/usersRequests";
+import UserInterface, { logedInUser } from "./interfaces/UserInterface";
+import {
+  GetAllUsers,
+  SignInRequest,
+  SignUpRequest,
+} from "../form/services/usersRequests";
 
 interface InitialState {
+  users: UserInterface[];
   user: logedInUser | null;
   pending: boolean;
   error: string | SerializedError;
@@ -16,6 +21,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
+  users: [],
   user: getUser(),
   pending: false,
   token: getToken(),
@@ -53,6 +59,20 @@ export const userSlice = createSlice({
       return state;
     });
     builder.addCase(SignUpRequest.rejected, (state, { error }) => {
+      state.pending = false;
+      state.error = error;
+      return state;
+    });
+    builder.addCase(GetAllUsers.pending, (state) => {
+      state.pending = true;
+      return state;
+    });
+    builder.addCase(GetAllUsers.fulfilled, (state, action) => {
+      state.pending = false;
+      state.users = action.payload;
+      return state;
+    });
+    builder.addCase(GetAllUsers.rejected, (state, { error }) => {
       state.pending = false;
       state.error = error;
       return state;

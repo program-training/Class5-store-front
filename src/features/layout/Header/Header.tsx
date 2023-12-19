@@ -16,6 +16,7 @@ import { setDecodedToken } from "../../token/tokenSlice";
 import { jwtDecode } from "jwt-decode";
 import { TokenType } from "../types/token";
 import { useEffect } from "react";
+import GridButton from "./GridButton";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -86,6 +87,7 @@ const Header = () => {
             >
               {themeMode ? <Brightness4Icon /> : <Brightness7Icon />}
             </IconButton>
+            <GridButton />
             <Cart />
           </Box>
         </Toolbar>

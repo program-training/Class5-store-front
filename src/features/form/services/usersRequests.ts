@@ -5,6 +5,7 @@ import {
   MUTATIONS_USER_SIGNUP,
 } from "../../../services/apollo/mutations";
 import client from "../../../apollo/apolloApi";
+import { QUERY_USERS } from "../../../services/apollo/queries";
 
 export const SignInRequest = createAsyncThunk(
   "user/SignInRequest",
@@ -14,8 +15,6 @@ export const SignInRequest = createAsyncThunk(
         mutation: MUTATIONS_USER_SIGNIN,
         variables: { input: userFromClient },
       });
-      console.log("insignin", data.SignInUser);
-
       return data;
     } catch (error) {
       return apiThunk.rejectWithValue(error);
@@ -43,3 +42,14 @@ export const SignUpRequest = createAsyncThunk(
     }
   }
 );
+
+export const GetAllUsers = createAsyncThunk("user/GetAllUsers", async () => {
+  try {
+    const { data } = await client.query({ query: QUERY_USERS });
+    console.log("Success");
+    return data.getUsers;
+  } catch (error) {
+    console.error("Error connecting to the users server");
+    throw error;
+  }
+});

@@ -3,7 +3,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import { ChangeEvent, useEffect } from "react";
+import { useEffect } from "react";
 // import { ShippingType, ShippingTypes } from "../types/types";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { setShippingDetails } from "../../../order/orderSlice";
