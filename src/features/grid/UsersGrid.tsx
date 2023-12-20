@@ -1,10 +1,12 @@
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { GetAllUsers } from "../form/services/usersRequests";
 import { useSubscription } from "@apollo/client";
 import { USERS_SUBSCRIPTION } from "../../services/apollo/subscriptions";
+import SpinnerComponent from "../form/components/WaitingComponent";
+import NotFoundPage from "../layout/NotFoundPage/NotFoundPage";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 250 },
@@ -25,38 +27,27 @@ const columns: GridColDef[] = [
 
 export default function UsersGrid() {
   const dispatch = useAppDispatch();
-  const { users } = useAppSelector((store) => store.users);
-  const [displayedUsers, setUsers] = useState(users);
+  const { error, pending, users } = useAppSelector((store) => store.users);
   const { data } = useSubscription(USERS_SUBSCRIPTION);
   const { themeMode } = useAppSelector((store) => store.themeMode);
 
   useEffect(() => {
     dispatch(GetAllUsers());
-    setUsers((prev) => {
-      console.log(data);
-      if (data) {
-        const copyPrev = [...prev];
-        copyPrev.push(data.userCreated);
-        return copyPrev;
-      } else {
-        return prev;
-      }
-    });
-  }, [data]);
-  console.log("users", users);
-  console.log("displayedUsers", displayedUsers);
-  console.log("data", data);
+  }, [users]);
 
-  const rows = displayedUsers.map((user) => ({
+  const rows = users.map((user) => ({
     id: user._id,
     email: user.email,
     login_count: user.loginCount,
   }));
 
+  if (pending) return <SpinnerComponent />;
+  if (error) return <NotFoundPage />;
+
   return (
     <Box
       sx={{
-        height: "100%",
+        height: "75.5%",
         width: "100%",
         mt: 15,
         display: "flex",
