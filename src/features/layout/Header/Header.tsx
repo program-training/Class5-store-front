@@ -1,9 +1,7 @@
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
-import AdbIcon from "@mui/icons-material/Adb";
-import { Typography, Box, IconButton } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Box, IconButton } from "@mui/material";
 import Cart from "../../cart/components/Cart";
 import HeaderSignInButton from "./HeaderSignInButton";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
@@ -19,7 +17,6 @@ import { useEffect } from "react";
 import GridButton from "./GridButton";
 
 const Header = () => {
-  const navigate = useNavigate();
   const themeMode = useAppSelector((store) => store.themeMode.themeMode);
   const { decodedToken } = useAppSelector((store) => store.token);
   const { token } = useAppSelector((store) => store.users);
@@ -39,45 +36,14 @@ const Header = () => {
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
           <Box sx={{ display: "flex" }}>
-            <AdbIcon
-              sx={{
-                display: { xs: "none", md: "flex" },
-                mr: 1,
-              }}
-            />
             {decodedToken && <ShowOrdersHistory />}
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              onClick={() => {
-                navigate("/store/home");
-              }}
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              David & Teddy's class
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "flex", md: "none" },
-            }}
-          ></Box>
-          <Box sx={{ marginLeft: "auto", display: "flex" }}>
             {decodedToken === null ? (
               <HeaderSignInButton />
             ) : (
               <HeaderLogOutButton />
             )}
+          </Box>
+          <Box sx={{ marginLeft: "auto", display: "flex" }}>
             <IconButton
               sx={{ ml: 1 }}
               onClick={() => {
@@ -88,8 +54,7 @@ const Header = () => {
               {themeMode ? <Brightness4Icon /> : <Brightness7Icon />}
             </IconButton>
             {decodedToken && <GridButton />}
-
-            <Cart />
+            {decodedToken && <Cart />}
           </Box>
         </Toolbar>
       </Container>

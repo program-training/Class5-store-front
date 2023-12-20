@@ -12,7 +12,7 @@ export default function Shipping() {
   const typeOrder = useAppSelector((state) => state.order.orderType);
   const dispatch = useAppDispatch();
   // dispatch(setShippingDetails("standard"));
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // const shippingDetails = (event.target as HTMLInputElement)
     //   .value as ShippingType;
     // onPick(shippingDetails);

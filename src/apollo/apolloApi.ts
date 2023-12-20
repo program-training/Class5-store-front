@@ -11,7 +11,7 @@ const wsLink = new GraphQLWsLink(
     url: "ws://localhost:5000/graphql",
   })
 );
-const link = split(
+const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
     return (
@@ -23,7 +23,7 @@ const link = split(
   httpLink
 );
 const client = new ApolloClient({
-  link,
+  link: splitLink,
   cache: new InMemoryCache(),
 });
 

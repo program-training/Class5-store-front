@@ -1,8 +1,10 @@
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { GetAllUsers } from "../form/services/usersRequests";
+import { useSubscription } from "@apollo/client";
+import { USERS_SUBSCRIPTION } from "../../services/apollo/subscriptions";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 250 },
@@ -24,19 +26,39 @@ const columns: GridColDef[] = [
 export default function UsersGrid() {
   const dispatch = useAppDispatch();
   const { users } = useAppSelector((store) => store.users);
+  const [displayedUsers, setUsers] = useState(users);
+  const { data } = useSubscription(USERS_SUBSCRIPTION);
 
   useEffect(() => {
     dispatch(GetAllUsers());
-  }, [users]);
+    setUsers((prev) => {
+      console.log(data);
+      if (data) {
+        const copyPrev = [...prev];
+        copyPrev.push(data.userCreated);
+        return copyPrev;
+      } else {
+        return prev;
+      }
+    });
+  }, [data]);
 
-  const rows = users.map((user) => ({
+  const rows = displayedUsers.map((user) => ({
     id: user._id,
     email: user.email,
     login_count: user.loginCount,
   }));
 
   return (
-    <Box sx={{ height: 371, width: "100%", mt: 15 }}>
+    <Box
+      sx={{
+        height: "100%",
+        width: "100%",
+        mt: 15,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <DataGrid
         rows={rows}
         columns={columns}
