@@ -11,7 +11,7 @@ const HeaderLogOutButton = () => {
     <Button
       color="inherit"
       onClick={() => {
-        navigate("/store/");
+        navigate("/store/home");
         removeToken();
         dispatch(setDecodedToken(null));
       }}

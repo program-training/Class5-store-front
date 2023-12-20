@@ -13,7 +13,6 @@ import UsersGrid from "../grid/UsersGrid";
 const RouterDom = () => {
   return (
     <Routes>
-      <Route path="/store" element={<HomePage />} />
       <Route path="/store/home" element={<HomePage />} />
       <Route path="/store/signin" element={<SignIn />} />
       <Route path="/store/signup" element={<SignUp />} />
