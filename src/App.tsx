@@ -5,7 +5,7 @@ import Footer from "./features/layout/Footer";
 import { ThemeProvider } from "@mui/material/styles";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
-import { Box, Container } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 import { pullFromLocalStorage } from "./features/cart/cartSlice";
 export const BASE_URL = "http://localhost:3000";
 export const BNR_URL = "https://sparkly-souffle-e37dff.netlify.app";
@@ -20,6 +20,7 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={themeMode ? themeLight : themeDark}>
+        <CssBaseline />
         <Container sx={{ display: "flex", justifyContent: "center" }}>
           <Header />
           <Box

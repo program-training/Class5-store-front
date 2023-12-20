@@ -52,9 +52,9 @@ export default function UsersGrid() {
   return (
     <Box
       sx={{
-        minHeight: "100%",
-        minWidth: "100%",
-        mt: 15,
+        height: "100%",
+        width: "100%",
+        mt: 22,
         display: "flex",
         flexDirection: "column",
         backgroundColor: !themeMode ? "#2a2a2b" : "white",
@@ -70,6 +70,7 @@ export default function UsersGrid() {
             },
           },
         }}
+        sx={{ height: "100%", width: "100%" }}
         pageSizeOptions={[5]}
         checkboxSelection
         disableRowSelectionOnClick
