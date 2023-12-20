@@ -28,6 +28,7 @@ export default function UsersGrid() {
   const { users } = useAppSelector((store) => store.users);
   const [displayedUsers, setUsers] = useState(users);
   const { data } = useSubscription(USERS_SUBSCRIPTION);
+  const { themeMode } = useAppSelector((store) => store.themeMode);
 
   useEffect(() => {
     dispatch(GetAllUsers());
@@ -48,15 +49,17 @@ export default function UsersGrid() {
     email: user.email,
     login_count: user.loginCount,
   }));
+  console.log(themeMode);
 
   return (
     <Box
       sx={{
-        height: "100%",
-        width: "100%",
+        minHeight: "100%",
+        minWidth: "100%",
         mt: 15,
         display: "flex",
         flexDirection: "column",
+        backgroundColor: !themeMode ? "#2a2a2b" : "white",
       }}
     >
       <DataGrid
