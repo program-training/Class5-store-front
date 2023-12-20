@@ -31,7 +31,15 @@ const initialState: InitialState = {
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    // logOut: (state) => {
+    //   client.clearStore();
+    //   removeToken();
+    //   state.token = null;
+    //   state.userState = null;
+    //   return state;
+    // },
+  },
   extraReducers(builder) {
     builder.addCase(SignInRequest.pending, (state) => {
       state.pending = true;
