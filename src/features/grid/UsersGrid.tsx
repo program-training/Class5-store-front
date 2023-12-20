@@ -49,8 +49,6 @@ export default function UsersGrid() {
     email: user.email,
     login_count: user.loginCount,
   }));
-  console.log(themeMode);
-
   return (
     <Box
       sx={{
