@@ -5,7 +5,7 @@ import client from "../../../apollo/apolloApi";
 const getAllProducts = createAsyncThunk("products/getAllProducts", async () => {
   try {
     const { data } = await client.query({ query: QUERY_PRODUCTS });
-    console.log("Success");
+    // console.log("Success");
     return data.getProducts;
   } catch (error) {
     console.error("Error connecting to the products server");

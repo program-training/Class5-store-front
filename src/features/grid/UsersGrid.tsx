@@ -43,12 +43,16 @@ export default function UsersGrid() {
       }
     });
   }, [data]);
+  console.log("users", users);
+  console.log("displayedUsers", displayedUsers);
+  console.log("data", data);
 
   const rows = displayedUsers.map((user) => ({
     id: user._id,
     email: user.email,
     login_count: user.loginCount,
   }));
+
   return (
     <Box
       sx={{

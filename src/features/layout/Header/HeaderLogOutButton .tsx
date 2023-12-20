@@ -11,8 +11,8 @@ const HeaderLogOutButton = () => {
     <Button
       color="inherit"
       onClick={() => {
-        navigate("/store/home");
         removeToken();
+        navigate("/store/home");
         dispatch(setDecodedToken(null));
       }}
       sx={{ marginLeft: "auto" }}

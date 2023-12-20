@@ -1,12 +1,11 @@
 import { gql } from "@apollo/client";
 
 export const USERS_SUBSCRIPTION = gql`
-  subscription UserCreated {
-    userCreated {
+  subscription UserRegister {
+    userRegister {
       _id
       email
       isAdmin
-      password
       loginCount
     }
   }
