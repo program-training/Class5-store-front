@@ -54,7 +54,7 @@ export default function UsersGrid() {
       sx={{
         height: "100%",
         width: "100%",
-        mt: 22,
+        mt: 15,
         display: "flex",
         flexDirection: "column",
         backgroundColor: !themeMode ? "#2a2a2b" : "white",
