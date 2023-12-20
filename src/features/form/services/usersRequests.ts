@@ -6,6 +6,7 @@ import {
 } from "../../../services/apollo/mutations";
 import client from "../../../apollo/apolloApi";
 import { QUERY_USERS } from "../../../services/apollo/queries";
+// import { USERS_SUBSCRIPTION } from "../../../services/apollo/subscriptions";
 
 export const SignInRequest = createAsyncThunk(
   "user/SignInRequest",
@@ -26,13 +27,10 @@ export const SignUpRequest = createAsyncThunk(
   "user/SignUpRequest",
   async (userFromClient: SignUpUser, apiThunk) => {
     try {
-      console.log(userFromClient);
-
       const { data } = await client.mutate({
         mutation: MUTATIONS_USER_SIGNUP,
         variables: { input: userFromClient },
       });
-      console.log(data.SignUpUser);
 
       console.log("Successfully Signed Up!");
       return data.SignUpUser; // You might want to return some data if needed
@@ -47,9 +45,29 @@ export const GetAllUsers = createAsyncThunk("user/GetAllUsers", async () => {
   try {
     const { data } = await client.query({ query: QUERY_USERS });
     console.log("Success");
+    console.log("daniellllll", data.getUsers);
+
     return data.getUsers;
   } catch (error) {
     console.error("Error connecting to the users server");
     throw error;
   }
 });
+// export const GetUserRegister = createAsyncThunk(
+//   "user/GetUserRegister",
+//   async () => {
+//     try {
+//       const { data } = await client.subscribe({
+//         // query: USERS_SUBSCRIPTION,
+//         // variables: {input: },
+//       });
+//       console.log("Success");
+//       console.log("daniellllll", data.getUsers);
+
+//       return data.getUsers;
+//     } catch (error) {
+//       console.error("Error connecting to the users server");
+//       throw error;
+//     }
+//   }
+// );

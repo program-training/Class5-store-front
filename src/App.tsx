@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { themeDark, themeLight } from "./features/themes/themes";
 import { Box, Container, CssBaseline } from "@mui/material";
 import { pullFromLocalStorage } from "./features/cart/cartSlice";
+import { ApolloProvider } from "@apollo/client";
+import client from "./apollo/apolloApi";
 export const BASE_URL = "http://localhost:3000";
 export const BNR_URL = "https://sparkly-souffle-e37dff.netlify.app";
 
@@ -19,24 +21,26 @@ const App = () => {
   dispatch(pullFromLocalStorage());
   return (
     <>
-      <ThemeProvider theme={themeMode ? themeLight : themeDark}>
-        <CssBaseline />
-        <Container sx={{ display: "flex", justifyContent: "center" }}>
-          <Header />
-          <Box
-            className="product-grid"
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              maxWidth: "90%",
-              justifyContent: "center",
-            }}
-          >
-            <RouterDOM />
-          </Box>
-          <Footer />
-        </Container>
-      </ThemeProvider>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={themeMode ? themeLight : themeDark}>
+          <CssBaseline />
+          <Container sx={{ display: "flex", justifyContent: "center" }}>
+            <Header />
+            <Box
+              className="product-grid"
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                maxWidth: "90%",
+                justifyContent: "center",
+              }}
+            >
+              <RouterDOM />
+            </Box>
+            <Footer />
+          </Container>
+        </ThemeProvider>
+      </ApolloProvider>
     </>
   );
 };
