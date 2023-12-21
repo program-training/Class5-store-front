@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { GetAllUsers } from "../form/services/usersRequests";
 import { useSubscription } from "@apollo/client";
 import { USERS_SUBSCRIPTION } from "../../services/apollo/subscriptions";
+import { addUser } from "../users/usersSlice";
 import SpinnerComponent from "../form/components/WaitingComponent";
 import NotFoundPage from "../layout/NotFoundPage/NotFoundPage";
 
@@ -33,7 +34,14 @@ export default function UsersGrid() {
 
   useEffect(() => {
     dispatch(GetAllUsers());
-  }, [users]);
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      dispatch(addUser(data.userRegister));
+      console.log("Updated data:");
+    }
+  }, [data]);
 
   const rows = users.map((user) => ({
     id: user._id,

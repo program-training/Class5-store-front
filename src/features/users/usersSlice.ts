@@ -32,13 +32,9 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    // logOut: (state) => {
-    //   client.clearStore();
-    //   removeToken();
-    //   state.token = null;
-    //   state.userState = null;
-    //   return state;
-    // },
+    addUser: (state, action) => {
+      state.users = [...state.users, action.payload];
+    },
   },
   extraReducers(builder) {
     builder.addCase(SignInRequest.pending, (state) => {
@@ -87,5 +83,13 @@ export const userSlice = createSlice({
     });
   },
 });
-
+export const { addUser } = userSlice.actions;
 export default userSlice.reducer;
+
+// logOut: (state) => {
+//   client.clearStore();
+//   removeToken();
+//   state.token = null;
+//   state.userState = null;
+//   return state;
+// },
