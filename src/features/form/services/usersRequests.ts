@@ -43,10 +43,10 @@ export const SignUpRequest = createAsyncThunk(
 
 export const GetAllUsers = createAsyncThunk("user/GetAllUsers", async () => {
   try {
-    const { data } = await client.query({ query: QUERY_USERS });
+    const { data } = await client.query({
+      query: QUERY_USERS,
+    });
     console.log("Success");
-    console.log("daniellllll", data.getUsers);
-
     return data.getUsers;
   } catch (error) {
     console.error("Error connecting to the users server");
@@ -57,14 +57,15 @@ export const GetAllUsers = createAsyncThunk("user/GetAllUsers", async () => {
 //   "user/GetUserRegister",
 //   async () => {
 //     try {
-//       const { data } = await client.subscribe({
-//         // query: USERS_SUBSCRIPTION,
-//         // variables: {input: },
-//       });
-//       console.log("Success");
-//       console.log("daniellllll", data.getUsers);
+//       const data = client
+//         .subscribe({
+//           query: USERS_SUBSCRIPTION,
+//         })
+//         .subscribe(({ data }) => {
+//           return data.userRegister;
+//         });
 
-//       return data.getUsers;
+//       return data;
 //     } catch (error) {
 //       console.error("Error connecting to the users server");
 //       throw error;

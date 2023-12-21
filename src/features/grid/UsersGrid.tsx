@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { GetAllUsers } from "../form/services/usersRequests";
 import { useSubscription } from "@apollo/client";
 import { USERS_SUBSCRIPTION } from "../../services/apollo/subscriptions";
+import { addUser } from "../users/usersSlice";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 250 },
@@ -26,14 +27,19 @@ const columns: GridColDef[] = [
 export default function UsersGrid() {
   const dispatch = useAppDispatch();
   const { users } = useAppSelector((store) => store.users);
-  const { variables } = useSubscription(USERS_SUBSCRIPTION);
+  const { data } = useSubscription(USERS_SUBSCRIPTION);
   const { themeMode } = useAppSelector((store) => store.themeMode);
-  // console.log("www", data.userRegister);/
 
   useEffect(() => {
     dispatch(GetAllUsers());
-    console.log("heyyyy", variables);
-  }, [users]);
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      dispatch(addUser(data.userRegister));
+      console.log("Updated data:");
+    }
+  }, [data]);
 
   const rows = users.map((user) => ({
     id: user._id,

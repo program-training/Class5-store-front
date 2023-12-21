@@ -19,7 +19,7 @@ export default function Shipping() {
     dispatch(setShippingDetails(e.target.value));
   };
   useEffect(() => {
-    console.log("aaa", typeOrder);
+    console.log(typeOrder);
   }, [typeOrder]);
 
   return (
